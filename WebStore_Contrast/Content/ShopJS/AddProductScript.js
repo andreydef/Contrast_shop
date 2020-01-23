@@ -23,4 +23,24 @@ $(function () {
     });
 
     /*-----------------------------------------------------------*/
+
+    /* Dropzone js*/
+
+    Dropzone.options.dropzoneForm = {
+        acceptedFiles: "images/*",
+        init: function () {
+            this.on("complete",
+                function (file) {
+                    if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                        location.reload();
+                    }
+                });
+            this.on("sending",
+                function (file, xhr, formData) {
+                    formData.append("id", @Model.Id); /* the script works because it's connected to the site 
+                                                           and that's where the Razor implementation is present */
+         });
+        }
+    };
+    /*-----------------------------------------------------------*/
 });
