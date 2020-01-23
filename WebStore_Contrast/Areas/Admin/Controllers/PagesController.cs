@@ -210,5 +210,27 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             // Return model in View
             return View(model);
         }
+
+        // GET: Admin/Pages/DeletePage/id
+        public ActionResult DeletePage(int id)
+        {
+            using (Db db = new Db())
+            {
+                // Get page
+                PagesDTO dto = db.Pages.Find(id);
+
+                // Delete page
+                db.Pages.Remove(dto);
+
+                // Save changes in database
+                db.SaveChanges();
+            }
+
+            // Add message about successful delete
+            TempData["SM"] = "You have deleted a page!";
+
+            // Return user to the page INDEX
+            return RedirectToAction("Index");
+        }
     }
 }

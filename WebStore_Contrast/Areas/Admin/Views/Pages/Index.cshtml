@@ -46,8 +46,26 @@
             <td>
                 @Html.ActionLink("Edit", "EditPage", new { id = item.Id }) |
                 @Html.ActionLink("Details", "PageDetails", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeletePage", new { id = item.Id })
+                <!-- If Slug = home, don't show the button delete -->
+                @if (item.Slug != "home")
+                {
+                    @Html.ActionLink("Delete", "DeletePage", new { id = item.Id }, new { @class = "delete" })
+                }
             </td>
         </tr>
     }
 </table>
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            /* Confirm page deletion */
+            $("a.delete").click(function () {
+                if (!confirm("Confirm page deletion")) {
+                    return false;
+                }
+            });
+        });
+    </script>
+} 
