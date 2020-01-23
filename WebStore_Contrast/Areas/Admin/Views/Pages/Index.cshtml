@@ -56,12 +56,12 @@ else
                     @Html.DisplayFor(modelItem => item.HasSidebar)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditPage", new {id = item.Id}) |
-                    @Html.ActionLink("Details", "PageDetails", new {id = item.Id}) |
+                    @Html.ActionLink("Edit", "EditPage", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "PageDetails", new { id = item.Id }) |
                     <!-- If Slug = home, don't show the button delete -->
                     @if (item.Slug != "home")
                     {
-                        @Html.ActionLink("Delete", "DeletePage", new {id = item.Id}, new {@class = "delete"})
+                        @Html.ActionLink("Delete", "DeletePage", new { id = item.Id }, new { @class = "delete" })
                     }
                 </td>
             </tr>
@@ -71,29 +71,5 @@ else
 
 @section Scripts
 {
-    <script>
-        $(function () {
-
-            /* Confirm page deletion */
-            $("a.delete").click(function () {
-                if (!confirm("Confirm page deletion")) {
-                    return false;
-                }
-            });
-
-            /* -------------------------------------------- */
-
-            /* Sorting script */
-            $("table#pages tbody").sortable({
-                items: "tr:not(.home)",
-                placeholder: "ui-state-highlight",
-                update: function () {
-                    var ids = $("table#pages tbody").sortable("serialize");
-                    var url = "/Admin/Pages/ReorderPages";
-                    $.post(url, ids, function (data) {
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="~/Content/ShopJS/PagesIndexViewJS.js"></script>
 } 

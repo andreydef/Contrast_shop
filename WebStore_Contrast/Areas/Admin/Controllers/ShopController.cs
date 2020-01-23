@@ -39,7 +39,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
             using (Db db = new Db())
             {
-                // Check the name of categories in unicity
+                // Check the name of categories at unicity
                 if (db.Categories.Any(x => x.Name == catName))
                     return "titletaken";
 
@@ -110,6 +110,32 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
             // Return user to the page Categories
             return RedirectToAction("Categories");
+        }
+
+        // Add POST method to Rename Category
+        // POST: Admin/Shop/RenameCategory/id
+        [HttpPost]
+        public string RenameCategory(string newCatName, int id)
+        {
+            using (Db db = new Db())
+            {
+                // Check the name at unicity
+                if (db.Categories.Any(x => x.Name == newCatName))
+                    return "titletaken";
+
+                // Get model DTO
+                CategoryDTO dto = db.Categories.Find(id);
+
+                // Editing model DTO
+                dto.Name = newCatName;
+                dto.Slug = newCatName;
+
+                // Save changes
+                db.SaveChanges();
+            }
+
+            // Return string
+            return "ok";
         }
     }
 }
