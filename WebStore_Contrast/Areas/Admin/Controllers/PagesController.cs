@@ -247,7 +247,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 // Realize variable with type Account
                 int count = 1;
 
-                // Initialize model of dates
+                // Initialize model of date
                 PagesDTO dto;
 
                 // Set the sorting for the each pages
@@ -261,6 +261,51 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                     count++;
                 }
             }
+        }
+
+        // Add GET method to Edit Sidebar
+        // GET: Admin/Pages/EditSidebar
+        [HttpGet]
+        public ActionResult EditSidebar()
+        {
+            // Declare model
+            SidebarVM model;
+
+            using (Db db = new Db())
+            {
+                // Take data on the database
+                SidebarDTO dto = db.Sidebars.Find(1); /* test version, I fix this later - don't try to do this!!! (bad code - Hard values ​​cannot be added!) */
+
+                // Fill the model with data
+                model = new SidebarVM(dto);
+            }
+
+            // Return View with model
+            return View(model);
+        }
+
+        // Add POST method to Edit Sidebar
+        // POST: Admin/Pages/EditSidebar
+        [HttpPost]
+        public ActionResult EditSidebar(SidebarVM model)
+        {
+            using (Db db = new Db())
+            {
+                // Get gata with DTO
+                SidebarDTO dto = db.Sidebars.Find(1); /* test version, I fix this later - don't try to do this!!! (bad code - Hard values ​​cannot be added!) */
+
+                // Assign data to the body (in property Body) 
+                dto.Body = model.Body;
+
+                // Save
+                db.SaveChanges();
+            }
+
+            // Assign message in TempData
+            TempData["SM"] = "You have edited the Sidebar!";
+
+            // Redirect user (admin)
+            return RedirectToAction("EditSidebar");
         }
     }
 }

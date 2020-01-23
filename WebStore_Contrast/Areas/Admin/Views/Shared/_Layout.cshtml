@@ -10,17 +10,17 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        @Html.ActionLink("Dashboard", "Index", "Dashboard", new { @class = "navbar-brand" })
+        @Html.ActionLink("Dashboard", "Index", "Dashboard", "", new { @class = "navbar-brand" })
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    @Html.ActionLink("Pages", "Index", "Pages", "", new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    @Html.ActionLink("Sidebar", "EditSidebar", "Pages", "", new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
