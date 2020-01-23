@@ -29,5 +29,87 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             // Return List in View()
             return View(categoryVMList);
         }
+
+        // POST : Admin/Shop/AddNewCategory
+        [HttpPost]
+        public string AddNewCategory(string catName)
+        {
+            // Declare string variable ID
+            string id;
+
+            using (Db db = new Db())
+            {
+                // Check the name of categories in unicity
+                if (db.Categories.Any(x => x.Name == catName))
+                    return "titletaken";
+
+                // Initialize the model DTO
+                CategoryDTO dto = new CategoryDTO();
+
+                // Add data in model
+                dto.Name = catName;
+                dto.Slug = catName;
+                dto.Sorting = 100;
+
+                // Save changes 
+                db.Categories.Add(dto);
+                db.SaveChanges();
+
+                // Take ID for return in View()
+                id = dto.Id.ToString();
+            }
+
+            // Return ID in View();
+            return id;
+        }
+
+        // Add POST method to Sorting Pages
+        // POST: Admin/Shop/ReorderCategories
+        [HttpPost]
+        public void ReorderCategories(int[] id)
+        {
+            using (Db db = new Db())
+            {
+                // Realize variable with type Account
+                int count = 1;
+
+                // Initialize model of data
+                CategoryDTO dto;
+
+                // Set the sorting for the each pages
+                foreach (var catId in id)
+                {
+                    dto = db.Categories.Find(catId);
+                    dto.Sorting = count;
+
+                    db.SaveChanges();
+
+                    count++;
+                }
+            }
+        }
+
+        // Add GET method to Delete Category
+        // GET: Admin/Shop/DeleteCategory/id
+        public ActionResult DeleteCategory(int id)
+        {
+            using (Db db = new Db())
+            {
+                // Get the model of category
+                CategoryDTO dto = db.Categories.Find(id);
+
+                // Delete category
+                db.Categories.Remove(dto);
+
+                // Save changes in database
+                db.SaveChanges();
+            }
+
+            // Add message about successful delete
+            TempData["SM"] = "You have deleted a category!";
+
+            // Return user to the page Categories
+            return RedirectToAction("Categories");
+        }
     }
 }
