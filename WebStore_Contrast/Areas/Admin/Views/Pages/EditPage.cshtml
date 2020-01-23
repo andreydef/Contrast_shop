@@ -74,3 +74,11 @@
 <div>
     @Html.ActionLink("Back to Pages", "Index", "", new { @class = "btn btn-danger" })
 </div>
+
+<!-- Script for replace with CKEDitor -->
+@section Scripts
+{
+    <script>
+        CKEDITOR.replace("Body") // Replace yhe Body with CKEditor
+    </script>
+} 

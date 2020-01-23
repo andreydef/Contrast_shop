@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit Sidebar";
 }
 
-<h2>Edit Sidebar</h2>
+<h2 style="margin-top: 10px;">Edit Sidebar</h2>
 
 @if (TempData["SM"] != null)
 {
@@ -22,18 +22,26 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Body, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })*@            
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Body, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
         </div>
+    </div>
 
         <div class="form-group">
-            <div class="offset-2 col">
+            <div class="col">
                 <input type="submit" value="Edit" class="btn btn-success" />
             </div>
         </div>
     </div>
+}
+
+<!-- Script for replace with CKEDitor -->
+@section Scripts
+{
+    <script>
+        CKEDITOR.replace("Body") // Replace the Body with CKEditor
+    </script>
 }

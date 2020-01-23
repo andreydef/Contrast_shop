@@ -15,7 +15,7 @@ namespace WebStore_Contrast
 
             // Connect new library jQuery.UI (js)
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                "~/Scripts/jquery-ui.js"));
+                "~/Scripts/jquery-ui.js*"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
@@ -27,6 +27,10 @@ namespace WebStore_Contrast
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/jquery-ui.css")); // Connect new library jQuery.UI (css)
+
+            // Connect new library CREditor
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/Scripts/ckeditor/ckeditor.js*"));
         }
     }
 }

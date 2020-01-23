@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using WebStore_Contrast.Models.Data;
 
 namespace WebStore_Contrast.Models.ViewModels.Pages
@@ -19,6 +20,8 @@ namespace WebStore_Contrast.Models.ViewModels.Pages
         }
 
         public int Id { get; set; }
+
+        [AllowHtml]
         public string Body { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using WebStore_Contrast.Models.Data;
 
 namespace WebStore_Contrast.Models.ViewModels.Pages
@@ -31,6 +32,7 @@ namespace WebStore_Contrast.Models.ViewModels.Pages
 
         [Required]
         [StringLength(int.MaxValue, MinimumLength = 3)]
+        [AllowHtml]
         public string Body { get; set; }
 
         public int Sorting { get; set; }
