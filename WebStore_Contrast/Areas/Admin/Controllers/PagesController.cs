@@ -94,6 +94,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        // Add GET method to Edit Pages
         // GET: Admin/Pages/EditPage/id
         [HttpGet]
         public ActionResult EditPage(int id)
@@ -120,7 +121,8 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             }
         }
 
-        // POST: Admin/Pages/EditPage/id
+        // Add POST method to Edit Pages
+        // POST: Admin/Pages/EditPage
         [HttpPost]
         public ActionResult EditPage(PageVM model)
         {
@@ -186,7 +188,8 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             return RedirectToAction("EditPage");
         }
 
-        // GET: Admin/Pages/EditPage/id
+        // Add GET method to Page Details
+        // GET: Admin/Pages/PageDetails/id
         public ActionResult PageDetails(int id)
         {
             // Assign model PageVM
@@ -211,6 +214,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             return View(model);
         }
 
+        // Add GET method to Delete Pages
         // GET: Admin/Pages/DeletePage/id
         public ActionResult DeletePage(int id)
         {
@@ -231,6 +235,32 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
             // Return user to the page INDEX
             return RedirectToAction("Index");
+        }
+
+        // Add POST method to Sorting Pages
+        // POST: Admin/Pages/ReorderPages
+        [HttpPost]
+        public void ReorderPages(int[] id)
+        {
+            using (Db db = new Db())
+            {
+                // Realize variable with type Account
+                int count = 1;
+
+                // Initialize model of dates
+                PagesDTO dto;
+
+                // Set the sorting for the each pages
+                foreach (var pageId in id)
+                {
+                    dto = db.Pages.Find(pageId);
+                    dto.Sorting = count;
+
+                    db.SaveChanges();
+
+                    count++;
+                }
+            }
         }
     }
 }
