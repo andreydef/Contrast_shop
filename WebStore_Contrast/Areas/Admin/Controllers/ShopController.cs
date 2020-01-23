@@ -252,7 +252,17 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                     ext != "image/pjpeg" && // A few (рідкісне) image extension but sometimes used
                     ext != "image/gif" &&
                     ext != "image/x-png" &&
-                    ext != "image/png")
+                    ext != "image/png" &&
+                    ext != "image/xbm" &&
+                    ext != "image/tif" &&
+                    ext != "image/pjp" &&
+                    ext != "image/jfif" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/ico" &&
+                    ext != "image/tiff" &&
+                    ext != "image/svg" &&
+                    ext != "image/bmp" &&
+                    ext != "image/svgz" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/webp")   // A few (рідкісне) image extension but sometimes used
                 {
                     using (Db db = new Db())
                     {
@@ -283,7 +293,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
                 // Create and save reduced copy of image
                 WebImage img = new WebImage(file.InputStream);
-                img.Resize(200, 200);
+                img.Resize(200, 200).Crop(1,1);
                 img.Save(path2);
             }
             #endregion
@@ -433,7 +443,17 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                     ext != "image/pjpeg" && // A few (рідкісне) image extension but sometimes used
                     ext != "image/gif" &&
                     ext != "image/x-png" &&
-                    ext != "image/png")
+                    ext != "image/png" &&
+                    ext != "image/xbm" &&
+                    ext != "image/tif" &&
+                    ext != "image/pjp" &&
+                    ext != "image/jfif" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/ico" &&
+                    ext != "image/tiff" &&
+                    ext != "image/svg" &&
+                    ext != "image/bmp" &&
+                    ext != "image/svgz" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/webp")   // A few (рідкісне) image extension but sometimes used
                 {
                     using (Db db = new Db())
                     {
@@ -482,7 +502,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
                 // Create and save reduced copy of image
                 WebImage img = new WebImage(file.InputStream);
-                img.Resize(200, 200);
+                img.Resize(200, 200).Crop(1, 1);
                 img.Save(path2);
             }
             #endregion
@@ -493,6 +513,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
         // Add POST method to Delete Products
         // POST: Admin/Shop/DeleteProduct/id
+        [HttpPost]
         public ActionResult DeleteProduct(int id)
         {
             // Delete product from database 
@@ -512,6 +533,56 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
             // Redirect user
             return RedirectToAction("Products");
+        }
+
+        // Add POST method to Add images to Gallery
+        // POST: Admin/Shop/SaveGalleryImages/id
+        [HttpPost]
+        public void SaveGalleryImages(int id)
+        {
+            // Sort all getting files
+            foreach (string fileName in Request.Files)
+            {
+                // Initialize the files
+                HttpPostedFileBase file = Request.Files[fileName];
+
+                // Check on null
+                if (file != null && file.ContentLength > 0)
+                {
+                    // Assign all paths to directories
+                    var originalDirectory = new DirectoryInfo(string.Format($"{Server.MapPath(@"\")}Images\\Uploads"));
+
+                    string pathString1 = Path.Combine(originalDirectory.ToString(), "Products\\" + id.ToString() + "\\Gallery");
+                    string pathString2 = Path.Combine(originalDirectory.ToString(), "Products\\" + id.ToString() + "\\Gallery\\Thumbs");
+
+                    // Assign paths of images
+                    var path = string.Format($"{pathString1}\\{file.FileName}");
+                    var path2 = string.Format($"{pathString2}\\{file.FileName}");
+
+                    // Save original and reduced copies of images
+                    file.SaveAs(path);
+
+                    WebImage img = new WebImage(file.InputStream);
+                    img.Resize(200, 200).Crop(1, 1);
+                    img.Save(path2);
+                }
+            }
+        }
+
+        // Add POST method to Delete images from Gallery
+        // POST: Admin/Shop/DeleteImage/id/imageName
+        [HttpPost]
+        public void DeleteImage(int id, string imageName)
+        {
+            string fullPath1 = Request.MapPath("~/Images/Uploads/Products/" + id.ToString() + "/Gallery/" + imageName);
+            string fullPath2 = Request.MapPath("~/Images/Uploads/Products/" + id.ToString() + "/Gallery/Thumbs" + imageName);
+
+            // Check that the images is available 
+            if (System.IO.File.Exists(fullPath1))
+                System.IO.File.Delete(fullPath1);
+
+            if (System.IO.File.Exists(fullPath2))
+                System.IO.File.Delete(fullPath2);
         }
     }
 }

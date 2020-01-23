@@ -97,18 +97,24 @@
 <br />
 <br />
 
-@foreach (var image in Model.GalleryImages)
-{
-    <div style="display: inline-block">
-        <img src="/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@image" />
-        @Html.ActionLink("Delete", "DeleteImage", "Shop", new { @class = "deleteimage", data_name = image })
-    </div>
-}
+<div class="row">
+    @foreach (var image in Model.GalleryImages)
+    {
+        <div class="col">
+            <div class="col">
+                <div style="width: 200px; height: 200px; text-align: center">
+                    <img src="/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@image" />
+                    @Html.ActionLink("Delete", "DeleteImage", "Shop", new { @class = "deleteimage btn btn-danger", data_name = image, style = "margin: 10px;" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 <!-- ************************************************ -->
 
 <div>
-    @Html.ActionLink("Back to Products", "Products", "", new { @class = "btn btn-danger" })
+    @Html.ActionLink("Back to Products", "Products", "", new { @class = "btn btn-danger", style = "margin-top: 50px;" })
 </div>
 
 <link href="~/Scripts/dropzone/basic.css" rel="stylesheet" />
@@ -118,4 +124,43 @@
 {
     <script src="~/Content/ShopJS/AddProductScript.js"></script>
     <script src="~/Scripts/dropzone/dropzone.js"></script>
+
+    <script>
+
+        /* Dropzone js*/
+
+        Dropzone.options.dropzoneForm = {
+            acceptedFiles: "image/*",
+            init: function () {
+                this.on("complete",
+                    function (file) {
+                        if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                            location.reload();
+                        }
+                    });
+                this.on("sending",
+                    function (file, xhr, formData) {
+                        formData.append("id",  @Model.Id);
+                    });
+            }
+        };
+
+        /*-----------------------------------------------------------*/
+
+        /* Delete gallery image */
+
+        $("a.deleteimage").click(function(e) {
+            e.preventDefault();
+            if (!confirm("Confirm deletion")) return false;
+            var $this = $(this);
+            var url = "/admin/shop/DeleteImage";
+            var imageName = $this.data("name");
+            $.post(url, { id: @Model.Id, imageName: imageName }, function(data) {
+                $this.parent().parent().parent().fadeOut("slow");
+            });
+        });
+
+        /*-----------------------------------------------------------*/
+
+    </script>
 } 
