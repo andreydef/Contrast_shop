@@ -13,11 +13,11 @@ namespace WebStore_Contrast
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute("Pages", "{page}", new { controller = "Pages", action = "Index" },
-                new[] { "WebStore_Contrast.Controllers" });
-
             routes.MapRoute("Default", "",
                 new { controller = "Pages", action = "Index" }, new[] { "WebStore_Contrast.Controllers" });
+
+            routes.MapRoute("Pages", "{page}", new { controller = "Pages", action = "Index" },
+                new[] { "WebStore_Contrast.Controllers" });
 
             routes.MapRoute("PagesMenuPartial", "Pages/PagesMenuPartial", new { controller = "Pages", action = "PagesMenuPartial" },
                 new[] { "WebStore_Contrast.Controllers" });
@@ -31,11 +31,8 @@ namespace WebStore_Contrast
             routes.MapRoute("Cart", "Cart/{action}/{id}", new { controller = "Cart", action = "Index", id = UrlParameter.Optional },
                 new[] { "WebStore_Contrast.Controllers" });
 
-            //routes.MapRoute(
-            //    name: "Default",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            //);
+            routes.MapRoute("Account", "Account/{action}/{id}", new { controller = "Account", action = "Index", id = UrlParameter.Optional },
+                new[] { "WebStore_Contrast.Controllers" });
         }
     }
 }
