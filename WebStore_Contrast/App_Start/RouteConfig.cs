@@ -22,6 +22,12 @@ namespace WebStore_Contrast
             routes.MapRoute("PagesMenuPartial", "Pages/PagesMenuPartial", new { controller = "Pages", action = "PagesMenuPartial" },
                 new[] { "WebStore_Contrast.Controllers" });
 
+            routes.MapRoute("SidebarPartial", "Pages/SidebarPartial", new { controller = "Pages", action = "SidebarPartial" },
+                new[] { "WebStore_Contrast.Controllers" });
+
+            routes.MapRoute("Shop", "Shop/{action}/{name}", new { controller = "Shop", action = "Index", name = UrlParameter.Optional },
+                new[] { "WebStore_Contrast.Controllers" });
+            
             //routes.MapRoute(
             //    name: "Default",
             //    url: "{controller}/{action}/{id}",

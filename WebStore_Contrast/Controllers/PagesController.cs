@@ -73,5 +73,22 @@ namespace WebStore_Contrast.Controllers
             // Return partial view() with list of data
             return PartialView("_PagesMenuPartial", pageVMList);
         }
+
+        public ActionResult SidebarPartial()
+        {
+            // Assign the model
+            SidebarVM model;
+
+            // Initialize the model of data 
+            using (Db db = new Db())
+            {
+                SidebarDTO dto = db.Sidebars.Find(1);
+
+                model = new SidebarVM(dto);
+            }
+
+            // Return model in partial view()
+            return PartialView("_SidebarPartial", model);
+        }
     }
 }
