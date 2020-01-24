@@ -28,6 +28,9 @@ namespace WebStore_Contrast
             routes.MapRoute("Shop", "Shop/{action}/{name}", new { controller = "Shop", action = "Index", name = UrlParameter.Optional },
                 new[] { "WebStore_Contrast.Controllers" });
 
+            routes.MapRoute("Cart", "Cart/{action}/{id}", new { controller = "Cart", action = "Index", id = UrlParameter.Optional },
+                new[] { "WebStore_Contrast.Controllers" });
+
             //routes.MapRoute(
             //    name: "Default",
             //    url: "{controller}/{action}/{id}",
