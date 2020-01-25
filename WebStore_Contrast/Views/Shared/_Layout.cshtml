@@ -16,11 +16,53 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
+
                 @Html.Action("PagesMenuPartial", "Pages")
+
+                @if (Request.IsAuthenticated)
+                {
+                    <li> @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "navbar-text", style = "text-decoration: none" })</li>
+                }
+                else
+                {
+                    if (ViewBag.Title == "Login")
+                    {
+                        <li class="navbar-text"> @Html.ActionLink("Login", "Login", "Account", null, new { @class = "active", style = "text-decoration: none" }) </li>
+                    }
+                    else
+                    {
+                        <li class="navbar-text"> @Html.ActionLink("Login", "Login", "Account", null, new { @class = "navbar-text", style = "text-decoration: none" }) </li>
+                    }
+                }
+
+                @if (Request.IsAuthenticated && User.IsInRole("User"))
+                {
+                    if (ViewBag.Title == "User Profile")
+                    {
+                        <li class="active"> @Html.Action("UserNavPartial", "Account", new { area = "" }) </li>
+                    }
+                    else
+                    {
+                        <li> @Html.Action("UserNavPartial", "Account", new { area = "" }) </li>
+                    }
+                }
             </ul>
-            <span class="navbar-text">
-                @Html.Action("CartPartial", "Cart")
-            </span>
+
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <span class="navbar-text">
+                    @Html.ActionLink("Admin Area", "Index", "Dashboard", new { area = "Admin" }, null)
+                </span>
+            }
+            else
+            {
+                if (ViewBag.Title != "Cart Details")
+                {
+                    <span class="navbar-text">
+                        @Html.Action("CartPartial", "Cart")
+                    </span>
+                }
+            }
         </div>
     </nav>
     <div class="container body-content" style="margin-top: 30px;">
