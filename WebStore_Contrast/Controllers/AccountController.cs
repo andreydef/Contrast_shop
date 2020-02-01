@@ -142,7 +142,7 @@ namespace WebStore_Contrast.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
-        }
+        }  
 
         public ActionResult UserNavPartial()
         {

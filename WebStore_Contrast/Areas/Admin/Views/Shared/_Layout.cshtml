@@ -1,15 +1,158 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Admin Area</title>
+    <title>@ViewBag.Title Contrast</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+
+<body class="navbar-fixed menu-pin">
+    <header class="navbar">
+        <div class="container-fluid">
+            <div id="mobile_menu" class="fn_mobile_menu hidden-xl-up text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 459 459"><path d="M0,382.5h459v-51H0V382.5z M0,255h459v-51H0V255z M0,76.5v51h459v-51H0z" fill="currentColor"></path></svg>
+            </div>
+            <div class="admin_switches">
+                <div class="box_adswitch">
+                    <a class="btn_admin" href="/">
+                        <!-- Add Controller to front-end site -->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460 460" width="20px" height="20px"><path d="M0,67.5v285h460v-285H0z M30,97.5h400v225H30V97.5z M130,362.5l-20,20v10h240v-10l-20-20H130z" fill="currentColor"></path></svg>
+                        <span>Перейти на сайт</span>
+                    </a>
+                </div>
+            </div>
+            <div class="admin_switches admin_switches_two hidden-sm-down">
+                <div class="box_adswitch"></div>
+            </div>
+            <div id="mobile_menu_right" class="fn_mobile_menu_right hidden-md-up text-white float-xs-right">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve" fill="currentColor"><rect x="6.4" y="0" fill="none" width="13.6" height="11.1"></rect><rect y="8.9" width="10.6" height="2.2"></rect><rect x="14.8" y="2.6" width="1.5" height="7.4"></rect><rect x="11.6" y="5.6" width="7.4" height="1.5"></rect><rect y="14.4" width="20" height="2.2"></rect><rect y="3.3" width="6.4" height="2.2"></rect></svg>
+            </div>
+            <div id="quickview" class="fn_quickview">
+                <div class="sidebar_header hidden-md-up">
+                    <span class="fn_switch_quickview menu_switch">
+                        <span class="menu_hamburger"></span>
+                    </span>
+                    <a href="#" class="logo_box">
+                        <img src="~/Content/img/logo.png" alt="Logotype" />
+                    </a>
+                </div>
+                <div class="admin_exit hidden-sm-down">
+                    <a href="#">
+                        <!-- Add LogoutController -->
+                        <span class="hidden-lg-down">Вихід</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" width="20px" height="20px"><path id="XMLID_16_" d="M221.742,46.906c-7.28-3.954-16.387-1.259-20.341,6.021c-3.955,7.279-1.259,16.386,6.02,20.341   C242.937,92.561,265,129.626,265,170c0,60.654-49.346,110-110,110S45,230.654,45,170c0-40.198,21.921-77.186,57.208-96.531   c7.265-3.982,9.925-13.1,5.943-20.364c-3.983-7.264-13.101-9.925-20.364-5.943C42.891,71.775,15,118.844,15,170   c0,77.196,62.804,140,140,140s140-62.804,140-140C295,118.62,266.929,71.453,221.742,46.906z" fill="currentColor"></path><path id="XMLID_17_" d="M155,130c8.284,0,15-6.716,15-15V15c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v100   C140,123.284,146.716,130,155,130z" fill="currentColor"></path></svg>
+                    </a>
+                </div>
+                <div class="admin_techsupport">
+                    <div class="teachsupport_inner">
+                        <a href="#" data-hint="Not active" class="hint-bottom-middle-t-info-s-small-mobile hint-anim">
+                            <!-- Add SupportAdminController -->
+                            <span class="quickview_hidden">Техпідтримка</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 235.129 235.129" width="20px" height="20px"><path d="M212.027,84.433l-3.954,0.003c-10.912-40.466-48.044-69.228-90.549-69.228c-42.253,0-79.347,28.769-90.44,69.236  l-3.987-0.003C10.361,84.441,0,94.802,0,107.538v25.941c0,12.734,10.361,23.094,23.097,23.094h2.874  c3.697,29.087,28.603,51.648,58.681,51.648h5.515c2.926,6.87,9.744,11.699,17.669,11.699h19.455  c10.585,0,19.197-8.611,19.197-19.195c0-10.586-8.612-19.199-19.197-19.199h-19.455c-7.923,0-14.739,4.828-17.666,11.695h-5.519  c-24.347,0-44.154-19.805-44.154-44.148V92.785c7.758-36.299,40.035-62.576,77.027-62.576c37.237,0,69.551,26.267,77.108,62.548  v56.31c0,4.142,3.358,7.5,7.5,7.5h9.9c12.735,0,23.096-10.36,23.096-23.095V107.53C235.129,94.795,224.768,84.433,212.027,84.433z   M107.836,196.526h19.455c2.314,0,4.197,1.884,4.197,4.199c0,2.314-1.883,4.195-4.197,4.195h-19.455  c-2.313,0-4.195-1.882-4.195-4.195C103.641,198.41,105.522,196.526,107.836,196.526z M15,133.479v-25.941  c0-4.464,3.632-8.097,8.09-8.097l2.407,0.002v42.129h-2.4C18.632,141.573,15,137.942,15,133.479z M220.129,133.471  c0,4.463-3.632,8.095-8.096,8.095h-2.4V99.435l2.4-0.002c4.464,0,8.096,3.632,8.096,8.097V133.471z" fill="currentColor"></path></svg>
+                        </a>
+                        <div class="techsupport_toggle hidden-md-up">
+                            <span>Not active</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin_notification">
+                    <div class="notification_inner">
+                        <span class="notification_title">
+                            <span class="quickview_hidden">Повідомлення</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 454.136 454.136" width="20px" height="20px"><path d="M391.024,321.948c-27.089-27.089-42.308-63.83-42.308-102.14v-35.833c0-57-39.206-104.837-92.121-118.031V29.526    C256.595,13.22,243.375,0,227.068,0s-29.526,13.22-29.526,29.526v36.417c-52.915,13.195-92.121,61.031-92.121,118.031v35.833    c0,38.31-15.219,75.05-42.308,102.14c-11.907,11.907-15.469,29.814-9.025,45.372c6.444,15.557,21.625,25.701,38.464,25.701h73.4    c0,33.754,27.363,61.116,61.116,61.116s61.116-27.363,61.116-61.116h73.4c16.839,0,32.02-10.143,38.464-25.701    C406.493,351.762,402.931,333.855,391.024,321.948z M227.068,424.137c-17.158,0-31.116-13.959-31.116-31.116h62.232    C258.184,410.178,244.226,424.137,227.068,424.137z M372.332,355.839c-1.807,4.363-6.026,7.181-10.748,7.181H92.552    c-4.722,0-8.941-2.819-10.748-7.181s-0.817-9.339,2.522-12.678c32.949-32.949,51.094-76.757,51.094-123.353v-35.833    c0-50.535,41.113-91.648,91.648-91.648c50.535,0,91.648,41.113,91.648,91.648v35.833c0,46.596,18.146,90.404,51.095,123.353    C373.15,346.5,374.139,351.476,372.332,355.839z" fill="currentColor"></path></svg>
+                            <span class="counter">5</span>
+                        </span>
+                        <div class="notification_toggle">
+                            <div class="notif_item">
+                                <a href="#" class="1_notif">
+                                    <!-- Add OrdersAdminController -->
+                                    <span class="notif_icon boxed_notify">
+                                        <svg width="20px" height="20px" viewBox="0 0 510 510"><g id="shopping-cart"><path d="M153,408c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S181.05,408,153,408z M0,0v51h51l91.8,193.8L107.1,306    c-2.55,7.65-5.1,17.85-5.1,25.5c0,28.05,22.95,51,51,51h306v-51H163.2c-2.55,0-5.1-2.55-5.1-5.1v-2.551l22.95-43.35h188.7    c20.4,0,35.7-10.2,43.35-25.5L504.9,89.25c5.1-5.1,5.1-7.65,5.1-12.75c0-15.3-10.2-25.5-25.5-25.5H107.1L84.15,0H0z M408,408    c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S436.05,408,408,408z" fill="currentColor"></path></g></svg>
+                                    </span>
+                                    <span class="notif_title">Замовлення</span>
+                                </a>
+                                <spab class="notif_count">2</spab>
+                            </div>
+                            <div class="notif_item">
+                                <a href="" class="1_notif">
+                                    <!-- Add CommentsAdminController -->
+                                    <span class="notif_icon boxed_warning">
+                                        <svg width="20" height="20" viewBox="0 0 23 19" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g fill="none"><g><path d="M13.23 11.997c1.356-.572 2.425-1.35 3.21-2.334.783-.983 1.175-2.056 1.175-3.215 0-1.159-.392-2.23-1.176-3.215C15.655 2.25 14.586 1.471 13.23.9 11.875.328 10.401.043 8.808.043 7.215.043 5.74.328 4.385.9 3.03 1.47 1.96 2.25 1.176 3.233.392 4.218 0 5.29 0 6.448c0 .993.296 1.927.889 2.803.592.876 1.405 1.614 2.44 2.214-.085.201-.17.384-.257.551a3.167 3.167 0 0 1-.314.482c-.12.154-.214.275-.28.362-.067.088-.176.211-.326.37-.15.158-.246.262-.288.312 0-.008-.017.01-.05.056s-.052.067-.057.063c-.003-.004-.02.017-.05.062l-.043.07-.032.062a.278.278 0 0 0-.024.075.535.535 0 0 0-.006.08c0 .03.003.057.012.082a.418.418 0 0 0 .143.263c.08.067.166.1.257.1h.038c.417-.059.775-.126 1.075-.2a10.511 10.511 0 0 0 3.479-1.602c.75.133 1.484.2 2.202.2 1.592 0 3.067-.285 4.422-.856zm-7-1.045l-.55.388c-.233.158-.492.322-.776.488l.438-1.051-1.214-.7c-.8-.468-1.421-1.018-1.864-1.651-.441-.635-.662-1.294-.662-1.978 0-.85.327-1.647.982-2.39.654-.742 1.536-1.33 2.646-1.764 1.109-.433 2.302-.65 3.578-.65 1.276 0 2.468.217 3.578.65 1.109.435 1.991 1.022 2.646 1.765.655.742.982 1.538.982 2.39 0 .85-.327 1.647-.982 2.389-.655.742-1.537 1.33-2.646 1.764-1.11.434-2.302.65-3.578.65a10.87 10.87 0 0 1-1.914-.175l-.663-.125z" fill="currentColor"></path></g><path d="M22.121 13.118c.593-.872.888-1.808.888-2.809 0-1.025-.312-1.985-.938-2.877-.625-.893-1.476-1.635-2.552-2.227a6.418 6.418 0 0 1-.55 5.08c-.559 1-1.36 1.884-2.403 2.652-.967.7-2.068 1.238-3.303 1.614a13.228 13.228 0 0 1-3.866.562c-.25 0-.617-.016-1.1-.05 1.676 1.102 3.645 1.652 5.905 1.652.718 0 1.451-.067 2.202-.2a10.518 10.518 0 0 0 3.478 1.601c.3.075.659.142 1.076.2.1.009.192-.02.275-.087a.462.462 0 0 0 .163-.275c-.004-.05 0-.078.012-.081.012-.004.01-.032-.006-.081l-.025-.076-.03-.062a.591.591 0 0 0-.045-.069.55.55 0 0 0-.05-.063 1.38 1.38 0 0 1-.056-.062 8.891 8.891 0 0 0-.337-.369 4.982 4.982 0 0 1-.326-.369l-.281-.363a3.17 3.17 0 0 1-.313-.482 6.657 6.657 0 0 1-.257-.55c1.034-.6 1.847-1.337 2.44-2.209z" fill="currentColor"></path></g></svg>
+                                    </span>
+                                    <span class="notif_title">Коментарі</span>
+                                </a>
+                                <span class="notif_count">1</span>
+                            </div>
+                            <div class="notif_item">
+                                <a href="" class="1_notif">
+                                    <!-- Add FeedbacksAdminController -->
+                                    <span class="notif_icon boxed_yellow">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 512 512"><path d="M448,64H64C28.656,64,0,92.656,0,128v256c0,35.344,28.656,64,64,64h384c35.344,0,64-28.656,64-64V128   C512,92.656,483.344,64,448,64z M342.656,234.781l135.469-116.094c0.938,3,1.875,6,1.875,9.313v256   c0,2.219-0.844,4.188-1.281,6.281L342.656,234.781z M448,96c2.125,0,4,0.813,6,1.219L256,266.938L58,97.219   C60,96.813,61.875,96,64,96H448z M33.266,390.25C32.828,388.156,32,386.219,32,384V128c0-3.313,0.953-6.313,1.891-9.313   L169.313,234.75L33.266,390.25z M64,416c-3.234,0-6.172-0.938-9.125-1.844l138.75-158.563l51.969,44.531   C248.578,302.719,252.297,304,256,304s7.422-1.281,10.406-3.875l51.969-44.531l138.75,158.563C454.188,415.062,451.25,416,448,416   H64z" fill="currentColor"></path></svg>
+                                    </span>
+                                    <span class="notif_title">Зворотній зв'язок</span>
+                                </a>
+                                <span class="notif_count">1</span>
+                            </div>
+                            <div class="notif_item">
+                                <a href="" class="1_notif">
+                                    <!-- Add CallbacksAdminController -->
+                                    <span class="notif_icon boxed_attention">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 612 612"><path d="M559.959,383.188l-99.145-50.93c-24.27-12.508-55.653-8.243-75.772,10.251l-11.571,10.595     c-11.226,10.328-28.726,12.719-42.323,5.681c-33.813-17.404-60.856-44.446-78.279-78.183c-7.133-13.847-4.857-30.83,5.718-42.305     l10.615-11.551c11.379-12.374,17.633-28.439,17.633-45.211c0-10.557-2.563-21.114-7.401-30.524l-50.987-99.067     C211.942,19.928,179.333,0,143.359,0c-21.152,0-41.195,6.771-57.949,19.565L55.27,42.553     c-47.334,36.07-66.785,98.36-48.444,154.989c61.085,188.382,209.132,340.311,396.021,406.426     c15.09,5.336,30.868,8.032,46.876,8.032c37.428,0,73.918-15.204,100.139-41.769l34.521-34.903     c17.824-18.016,27.616-41.846,27.616-67.109C611.999,432.244,592.051,399.674,559.959,383.188z M543.531,495.051l-34.501,34.903     c-22.147,22.414-57.223,30.504-87.058,19.947C251.817,489.734,117.024,351.384,61.409,179.871     c-10.844-33.526,0.65-70.38,28.668-91.743l30.16-23.007c6.675-5.087,14.669-7.784,23.122-7.784     c14.382,0,27.444,7.975,34.042,20.846l50.968,99.067c0.688,1.339,1.052,2.792,1.052,4.303c0,3.06-1.377,5.183-2.543,6.445     l-10.595,11.532c-26.737,29.07-32.532,72.197-14.42,107.33c22.874,44.407,58.522,79.98,102.988,102.892     c34.521,17.786,78.853,11.801,107.406-14.401l11.59-10.633c1.874-1.722,6.731-3.52,10.748-1.473l99.144,50.93     c12.891,6.617,20.885,19.66,20.885,34.043C554.604,478.297,550.665,487.821,543.531,495.051z" fill="currentColor"></path></svg>
+                                    </span>
+                                    <span class="notif_title">Зворотній дзвінок</span>
+                                </a>
+                                <span class="notif_count">1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin_languages">
+                    <div class="languages_inner">
+                        <span class="languages_title hidden-md-up">Мови</span>
+                        <a href="#" class="flag flag_1 focus hint-bottom-middle-t-info-s-small-mobile hint-anim" data-hint="Російська" data-label="ru">
+                            <!-- Add LearningAdminController -->
+                            <img src="~/Content/img/ru.png" />
+                        </a>
+                        <a href="#" class="flag flag_2 focus hint-bottom-middle-t-info-s-small-mobile hint-anim" data-hint="Англійська" data-label="en">
+                            <!-- Add LearningAdminController -->
+                            <img src="~/Content/img/en.png" />
+                        </a>
+                        <a href="#" class="flag flag_3 focus hint-bottom-middle-t-info-s-small-mobile hint-anim" data-hint="Українська" data-label="ua">
+                            <!-- Add LearningAdminController -->
+                            <img src="~/Content/img/ua.png" />
+                        </a>
+                    </div>
+                </div>
+                <div class="admin_exit hidden-md-up">
+                    <a href=""> <!-- Add Logout link -->
+                        <span>Вихід</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" width="20px" height="20px"><path id="XMLID_16_" d="M221.742,46.906c-7.28-3.954-16.387-1.259-20.341,6.021c-3.955,7.279-1.259,16.386,6.02,20.341   C242.937,92.561,265,129.626,265,170c0,60.654-49.346,110-110,110S45,230.654,45,170c0-40.198,21.921-77.186,57.208-96.531   c7.265-3.982,9.925-13.1,5.943-20.364c-3.983-7.264-13.101-9.925-20.364-5.943C42.891,71.775,15,118.844,15,170   c0,77.196,62.804,140,140,140s140-62.804,140-140C295,118.62,266.929,71.453,221.742,46.906z" fill="currentColor"></path><path id="XMLID_17_" d="M155,130c8.284,0,15-6.716,15-15V15c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v100   C140,123.284,146.716,130,155,130z" fill="currentColor"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+
+    <nav id="admin_catalog" class="fn_left_menu"></nav>
+    <div class="page-container"></div>
+
+
+
+
+
+
+
+
+
+
+    @* <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         @Html.ActionLink("Dashboard", "Index", "Dashboard", "", new { @class = "navbar-brand" })
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,31 +172,21 @@
                     @Html.ActionLink("Products", "Products", "Shop", "", new { @class = "nav-link" })
                 </li>
             </ul>
+            <!-- New right menu
+                <ul class="navbar-nav ml-auto">
+                    <li>
+                        <a href="/" class="navbar-brand" target="_blank">Shopping Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </nav> *@
 
-            <!-- New right menu -->
-            <ul class="navbar-nav ml-auto">
-                <li>
-                    <a href="/" class="navbar-brand" target="_blank">Shopping Cart</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
-        </footer>
-    </div>
-
+    @RenderBody()
     @Scripts.Render("~/bundles/jquery")
-
     <!-- Add bundle to site -->
     @Scripts.Render("~/bundles/jqueryui")
-
     <!-- Add library CKEditor -->
     @Scripts.Render("~/bundles/ckeditor")
-
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

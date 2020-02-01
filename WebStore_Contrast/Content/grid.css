@@ -1,0 +1,20 @@
+/* ==================================================
+    Bootstrap 4 grid
+  ================================================== */
+
+.container-fluid {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.container-fluid::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.float-xs-right {
+    float: right !important;
+}
