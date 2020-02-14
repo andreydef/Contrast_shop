@@ -6,6 +6,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title Contrast</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+    <link href="/Content/jquery-ui.min.css" type="text/css" rel="stylesheet">
+    <link href="/Content/jquery.fancybox.min.css" type="text/css" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -128,7 +131,8 @@
                     </div>
                 </div>
                 <div class="admin_exit hidden-md-up">
-                    <a href=""> <!-- Add Logout link -->
+                    <a href="">
+                        <!-- Add Logout link -->
                         <span>Вихід</span>
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" width="20px" height="20px"><path id="XMLID_16_" d="M221.742,46.906c-7.28-3.954-16.387-1.259-20.341,6.021c-3.955,7.279-1.259,16.386,6.02,20.341   C242.937,92.561,265,129.626,265,170c0,60.654-49.346,110-110,110S45,230.654,45,170c0-40.198,21.921-77.186,57.208-96.531   c7.265-3.982,9.925-13.1,5.943-20.364c-3.983-7.264-13.101-9.925-20.364-5.943C42.891,71.775,15,118.844,15,170   c0,77.196,62.804,140,140,140s140-62.804,140-140C295,118.62,266.929,71.453,221.742,46.906z" fill="currentColor"></path><path id="XMLID_17_" d="M155,130c8.284,0,15-6.716,15-15V15c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v100   C140,123.284,146.716,130,155,130z" fill="currentColor"></path></svg>
                     </a>
@@ -137,57 +141,83 @@
         </div>
     </header>
 
+    <nav id="admin_catalog" class="fn_left_menu">
+        <div id="mob_menu"></div>
+        <div class="sidebar_header">
+            <a href="#" id="fix_logo" class="hidden-lg-down"> <!-- Add logotype --></a>
+            <a class="logo_box">
+                <img src="~/Content/img/logo.png" alt="Contrast" />
+            </a>
+            <span class="fn_switch_menu menu_switch fn_ajax_action fn_active_class hint-left-middle-t-white-s-small-mobile" data-id="1" data-hint="Фіксація каталога">
+                <span class="menu_hamburger"></span>
+            </span>
+        </div>
 
-
-
-    <nav id="admin_catalog" class="fn_left_menu"></nav>
-    <div class="page-container"></div>
-
-
-
-
-
-
-
-
-
-
-    @* <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        @Html.ActionLink("Dashboard", "Index", "Dashboard", "", new { @class = "navbar-brand" })
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    @Html.ActionLink("Pages", "Index", "Pages", "", new { @class = "nav-link" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Sidebar", "EditSidebar", "Pages", "", new { @class = "nav-link" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Categories", "Categories", "Shop", "", new { @class = "nav-link" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Products", "Products", "Shop", "", new { @class = "nav-link" })
-                </li>
-            </ul>
-            <!-- New right menu
-                <ul class="navbar-nav ml-auto">
-                    <li>
-                        <a href="/" class="navbar-brand" target="_blank">Shopping Cart</a>
-                    </li>
-                </ul>
+        <div class="sidebar sidebar-menu" id="navbarText">
+            <div class="scroll-wrapper scrollbar-inner menu_items" style="position: relative;">
+                <div class="scroll-inner menu_items scroll-content" style="height: 1040px;margin-bottom: 0px; margin-right: 0px; max-height: none;">
+                    <div>
+                        <form class="fn_manager_menu">
+                            <input type="hidden" mane="object" value="managers">
+                            <input type="hidden" name="session_id" value="bac704230c74e88d02118e6507be0078">
+                            <input type="hidden" name="id" value="1">
+                            <ul id="fn_sort_menu_section" class="menu_items">
+                                <li class="fn_item_sub_switch nav-dropdown" draggable="false">
+                                    <a class="fn_learning_left_catalog nav-link fn_item_switch nav-dropdown-toggle" href="javascript:;">
+                                        <span class="left_catalog title">Каталог</span>
+                                        <span class="icon-thumbnail">
+                                            <svg width="20px" height="20px" viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg"><path d="M.81.453h2.804v2.805H.81V.453zm0 5.184h2.804v2.805H.81V5.637zm0 5.184h2.804v2.804H.81v-2.804zM4.86.453h10.33v2.805H4.86V.453zm0 5.184h10.33v2.805H4.86V5.637zm0 5.184h10.33v2.804H4.86v-2.804z" fill="currentColor" fill-rule="evenodd"></path></svg>
+                                        </span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="fn_submenu_toggle submenu fn_sort_menu_item" style="display: none;">
+                                        <li class="nav-item active">
+                                            <input type="hidden" name="manager_menu[left_catalog][left_products_title]" value="ProductsAdmin">
+                                            <a href="" class="fn_learning_ProductsAdmin nav-link">
+                                                <span class="icon-thumbnail">T</span>
+                                                <span class="left_products_title title">
+                                                    @Html.ActionLink("Товари", "Products", "Shop", "", new { @class = "nav-link" })
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <input type="hidden" name="manager_menu[left_catalog][left_products_title]" value="CategoriesAdmin">
+                                            <a href="" class="fn_learning_CategoriesAdmin nav-link">
+                                                <span class="icon-thumbnail">K</span>
+                                                <span class="left_products_title title">
+                                                    @Html.ActionLink("Категорії", "Categories", "Shop", "", new { @class = "nav-link" })
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </nav> *@
+        </div>
+    </nav>
 
     @RenderBody()
     @Scripts.Render("~/bundles/jquery")
-    <!-- Add bundle to site -->
     @Scripts.Render("~/bundles/jqueryui")
-    <!-- Add library CKEditor -->
-    @Scripts.Render("~/bundles/ckeditor")
-    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/Scripts/jquery.js")
+    @Scripts.Render("~/Scripts/jquery.scrollbar.js")
+    @Scripts.Render("~/Scripts/jquery-ui.min.js")
+    @Scripts.Render("~/Scripts/jquery.dd.min.js")
+    @Scripts.Render("~/Scripts/jquery.fancybox.min.js")
+
+    @Scripts.Render("~/bundles/bootstrap") @* Include CKEditor *@
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Scripts.Render("~/Scripts/bootstrap-select.js")
+
+    @Scripts.Render("~/Scripts/sortable.js")
+    @Scripts.Render("~/Scripts/introjs.js")
+
+    @Scripts.Render("~/Scripts/main_beckend.js")
+    @Scripts.Render("~/Scripts/clipboard.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
