@@ -27,7 +27,6 @@ namespace WebStore_Contrast.Controllers
             using (Db db = new Db())
             {
                 categoryVMList = db.Categories.ToArray()
-                    .OrderBy(x => x.Sorting)
                     .Select(x => new CategoryVM(x)).ToList();
             }
 

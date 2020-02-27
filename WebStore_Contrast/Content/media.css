@@ -25,7 +25,7 @@
         width: 30px;
         height: 40px;
         display: inline-block;
-        background: url(/Content/img/logo_img.png) no-repeat center center;
+        /* background: url(/Content/img/logo_img.png) no-repeat center center; */
         background-size: cover;
         z-index: 1200;
         background-color: #272b35;

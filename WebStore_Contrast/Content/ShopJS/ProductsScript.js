@@ -13,7 +13,7 @@
 
     /*-----------------------------------------------------------*/
 
-    /* Confirm page deletion */
+    /* Confirm product deletion */
 
     $("a.delete").click(function () {
         if (!confirm("Confirm product deletion")) return false;

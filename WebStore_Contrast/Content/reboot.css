@@ -1,7 +1,7 @@
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 :after,
@@ -357,6 +357,8 @@ ul,
 dl {
     margin-top: 0;
     margin-bottom: 1rem;
+    list-style: none;
+    padding-inline-start: 0px !important;
 }
 
 ol ol,
