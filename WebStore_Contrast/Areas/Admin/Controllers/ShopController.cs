@@ -14,6 +14,42 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
     public class ShopController : Controller
     {
         #region Products
+
+        // Add GET method the list of goods
+        // GET: Admin/Shop/Products
+        [HttpGet]
+        public ActionResult Products(int? page, int? catId)
+        {
+            // Assign model ProductVM with type List
+            List<ProductVM> listOfProductVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfProductVM = db.Products.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
+                    .Select(x => new ProductVM(x))
+                    .ToList();
+
+                // Fill in the categories with data
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+
+                // Set the selected category
+                ViewBag.SelectedCat = catId.ToString();
+            }
+
+            // Set a page navigation
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 5); // 5 - the number of goods in page
+            ViewBag.onePageOfProducts = onePageOfProducts;
+
+            // Return View() with data
+            return View(listOfProductVM);
+        }
+
         // Add GET method to Adding goods
         // GET: Admin/Shop/AddProduct
         [HttpGet]
@@ -171,41 +207,6 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
             // Redirect user 
             return RedirectToAction("AddProduct");
-        }
-
-        // Add GET method the list of goods
-        // GET: Admin/Shop/Products
-        [HttpGet]
-        public ActionResult Products(int? page, int? catId)
-        {
-            // Assign model ProductVM with type List
-            List<ProductVM> listOfProductVM;
-
-            // Set the number of page
-            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
-                                               if it returns a value instead of 1 it will be this value */
-
-            using (Db db = new Db())
-            {
-                // Initialize List and fill in data
-                listOfProductVM = db.Products.ToArray()
-                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
-                    .Select(x => new ProductVM(x))
-                    .ToList();
-
-                // Fill in the categories with data
-                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
-
-                // Set the selected category
-                ViewBag.SelectedCat = catId.ToString();
-            }
-
-            // Set a page navigation
-            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 5); // 5 - the number of goods in page
-            ViewBag.onePageOfProducts = onePageOfProducts;
-
-            // Return View() with data
-            return View(listOfProductVM);
         }
 
         // Add GET method to Edit Products
@@ -458,83 +459,177 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         #endregion
 
         #region Categories
-        // GET: Admin/Shop
+
+        // Add GET method the list of categories
+        // GET: Admin/Shop/Categories
         [HttpGet]
-        public ActionResult Categories()
+        public ActionResult Categories(int? page)
         {
-            // Declare model with type List
-            List<CategoryVM> categoryVMList;
+            // Assign model BrandVM with type List
+            List<CategoryVM> listOfCatVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
 
             using (Db db = new Db())
             {
-                // Initialize model to data
-                categoryVMList = db.Categories
-                    .ToArray()
+                // Initialize List and fill in data
+                listOfCatVM = db.Categories.ToArray()
                     .Select(x => new CategoryVM(x))
                     .ToList();
             }
 
-            // Return List in View()
-            return View(categoryVMList);
+            // Set a page navigation
+            var onePageOfCategories = listOfCatVM.ToPagedList(pageNumber, 5); // 5 - the number of goods in page
+            ViewBag.onePageOfCategories = onePageOfCategories;
+
+            // Return View() with data
+            return View(listOfCatVM);
         }
 
-        // POST : Admin/Shop/AddNewCategory
-        [HttpPost]
-        public string AddNewCategory(string catName)
+        // Add GET method to Adding categories
+        // GET: Admin/Shop/AddCategory
+        [HttpGet]
+        public ActionResult AddCategory()
         {
-            // Declare string variable ID
-            string id;
+            // Assign the model of data
+            CategoryVM model = new CategoryVM();
+
+            // Add the list of categories from database to model
+            using (Db db = new Db())
+            {
+                model.Categories = new SelectList(db.Categories.ToList(), "id", "Name");
+            }
+
+            // Return model in view()
+            return View(model);
+        }
+
+        // Add POST method to Adding categories
+        // POST: Admin/Shop/AddCategory
+        [HttpPost]
+        public ActionResult AddCategory(CategoryVM model)
+        {
+            // Check the category name for unicity
+            using (Db db = new Db())
+            {
+                if (db.Categories.Any(x => x.Name == model.Name))
+                {
+                    model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+                    ModelState.AddModelError("", "The category name is taken!");
+                    return View(model);
+                }
+            }
+
+            // Assign variable CategoryID
+            int id;
+
+            // Initialize and save model on base CategoryDTO
+            using (Db db = new Db())
+            {
+                CategoryDTO category = new CategoryDTO();
+
+                category.Name = model.Name;
+                category.Short_desc = model.Short_desc;
+                category.Title = model.Title;
+                category.Meta_title = model.Meta_title;
+                category.Meta_keywords = model.Meta_keywords;
+                category.Meta_description = model.Meta_description;
+                category.Body = model.Body;
+
+                db.Categories.Add(category);
+                db.SaveChanges();
+
+                id = category.Id;
+            }
+
+            // Add message in TempData
+            TempData["SM"] = "You have added a category!";
+
+            // Redirect user 
+            return RedirectToAction("AddCategory");
+        }
+
+        // Add GET method to Edit Categories
+        // GET: Admin/Shop/EditCategory/id
+        [HttpGet]
+        public ActionResult EditCategory(int id)
+        {
+            // Assign model CategoryVM
+            CategoryVM model;
 
             using (Db db = new Db())
             {
-                // Check the name of categories at unicity
-                if (db.Categories.Any(x => x.Name == catName))
-                    return "titletaken";
+                // Get category
+                CategoryDTO dto = db.Categories.Find(id);
 
-                // Initialize the model DTO
-                CategoryDTO dto = new CategoryDTO();
+                // Check, that the category is available 
+                if (dto == null)
+                {
+                    return Content("That category does not exist!");
+                }
 
-                // Add data in model
-                dto.Name = catName;
-                dto.Slug = catName;
-
-                // Save changes 
-                db.Categories.Add(dto);
-                db.SaveChanges();
-
-                // Take ID for return in View()
-                id = dto.Id.ToString();
+                // Initialize model to data
+                model = new CategoryVM(dto);
             }
 
-            // Return ID in View();
-            return id;
+            // Return model in View()
+            return View(model);
         }
 
-        //// Add POST method to Sorting Categories
-        //// POST: Admin/Shop/ReorderCategories
-        //[HttpPost]
-        //public void ReorderCategories(int[] id)
-        //{
-        //    using (Db db = new Db())
-        //    {
-        //        // Realize variable with type Account
-        //        int count = 1;
+        // Add POST method to Edit Categories
+        // POST: Admin/Shop/EditCategory
+        [HttpPost]
+        public ActionResult EditCategory(CategoryVM model)
+        {
+            // Get ID of product 
+            int id = model.Id;
 
-        //        // Initialize model of data
-        //        CategoryDTO dto;
+            // Fill in the List with categories
+            using (Db db = new Db())
+            {
+                model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+            }
 
-        //        // Set the sorting for the each pages
-        //        foreach (var catId in id)
-        //        {
-        //            dto = db.Categories.Find(catId);
-        //            dto.Sorting = count;
+            // Check the model in validity
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-        //            db.SaveChanges();
+            // Check the name of category in unicity
+            using (Db db = new Db())
+            {
+                if (db.Categories.Where(x => x.Id != id).Any(x => x.Name == model.Name))
+                {
+                    ModelState.AddModelError("", "That category name is taken!");
+                    return View(model);
+                }
+            }
 
-        //            count++;
-        //        }
-        //    }
-        //}
+            // Update category 
+            using (Db db = new Db())
+            {
+                CategoryDTO dto = db.Categories.Find(id);
+
+                dto.Name = model.Name;
+                dto.Short_desc = model.Short_desc;
+                dto.Title = model.Title;
+                dto.Meta_title = model.Meta_title;
+                dto.Meta_keywords = model.Meta_keywords;
+                dto.Meta_description = model.Meta_description;
+                dto.Body = model.Body;
+
+                db.SaveChanges();
+            }
+
+            // Set the message in TempData
+            TempData["SM"] = "You have edited the category!";
+
+            // Redirect user
+            return RedirectToAction("EditCategory");
+        }
 
         // Add GET method to Delete Category
         // GET: Admin/Shop/DeleteCategory/id
@@ -560,34 +655,37 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             return RedirectToAction("Categories");
         }
 
-        // Add POST method to Rename Category
-        // POST: Admin/Shop/RenameCategory/id
-        [HttpPost]
-        public string RenameCategory(string newCatName, int id)
-        {
-            using (Db db = new Db())
-            {
-                // Check the name at unicity
-                if (db.Categories.Any(x => x.Name == newCatName))
-                    return "titletaken";
-
-                // Get model DTO
-                CategoryDTO dto = db.Categories.Find(id);
-
-                // Editing model DTO
-                dto.Name = newCatName;
-                dto.Slug = newCatName;
-
-                // Save changes
-                db.SaveChanges();
-            }
-
-            // Return string
-            return "ok";
-        }
         #endregion
 
         #region Brands
+
+        // Add GET method the list of brands
+        // GET: Admin/Shop/Brands
+        [HttpGet]
+        public ActionResult Brands(int? page)
+        {
+            // Assign model BrandVM with type List
+            List<BrandsVM> listOfBrandVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfBrandVM = db.Brands.ToArray()
+                    .Select(x => new BrandsVM(x))
+                    .ToList();
+            }
+
+            // Set a page navigation
+            var onePageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 5); // 5 - the number of goods in page
+            ViewBag.onePageOfBrands = onePageOfBrands;
+
+            // Return View() with data
+            return View(listOfBrandVM);
+        }
 
         // Add GET method to Adding brands
         // GET: Admin/Shop/AddBrand
@@ -612,7 +710,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddBrand(BrandsVM model)
         {
-            // Check the product name for unicity
+            // Check the brand name for unicity
             using (Db db = new Db())
             {
                 if (db.Brands.Any(x => x.Name == model.Name))
@@ -623,10 +721,10 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 }
             }
 
-            // Assign variable ProductID
+            // Assign variable BrandID
             int id;
 
-            // Initialize and save model on base ProductDTO
+            // Initialize and save model on base BrandDTO
             using (Db db = new Db())
             {
                 BrandsDTO brand = new BrandsDTO();
@@ -649,34 +747,6 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
             // Redirect user 
             return RedirectToAction("AddBrand");
-        }
-
-        // Add GET method the list of brands
-        // GET: Admin/Shop/Brands
-        [HttpGet]
-        public ActionResult Brands(int? page)
-        {
-            // Assign model ProductVM with type List
-            List<BrandsVM> listOfBrandVM;
-
-            // Set the number of page
-            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
-                                               if it returns a value instead of 1 it will be this value */
-
-            using (Db db = new Db())
-            {
-                // Initialize List and fill in data
-                listOfBrandVM = db.Brands.ToArray()
-                    .Select(x => new BrandsVM(x))
-                    .ToList();
-            }
-
-            // Set a page navigation
-            var onePageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 5); // 5 - the number of goods in page
-            ViewBag.onePageOfBrands = onePageOfBrands;
-
-            // Return View() with data
-            return View(listOfBrandVM);
         }
 
         // Add GET method to Edit Brands
@@ -758,20 +828,27 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             return RedirectToAction("EditBrand");
         }
 
-        // Add POST method to Delete Brands
-        // POST: Admin/Shop/DeleteBrand/id
-        [HttpPost]
+        // Add GET method to Delete Brand
+        // GET: Admin/Shop/DeleteBrand/id
+        [HttpGet]
         public ActionResult DeleteBrand(int id)
         {
-            // Delete product from database 
             using (Db db = new Db())
             {
+                // Get the model of category
                 BrandsDTO dto = db.Brands.Find(id);
+
+                // Delete category
                 db.Brands.Remove(dto);
+
+                // Save changes in database
                 db.SaveChanges();
             }
 
-            // Redirect user
+            // Add message about successful delete
+            TempData["SM"] = "You have deleted a brand!";
+
+            // Return user to the page Categories
             return RedirectToAction("Brands");
         }
 

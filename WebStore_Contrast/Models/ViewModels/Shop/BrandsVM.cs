@@ -35,6 +35,7 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
         public string Meta_title { get; set; }
         public string Meta_keywords { get; set; }
         public string Meta_description { get; set; }
+        [AllowHtml]
         public string Body { get; set; }
 
         public IEnumerable<SelectListItem> Brands { get; set; }

@@ -43,7 +43,7 @@ namespace WebStore_Contrast.Controllers
             using (Db db = new Db())
             {
                 // Get ID of category
-                CategoryDTO categoryDTO = db.Categories.Where(x => x.Slug == name).FirstOrDefault();
+                CategoryDTO categoryDTO = db.Categories.Where(x => x.Short_desc == name).FirstOrDefault();
 
                 int catId = categoryDTO.Id;
 
@@ -60,7 +60,7 @@ namespace WebStore_Contrast.Controllers
                 if (productCat == null)
                 {
                     var catName = db.Categories
-                        .Where(x => x.Slug == name)
+                        .Where(x => x.Short_desc == name)
                         .Select(x => x.Name)
                         .FirstOrDefault();
 
