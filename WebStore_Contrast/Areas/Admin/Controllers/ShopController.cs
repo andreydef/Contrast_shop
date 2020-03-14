@@ -532,7 +532,6 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
                 category.Name = model.Name;
                 category.Short_desc = model.Short_desc;
-                category.Title = model.Title;
                 category.Meta_title = model.Meta_title;
                 category.Meta_keywords = model.Meta_keywords;
                 category.Meta_description = model.Meta_description;
@@ -615,7 +614,6 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
                 dto.Name = model.Name;
                 dto.Short_desc = model.Short_desc;
-                dto.Title = model.Title;
                 dto.Meta_title = model.Meta_title;
                 dto.Meta_keywords = model.Meta_keywords;
                 dto.Meta_description = model.Meta_description;
@@ -682,6 +680,18 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             // Set a page navigation
             var onePageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 5); // 5 - the number of goods in page
             ViewBag.onePageOfBrands = onePageOfBrands;
+
+            var tenPageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 10); // 10 - the number of goods in page
+            ViewBag.tenPageOfBrands = tenPageOfBrands;
+
+            var twenty_five_PageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 25); // 25 - the number of goods in page
+            ViewBag.twenty_five_PageOfBrands = twenty_five_PageOfBrands;
+
+            var fiftyPageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 50); // 50 - the number of goods in page
+            ViewBag.fiftyPageOfBrands = fiftyPageOfBrands;
+
+            var hundredPageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 100); // 100 - the number of goods in page
+            ViewBag.hundredPageOfBrands = hundredPageOfBrands;
 
             // Return View() with data
             return View(listOfBrandVM);

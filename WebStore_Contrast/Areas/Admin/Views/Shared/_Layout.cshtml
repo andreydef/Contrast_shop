@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title Contrast</title>
+    <title>@ViewBag.Title</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
     <link href="/Content/jquery-ui.min.css" type="text/css" rel="stylesheet">
     <link href="/Content/jquery.fancybox.min.css" type="text/css" rel="stylesheet">
@@ -170,32 +170,41 @@
                                         </span>
                                         <span class="arrow"></span>
                                     </a>
-                                    <ul class="fn_submenu_toggle submenu fn_sort_menu_item" style="display: none;">
-                                        <li class="nav-item active">
+                                    <ul class="fn_submenu_toggle submenu fn_sort_menu_item">
+                                        <li class="">
                                             <input type="hidden" name="manager_menu[left_catalog][left_products_title]" value="ProductsAdmin">
-                                            <a href="" class="fn_learning_ProductsAdmin nav-link">
-                                                <span class="icon-thumbnail">T</span>
-                                                <span class="left_products_title title">
-                                                    @Html.ActionLink("Товари", "Products", "Shop", "", new { @class = "nav-link" })
+                                            <a class="fn_learning_ProductsAdmin nav-link" href="~/admin/shop/Products">
+                                                <span class="icon-thumbnail">
+                                                    Т
                                                 </span>
+                                                <span class="left_products_title title">Товари</span>
                                             </a>
                                         </li>
-                                        <li class="nav-item active">
-                                            <input type="hidden" name="manager_menu[left_catalog][left_products_title]" value="CategoriesAdmin">
-                                            <a href="" class="fn_learning_CategoriesAdmin nav-link">
-                                                <span class="icon-thumbnail">K</span>
-                                                <span class="left_products_title title">
-                                                    @Html.ActionLink("Категорії", "Categories", "Shop", "", new { @class = "nav-link" })
+                                        <li class="">
+                                            <input type="hidden" name="manager_menu[left_catalog][left_categories_title]" value="CategoriesAdmin">
+                                            <a class="fn_learning_CategoriesAdmin nav-link" href="~/admin/shop/Categories">
+                                                <span class="icon-thumbnail">
+                                                    К
                                                 </span>
+                                                <span class="left_categories_title title">Категорії</span>
                                             </a>
                                         </li>
-                                        <li class="nav-item active">
-                                            <input type="hidden" name="manager_menu[left_catalog][left_products_title]" value="CategoriesAdmin">
-                                            <a href="" class="fn_learning_CategoriesAdmin nav-link">
-                                                <span class="icon-thumbnail">Б</span>
-                                                <span class="left_products_title title">
-                                                    @Html.ActionLink("Бренди", "Brands", "Shop", "", new { @class = "nav-link" })
+                                        <li class="active">
+                                            <input type="hidden" name="manager_menu[left_catalog][left_brands_title]" value="BrandsAdmin">
+                                            <a class="fn_learning_BrandsAdmin nav-link" href="~/admin/shop/Brands">
+                                                <span class="icon-thumbnail">
+                                                    Б
                                                 </span>
+                                                <span class="left_brands_title title">Бренди</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <input type="hidden" name="manager_menu[left_catalog][left_features_title]" value="FeaturesAdmin">
+                                            <a class="fn_learning_FeaturesAdmin nav-link" href="#">
+                                                <span class="icon-thumbnail">
+                                                    С
+                                                </span>
+                                                <span class="left_features_title title">Властивості</span>
                                             </a>
                                         </li>
                                     </ul>

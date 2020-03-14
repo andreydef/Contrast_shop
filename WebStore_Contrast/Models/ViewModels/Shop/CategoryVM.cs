@@ -20,7 +20,6 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
             Id = row.Id;
             Name = row.Name;
             Short_desc = row.Short_desc;
-            Title = row.Title;
             Meta_title = row.Meta_title;
             Meta_keywords = row.Meta_keywords;
             Meta_description = row.Meta_description;
@@ -34,7 +33,6 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
         public string Name { get; set; }
         [Required]
         public string Short_desc { get; set; }
-        public string Title { get; set; }
         public string Meta_title { get; set; }
         public string Meta_keywords { get; set; }
         public string Meta_description { get; set; }
