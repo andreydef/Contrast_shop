@@ -465,7 +465,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Categories(int? page, int? catId)
         {
-            // Assign model ProductVM with type List
+            // Assign model CategoryVM with type List
             List<CategoryVM> listOfCatVM;
 
             // Set the number of page
@@ -539,10 +539,10 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 }
             }
 
-            // Assign variable ProductID
+            // Assign variable CategoryID
             int id;
 
-            // Initialize and save model on base ProductDTO
+            // Initialize and save model on base CategoryDTO
             using (Db db = new Db())
             {
                 CategoryDTO category = new CategoryDTO();
@@ -602,7 +602,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditCategory(CategoryVM model, HttpPostedFileBase file)
         {
-            // Get ID of product 
+            // Get ID of category
             int id = model.Id;
 
             // Fill in the List with categories
@@ -627,7 +627,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 }
             }
 
-            // Update product 
+            // Update category
             using (Db db = new Db())
             {
                 CategoryDTO dto = db.Categories.Find(id);
@@ -635,7 +635,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 dto.Name = model.Name;
                 dto.Short_desc = model.Short_desc;
                 dto.Meta_title = model.Meta_title;
-                dto.Meta_keywords = model.Meta_description;
+                dto.Meta_keywords = model.Meta_keywords;
                 dto.Meta_description = model.Meta_description;
                 dto.Body = model.Body;
 
@@ -713,7 +713,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             // Assign the model of data
             BrandsVM model = new BrandsVM();
 
-            // Add the list of categories from database to model
+            // Add the list of brands from database to model
             using (Db db = new Db())
             {
                 model.Brands = new SelectList(db.Brands.ToList(), "id", "Name");
@@ -749,10 +749,10 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 }
             }
 
-            // Assign variable ProductID
+            // Assign variable BrandID
             int id;
 
-            // Initialize and save model on base ProductDTO
+            // Initialize and save model on base BrandDTO
             using (Db db = new Db())
             {
                 BrandsDTO brand = new BrandsDTO();
@@ -782,15 +782,15 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult EditBrand(int id)
         {
-            // Assign model ProductVM
+            // Assign model BrandVM
             BrandsVM model;
 
             using (Db db = new Db())
             {
-                // Get product (goods)
+                // Get brands
                 BrandsDTO dto = db.Brands.Find(id);
 
-                // Check, that the product is available 
+                // Check, that the brand is available 
                 if (dto == null)
                 {
                     return Content("That brand does not exist!");
@@ -809,10 +809,10 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditBrand(BrandsVM model)
         {
-            // Get ID of product 
+            // Get ID of brand 
             int id = model.Id;
 
-            // Fill in the List with categories and images
+            // Fill in the List with brands
             using (Db db = new Db())
             {
                 model.Brands = new SelectList(db.Brands.ToList(), "Id", "Name");
@@ -824,7 +824,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 return View(model);
             }
 
-            // Check the name of product in unicity
+            // Check the name of brand in unicity
             using (Db db = new Db())
             {
                 if (db.Brands.Where(x => x.Id != id).Any(x => x.Name == model.Name))
@@ -834,7 +834,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 }
             }
 
-            // Update product 
+            // Update brand
             using (Db db = new Db())
             {
                 BrandsDTO dto = db.Brands.Find(id);
@@ -863,10 +863,10 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         {
             using (Db db = new Db())
             {
-                // Get the model of category
+                // Get the model of brand
                 BrandsDTO dto = db.Brands.Find(id);
 
-                // Delete category
+                // Delete brand
                 db.Brands.Remove(dto);
 
                 // Save changes in database
@@ -876,7 +876,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             // Add message about successful delete
             TempData["SM"] = "You have deleted a brand!";
 
-            // Return user to the page Categories
+            // Return user to the page Brands
             return RedirectToAction("Brands");
         }
 

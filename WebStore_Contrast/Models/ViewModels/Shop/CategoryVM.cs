@@ -28,8 +28,6 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
         }
 
         [Key]
-        [Required]
-        [DisplayName("Category")]
         public int Id { get; set; }
 
         [Required]
