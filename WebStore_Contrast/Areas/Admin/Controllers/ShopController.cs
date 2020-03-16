@@ -463,9 +463,9 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         // Add GET method the list of categories
         // GET: Admin/Shop/Categories
         [HttpGet]
-        public ActionResult Categories(int? page)
+        public ActionResult Categories(int? page, int? catId)
         {
-            // Assign model BrandVM with type List
+            // Assign model ProductVM with type List
             List<CategoryVM> listOfCatVM;
 
             // Set the number of page
@@ -476,12 +476,19 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             {
                 // Initialize List and fill in data
                 listOfCatVM = db.Categories.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.Id == catId)
                     .Select(x => new CategoryVM(x))
                     .ToList();
+
+                // Fill in the categories with data
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+
+                // Set the selected category
+                ViewBag.SelectedCat = catId.ToString();
             }
 
             // Set a page navigation
-            var onePageOfCategories = listOfCatVM.ToPagedList(pageNumber, 5); // 5 - the number of goods in page
+            var onePageOfCategories = listOfCatVM.ToPagedList(pageNumber, 5); // 5 - the number of categories in page
             ViewBag.onePageOfCategories = onePageOfCategories;
 
             // Return View() with data
@@ -509,8 +516,18 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         // Add POST method to Adding categories
         // POST: Admin/Shop/AddCategory
         [HttpPost]
-        public ActionResult AddCategory(CategoryVM model)
+        public ActionResult AddCategory(CategoryVM model, HttpPostedFileBase file)
         {
+            // Check model in validation
+            if (!ModelState.IsValid)
+            {
+                using (Db db = new Db())
+                {
+                    model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+                    return View(model);
+                }
+            }
+
             // Check the category name for unicity
             using (Db db = new Db())
             {
@@ -522,10 +539,10 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 }
             }
 
-            // Assign variable CategoryID
+            // Assign variable ProductID
             int id;
 
-            // Initialize and save model on base CategoryDTO
+            // Initialize and save model on base ProductDTO
             using (Db db = new Db())
             {
                 CategoryDTO category = new CategoryDTO();
@@ -571,6 +588,9 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
                 // Initialize model to data
                 model = new CategoryVM(dto);
+
+                // Create the list of categories
+                model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
             }
 
             // Return model in View()
@@ -580,7 +600,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         // Add POST method to Edit Categories
         // POST: Admin/Shop/EditCategory
         [HttpPost]
-        public ActionResult EditCategory(CategoryVM model)
+        public ActionResult EditCategory(CategoryVM model, HttpPostedFileBase file)
         {
             // Get ID of product 
             int id = model.Id;
@@ -607,7 +627,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 }
             }
 
-            // Update category 
+            // Update product 
             using (Db db = new Db())
             {
                 CategoryDTO dto = db.Categories.Find(id);
@@ -615,7 +635,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 dto.Name = model.Name;
                 dto.Short_desc = model.Short_desc;
                 dto.Meta_title = model.Meta_title;
-                dto.Meta_keywords = model.Meta_keywords;
+                dto.Meta_keywords = model.Meta_description;
                 dto.Meta_description = model.Meta_description;
                 dto.Body = model.Body;
 
@@ -678,20 +698,8 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             }
 
             // Set a page navigation
-            var onePageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 5); // 5 - the number of goods in page
+            var onePageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 5); // 5 - the number of brands in page
             ViewBag.onePageOfBrands = onePageOfBrands;
-
-            var tenPageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 10); // 10 - the number of goods in page
-            ViewBag.tenPageOfBrands = tenPageOfBrands;
-
-            var twenty_five_PageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 25); // 25 - the number of goods in page
-            ViewBag.twenty_five_PageOfBrands = twenty_five_PageOfBrands;
-
-            var fiftyPageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 50); // 50 - the number of goods in page
-            ViewBag.fiftyPageOfBrands = fiftyPageOfBrands;
-
-            var hundredPageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 100); // 100 - the number of goods in page
-            ViewBag.hundredPageOfBrands = hundredPageOfBrands;
 
             // Return View() with data
             return View(listOfBrandVM);
@@ -718,8 +726,18 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         // Add POST method to Adding brands
         // POST: Admin/Shop/AddBrand
         [HttpPost]
-        public ActionResult AddBrand(BrandsVM model)
+        public ActionResult AddBrand(BrandsVM model, HttpPostedFileBase file)
         {
+            // Check model in validation
+            if (!ModelState.IsValid)
+            {
+                using (Db db = new Db())
+                {
+                    model.Brands = new SelectList(db.Brands.ToList(), "Id", "Name");
+                    return View(model);
+                }
+            }
+
             // Check the brand name for unicity
             using (Db db = new Db())
             {
@@ -731,10 +749,10 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 }
             }
 
-            // Assign variable BrandID
+            // Assign variable ProductID
             int id;
 
-            // Initialize and save model on base BrandDTO
+            // Initialize and save model on base ProductDTO
             using (Db db = new Db())
             {
                 BrandsDTO brand = new BrandsDTO();
