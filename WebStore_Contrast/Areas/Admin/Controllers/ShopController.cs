@@ -22,6 +22,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         {
             // Assign model ProductVM with type List
             List<ProductVM> listOfProductVM;
+            ProductDTO dto = new ProductDTO();
 
             // Set the number of page
             var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
@@ -31,7 +32,6 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             {
                 // Initialize List and fill in data
                 listOfProductVM = db.Products.ToArray()
-                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
                     .Select(x => new ProductVM(x))
                     .ToList();
 
@@ -103,10 +103,11 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 ProductDTO product = new ProductDTO();
 
                 product.Name = model.Name;
-                product.Slug = model.Name;
-                product.Description = model.Description;
-                product.Price = model.Price;
+                product.Short_desc = model.Short_desc;
+                product.Body = model.Body;
+                product.CategoryName = model.CategoryName;
                 product.CategoryId = model.CategoryId;
+                product.ImageName = model.ImageName;
 
                 CategoryDTO catDTO = db.Categories.FirstOrDefault(x => x.Id == model.CategoryId);
                 product.CategoryName = catDTO.Name;
@@ -284,9 +285,9 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 ProductDTO dto = db.Products.Find(id);
 
                 dto.Name = model.Name;
-                dto.Slug = model.Name;
-                dto.Description = model.Description;
-                dto.Price = model.Price;
+                dto.Short_desc = model.Short_desc;
+                dto.Body = model.Body;
+                dto.CategoryName = model.CategoryName;
                 dto.CategoryId = model.CategoryId;
                 dto.ImageName = model.ImageName;
 
@@ -878,6 +879,224 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
             // Return user to the page Brands
             return RedirectToAction("Brands");
+        }
+
+        #endregion
+
+        #region Features
+
+        // Add GET method the list of features
+        // GET: Admin/Shop/Features
+        [HttpGet]
+        public ActionResult Features(int? page, int? catId)
+        {
+            // Assign model FeaturesVM with type List
+            List<FeaturesVM> listOfFeaturesVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfFeaturesVM = db.Features.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
+                    .Select(x => new FeaturesVM(x))
+                    .ToList();
+
+                // Fill in the categories with data
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+
+                // Set the selected category
+                ViewBag.SelectedCat = catId.ToString();
+            }
+
+            // Set a page navigation
+            var onePageOfFeatures = listOfFeaturesVM.ToPagedList(pageNumber, 5); // 5 - the number of features in page
+            ViewBag.onePageOfFeatures = onePageOfFeatures;
+
+            // Return View() with data
+            return View(listOfFeaturesVM);
+        }
+
+        // Add GET method to Adding features
+        // GET: Admin/Shop/AddFeature
+        [HttpGet]
+        public ActionResult AddFeature()
+        {
+            // Assign the model of data
+            FeaturesVM model = new FeaturesVM();
+
+            // Add the list of categories from database to model
+            using (Db db = new Db())
+            {
+                model.Categories = new SelectList(db.Categories.ToList(), "id", "Name");
+            }
+
+            // Return model in view()
+            return View(model);
+        }
+
+        // Add POST method to Adding features
+        // POST: Admin/Shop/AddFeature
+        [HttpPost]
+        public ActionResult AddFeature(FeaturesVM model, HttpPostedFileBase file)
+        {
+            // Check model in validation
+            if (!ModelState.IsValid)
+            {
+                using (Db db = new Db())
+                {
+                    model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+                    return View(model);
+                }
+            }
+
+            // Check the feature name for unicity
+            using (Db db = new Db())
+            {
+                if (db.Features.Any(x => x.Name == model.Name))
+                {
+                    model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+                    ModelState.AddModelError("", "The feature name is taken!");
+                    return View(model);
+                }
+            }
+
+            // Assign variable FeatureID
+            int id;
+
+            // Initialize and save model on base FeatureDTO
+            using (Db db = new Db())
+            {
+                FeaturesDTO feature = new FeaturesDTO();
+
+                feature.Name = model.Name;
+                feature.Url = model.Url;
+                feature.Description = model.Description;
+                feature.CategoryName = model.CategoryName;
+                feature.CategoryId = model.CategoryId;
+                feature.Id_property = model.Id_property;
+                feature.Id_value = model.Id_value;
+
+                CategoryDTO catDTO = db.Categories.FirstOrDefault(x => x.Id == model.CategoryId);
+                feature.CategoryName = catDTO.Name;
+
+                db.Features.Add(feature);
+                db.SaveChanges();
+
+                id = feature.Id;
+            }
+
+            // Add message in TempData
+            TempData["SM"] = "You have added a feature!";
+
+            // Redirect user 
+            return RedirectToAction("AddFeature");
+        }
+
+        // Add GET method to Edit Features
+        // GET: Admin/Shop/EditFeature/id
+        [HttpGet]
+        public ActionResult EditFeature(int id)
+        {
+            // Assign model FeatureVM
+            FeaturesVM model;
+
+            using (Db db = new Db())
+            {
+                // Get feature
+                FeaturesDTO dto = db.Features.Find(id);
+
+                // Check, that the feature is available 
+                if (dto == null)
+                {
+                    return Content("That feature does not exist!");
+                }
+
+                // Initialize model to data
+                model = new FeaturesVM(dto);
+
+                // Create the list of categories
+                model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+            }
+
+            // Return model in View()
+            return View(model);
+        }
+
+        // Add POST method to Edit Features
+        // POST: Admin/Shop/EditProduct
+        [HttpPost]
+        public ActionResult EditFeature(FeaturesVM model, HttpPostedFileBase file)
+        {
+            // Get ID of feature 
+            int id = model.Id;
+
+            // Fill in the List with categories
+            using (Db db = new Db())
+            {
+                model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+            }
+
+            // Check the model in validity
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // Check the name of feature in unicity
+            using (Db db = new Db())
+            {
+                if (db.Features.Where(x => x.Id != id).Any(x => x.Name == model.Name))
+                {
+                    ModelState.AddModelError("", "That feature name is taken!");
+                    return View(model);
+                }
+            }
+
+            // Update product 
+            using (Db db = new Db())
+            {
+                FeaturesDTO dto = db.Features.Find(id);
+
+                dto.Name = model.Name;
+                dto.Url = model.Url;
+                dto.Description = model.Description;
+                dto.CategoryName = model.CategoryName;
+                dto.CategoryId = model.CategoryId;
+                dto.Id_property = model.Id_property;
+                dto.Id_value = model.Id_value;
+
+                CategoryDTO catDTO = db.Categories.FirstOrDefault(x => x.Id == model.CategoryId);
+                dto.CategoryName = catDTO.Name;
+
+                db.SaveChanges();
+            }
+
+            // Set the message in TempData
+            TempData["SM"] = "You have edited the feature!";
+
+            // Redirect user
+            return RedirectToAction("EditFeature");
+        }
+
+        // Add POST method to Delete Features
+        // POST: Admin/Shop/DeleteFeature/id
+        [HttpPost]
+        public ActionResult DeleteFeature(int id)
+        {
+            // Delete feature from database 
+            using (Db db = new Db())
+            {
+                FeaturesDTO dto = db.Features.Find(id);
+                db.Features.Remove(dto);
+                db.SaveChanges();
+            }
+
+            // Redirect user
+            return RedirectToAction("Features");
         }
 
         #endregion

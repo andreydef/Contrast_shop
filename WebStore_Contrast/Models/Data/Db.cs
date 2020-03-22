@@ -18,5 +18,6 @@ namespace WebStore_Contrast.Models.Data
         public DbSet<OrderDTO> Orders { get; set; }
         public DbSet<OrderDetailsDTO> OrderDetails { get; set; }
         public DbSet<BrandsDTO> Brands { get; set; }
+        public DbSet<FeaturesDTO> Features { get; set; }
     }
 }

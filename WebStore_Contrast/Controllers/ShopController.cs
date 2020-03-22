@@ -90,13 +90,13 @@ namespace WebStore_Contrast.Controllers
             using (Db db = new Db())
             {
                 // Check, that the product is available 
-                if (!db.Products.Any(x => x.Slug.Equals(name)))
+                if (!db.Products.Any(x => x.Short_desc.Equals(name)))
                 {
                     return RedirectToAction("Index", "Shop");
                 }
 
                 // Initialize the model DTO to data
-                dto = db.Products.Where(x => x.Slug == name).FirstOrDefault();
+                dto = db.Products.Where(x => x.Short_desc == name).FirstOrDefault();
 
                 // Get ID
                 id = dto.Id;

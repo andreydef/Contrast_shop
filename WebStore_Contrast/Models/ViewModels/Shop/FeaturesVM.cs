@@ -9,38 +9,35 @@ using WebStore_Contrast.Models.Data;
 
 namespace WebStore_Contrast.Models.ViewModels.Shop
 {
-    public class ProductVM
+    public class FeaturesVM
     {
-        public ProductVM(){ }
+        public FeaturesVM(){}
 
-        public ProductVM(ProductDTO row)
+        public FeaturesVM(FeaturesDTO row)
         {
             Id = row.Id;
             Name = row.Name;
-            Short_desc = row.Short_desc;
-            Body = row.Body;
-            Price = row.Price;
+            Url = row.Url;
+            Description = row.Description;
             CategoryName = row.CategoryName;
             CategoryId = row.CategoryId;
-            ImageName = row.ImageName;
+            Id_property = row.Id_property;
+            Id_value = row.Id_value;
         }
 
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
-        public string Short_desc { get; set; }
+        public string Url { get; set; }
         [AllowHtml]
-        public string Body { get; set; }
-        public decimal Price { get; set; }
-        [Required]
-        [DisplayName("Category")]
+        public string Description { get; set; }
         public string CategoryName { get; set; }
+        [DisplayName("Category")]
         public int CategoryId { get; set; }
-        public string ImageName { get; set; }
+        public string Id_property { get; set; }
+        public string Id_value { get; set; }
 
-
+        public IEnumerable<SelectListItem> Features { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
-        public IEnumerable<string> GalleryImages { get; set; }
     }
 }
