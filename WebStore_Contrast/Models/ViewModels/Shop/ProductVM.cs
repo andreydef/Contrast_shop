@@ -17,8 +17,8 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
         {
             Id = row.Id;
             Name = row.Name;
-            Short_desc = row.Short_desc;
-            Body = row.Body;
+            Slug = row.Slug;
+            Description = row.Description;
             Price = row.Price;
             CategoryName = row.CategoryName;
             CategoryId = row.CategoryId;
@@ -26,19 +26,27 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
         }
 
         public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
+
         [Required]
-        public string Short_desc { get; set; }
+        public string Slug { get; set; }
+
+        [Required]
         [AllowHtml]
-        public string Body { get; set; }
+        public string Description { get; set; }
+
         public decimal Price { get; set; }
+
+        public string CategoryName { get; set; }
+
         [Required]
         [DisplayName("Category")]
-        public string CategoryName { get; set; }
         public int CategoryId { get; set; }
-        public string ImageName { get; set; }
 
+        [DisplayName("Image")]
+        public string ImageName { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
         public IEnumerable<string> GalleryImages { get; set; }

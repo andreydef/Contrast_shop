@@ -15,8 +15,22 @@
 
     /* Confirm product deletion */
 
-    $("a.delete").click(function () {
-        if (!confirm("Confirm product deletion")) return false;
+    //$(".delete").click(function () {
+    //    if (!confirm("Confirm product deletion")) return false;
+    //});
+
+    $(function () {
+
+        $("a.delete").click(function (e) {
+            e.preventDefault();
+
+            var productId = $(this).data("id");
+            var url = "/admin/shop/DeleteProduct";
+
+            $.get(url, { productId: productId }, function (data) {
+                location.reload();
+            });
+        });
     });
 
     /*-----------------------------------------------------------*/

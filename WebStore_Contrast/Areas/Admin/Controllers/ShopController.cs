@@ -15,41 +15,6 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
     {
         #region Products
 
-        // Add GET method the list of goods
-        // GET: Admin/Shop/Products
-        [HttpGet]
-        public ActionResult Products(int? page, int? catId)
-        {
-            // Assign model ProductVM with type List
-            List<ProductVM> listOfProductVM;
-            ProductDTO dto = new ProductDTO();
-
-            // Set the number of page
-            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
-                                               if it returns a value instead of 1 it will be this value */
-
-            using (Db db = new Db())
-            {
-                // Initialize List and fill in data
-                listOfProductVM = db.Products.ToArray()
-                    .Select(x => new ProductVM(x))
-                    .ToList();
-
-                // Fill in the categories with data
-                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
-
-                // Set the selected category
-                ViewBag.SelectedCat = catId.ToString();
-            }
-
-            // Set a page navigation
-            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 5); // 5 - the number of goods in page
-            ViewBag.onePageOfProducts = onePageOfProducts;
-
-            // Return View() with data
-            return View(listOfProductVM);
-        }
-
         // Add GET method to Adding goods
         // GET: Admin/Shop/AddProduct
         [HttpGet]
@@ -103,11 +68,10 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 ProductDTO product = new ProductDTO();
 
                 product.Name = model.Name;
-                product.Short_desc = model.Short_desc;
-                product.Body = model.Body;
-                product.CategoryName = model.CategoryName;
+                product.Slug = model.Name;
+                product.Description = model.Description;
+                product.Price = model.Price;
                 product.CategoryId = model.CategoryId;
-                product.ImageName = model.ImageName;
 
                 CategoryDTO catDTO = db.Categories.FirstOrDefault(x => x.Id == model.CategoryId);
                 product.CategoryName = catDTO.Name;
@@ -210,6 +174,41 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             return RedirectToAction("AddProduct");
         }
 
+        // Add GET method the list of goods
+        // GET: Admin/Shop/Products
+        [HttpGet]
+        public ActionResult Products(int? page, int? catId)
+        {
+            // Assign model ProductVM with type List
+            List<ProductVM> listOfProductVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfProductVM = db.Products.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
+                    .Select(x => new ProductVM(x))
+                    .ToList();
+
+                // Fill in the categories with data
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+
+                // Set the selected category
+                ViewBag.SelectedCat = catId.ToString();
+            }
+
+            // Set a page navigation
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // 3 - the number of goods in page
+            ViewBag.onePageOfProducts = onePageOfProducts;
+
+            // Return View() with data
+            return View(listOfProductVM);
+        }
+
         // Add GET method to Edit Products
         // GET: Admin/Shop/EditProduct/id
         [HttpGet]
@@ -285,9 +284,9 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 ProductDTO dto = db.Products.Find(id);
 
                 dto.Name = model.Name;
-                dto.Short_desc = model.Short_desc;
-                dto.Body = model.Body;
-                dto.CategoryName = model.CategoryName;
+                dto.Slug = model.Name;
+                dto.Description = model.Description;
+                dto.Price = model.Price;
                 dto.CategoryId = model.CategoryId;
                 dto.ImageName = model.ImageName;
 
@@ -384,16 +383,20 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             return RedirectToAction("EditProduct");
         }
 
-        // Add POST method to Delete Products
-        // POST: Admin/Shop/DeleteProduct/id
-        [HttpPost]
+        // Add GET method to Delete Product
+        // GET: Admin/Shop/DeleteProduct/id
+        [HttpGet]
         public ActionResult DeleteProduct(int id)
         {
-            // Delete product from database 
             using (Db db = new Db())
             {
+                // Get the model of product
                 ProductDTO dto = db.Products.Find(id);
+
+                // Delete product
                 db.Products.Remove(dto);
+
+                // Save changes in database
                 db.SaveChanges();
             }
 
@@ -404,7 +407,10 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             if (Directory.Exists(pathString))
                 Directory.Delete(pathString, true);
 
-            // Redirect user
+            // Add message about successful delete
+            TempData["SM"] = "You have deleted a product!";
+
+            // Return user to the page Products
             return RedirectToAction("Products");
         }
 
@@ -457,6 +463,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             if (System.IO.File.Exists(fullPath2))
                 System.IO.File.Delete(fullPath2);
         }
+
         #endregion
 
         #region Categories
