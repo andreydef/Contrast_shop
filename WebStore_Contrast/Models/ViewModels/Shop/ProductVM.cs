@@ -11,7 +11,10 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
 {
     public class ProductVM
     {
-        public ProductVM(){ }
+        public ProductVM()
+        {
+
+        }
 
         public ProductVM(ProductDTO row)
         {
