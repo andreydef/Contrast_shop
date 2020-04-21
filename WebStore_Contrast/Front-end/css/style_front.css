@@ -1208,6 +1208,7 @@ p.welcome-msg {
 
 .preview-1 .nivo-caption {
     font-family: 'Raleway', sans-serif;
+    display: block !important;
 }
 
 .layer-1-1 .title1 {
@@ -1519,6 +1520,7 @@ span.rating i {
     position: absolute;
     right: 30px;
 }
+
 
 .carosel-circle .owl-theme .owl-controls .owl-page span {
     background: #fff none repeat scroll 0 0;
@@ -2270,7 +2272,7 @@ ul.footer-content.box-information li a {
 }
 
 #scrollUp {
-    background: #e95668 url("img/icon/back-top.png") no-repeat scroll 0 0;
+    background: #e95668 url("Front-end/img/icon/back-top.png") no-repeat scroll 0 0;
     bottom: 35px;
     height: 54px;
     right: 20px;
@@ -2280,7 +2282,7 @@ ul.footer-content.box-information li a {
 }
 
 #scrollUp:hover {
-    background: #26acce url("img/icon/back-top.png") no-repeat scroll 0 -56px;
+    background: #26acce url("Front-end/img/icon/back-top.png") no-repeat scroll 0 -56px;
 }
 
 
