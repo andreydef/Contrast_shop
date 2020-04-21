@@ -73,7 +73,7 @@ namespace WebStore_Contrast.Controllers
             }
 
             // Return the PartialView() of View() with model
-            return PartialView("_CartPartial", model);
+            return View("Cart", model);
         }
 
         // GET: MainCart/AddToCartPartial/id

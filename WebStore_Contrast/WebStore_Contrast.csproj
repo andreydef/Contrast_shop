@@ -1165,13 +1165,15 @@
     <Content Include="Views\Pages\_SidebarPartial.cshtml" />
     <Content Include="Views\Shop\ProductDetails.cshtml" />
     <Content Include="Views\Shop\Category.cshtml" />
-    <Content Include="Views\Cart\_CartPartial.cshtml" />
     <Content Include="Views\Cart\MainCart.cshtml" />
     <Content Include="Views\Cart\_AddToCartPartial.cshtml" />
     <Content Include="Views\Account\CreateAccount.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\UserNavPartial.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
+    <Content Include="Views\About\About.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Shared\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
