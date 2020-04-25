@@ -22,6 +22,7 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
             Meta_keywords = row.Meta_keywords;
             Meta_description = row.Meta_description;
             Body = row.Body;
+            ImageName = row.ImageName;
         }
 
         public int Id { get; set; }
@@ -37,6 +38,7 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
         public string Meta_description { get; set; }
         [AllowHtml]
         public string Body { get; set; }
+        public string ImageName { get; set; }
 
         public IEnumerable<SelectListItem> Brands { get; set; }
     }

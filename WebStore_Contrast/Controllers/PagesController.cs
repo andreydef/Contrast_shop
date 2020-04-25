@@ -41,15 +41,15 @@ namespace WebStore_Contrast.Controllers
             // Set the title of page (TITLE)
             ViewBag.PageTitle = dto.Title;
 
-            // Check the sidebar 
-            if (dto.HasSidebar == true)
-            {
-                ViewBag.Sidebar = "Yes";
-            }
-            else
-            {
-                ViewBag.Sidebar = "No";
-            }
+            //// Check the sidebar 
+            //if (dto.HasSidebar == true)
+            //{
+            //    ViewBag.Sidebar = "Yes";
+            //}
+            //else
+            //{
+            //    ViewBag.Sidebar = "No";
+            //}
 
             // Fill the model to data
             model = new PageVM(dto);
@@ -58,21 +58,21 @@ namespace WebStore_Contrast.Controllers
             return View(model);
         }
 
-        public ActionResult PagesMenuPartial()
-        {
-            // Initialize list PageVM
-            List<PageVM> pageVMList;
+        //public ActionResult PagesMenuPartial()
+        //{
+        //    // Initialize list PageVM
+        //    List<PageVM> pageVMList;
 
-            // Get all pages, except HOME
-            using (Db db = new Db())
-            {
-                pageVMList = db.Pages.ToArray().OrderBy(x => x.Sorting).Where(x => x.Slug != "home")
-                    .Select(x => new PageVM(x)).ToList();
-            }
+        //    //// Get all pages, except HOME
+        //    //using (Db db = new Db())
+        //    //{
+        //    //    pageVMList = db.Pages.ToArray().OrderBy(x => x.Sorting).Where(x => x.Slug != "home")
+        //    //        .Select(x => new PageVM(x)).ToList();
+        //    //}
 
-            // Return partial view() with list of data
-            return PartialView("_PagesMenuPartial", pageVMList);
-        }
+        //    // Return partial view() with list of data
+        //    return PartialView("_PagesMenuPartial", pageVMList);
+        //}
 
         public ActionResult SidebarPartial()
         {

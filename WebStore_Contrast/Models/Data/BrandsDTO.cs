@@ -18,5 +18,6 @@ namespace WebStore_Contrast.Models.Data
         public string Meta_keywords { get; set; }
         public string Meta_description { get; set; }
         public string Body { get; set; }
+        public string ImageName { get; set; }
     }
 }

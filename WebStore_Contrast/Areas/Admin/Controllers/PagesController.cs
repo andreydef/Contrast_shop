@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,189 +11,116 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 {
     public class PagesController : Controller
     {
-        // GET: Admin/Pages
-        public ActionResult Index()
+        // Add GET method the list of pages
+        // GET: Admin/Shop/Pages
+        [HttpGet]
+        public ActionResult Pages(int? page, int? pageId)
         {
-            //  Create list for ViewModels (PageVM)
-            List<PageVM> pageList;
+            // Assign model PageVM with type List
+            List<PageVM> listOfPageVM;
 
-            // Initialize list (Db)
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
             using (Db db = new Db())
             {
-                pageList = db.Pages.ToArray().OrderBy(x => x.Sorting).Select(x => new PageVM(x)).ToList();
+                // Initialize List and fill in data
+                listOfPageVM = db.Pages.ToArray()
+                    .Where(x => pageId == null || pageId == 0 || x.Id == pageId)
+                    .Select(x => new PageVM(x))
+                    .ToList();
+
+                // Fill in the pages with data
+                ViewBag.Pages = new SelectList(db.Pages.ToList(), "Id", "Title");
+
+                // Set the selected pages
+                ViewBag.SelectedPage = pageId.ToString();
             }
 
-            // Return list to PageVM
-            return View(pageList);
+            // Set a page navigation
+            var onePageOfPages = listOfPageVM.ToPagedList(pageNumber, 5); // 5 - the number of pages in page
+            ViewBag.onePageOfPages = onePageOfPages;
+
+            // Return View() with data
+            return View(listOfPageVM);
         }
 
-        // GET: Admin/Pages/AddPage
-        [HttpGet] // this method a receives and displays data
+        // Add GET method to Adding pages
+        // GET: Admin/Shop/AddPage
+        [HttpGet]
         public ActionResult AddPage()
         {
-            return View();
-        }
+            // Assign the model of data
+            PageVM model = new PageVM();
 
-        // POST: Admin/Pages/AddPage
-        [HttpPost] // this method processes the data
-        public ActionResult AddPage(PageVM model)
-        {
-            // Validation of the model
-            if (!ModelState.IsValid) // if model is not valid
-            {
-                return View(model);
-            }
-
+            // Add the list of pages from database to model
             using (Db db = new Db())
             {
-                // Declare a variable for short description (slug)
-                string slug;
-
-                // Initialize class PageDTO
-                PagesDTO dto = new PagesDTO();
-
-                // Assign the model title
-                dto.Title = model.Title;
-
-                // Check if there is a short description(slug), if not, assign it
-                if (string.IsNullOrWhiteSpace(model.Slug))
-                {
-                    slug = model.Title;
-                }
-                else
-                {
-                    slug = model.Slug;
-                }
-
-                // Make sure that the title and short description(slug) - are unique
-                if (db.Pages.Any(x => x.Title == model.Title))
-                {
-                    ModelState.AddModelError("", "That title already exist.");
-                    return View(model); // return model with taken data
-                }
-                else if (db.Pages.Any(x => x.Slug == model.Slug))
-                {
-                    ModelState.AddModelError("", "That slug already exist.");
-                    return View(model); // return model with taken data
-                }
-
-                // After that, assign the values of the model, which have saved
-                dto.Slug = slug;
-                dto.Body = model.Body;
-                dto.HasSidebar = model.HasSidebar;
-                dto.Sorting = 100; // When adding a model to a database, the model was added to the end of the database list
-
-                // Saved model to the database
-                db.Pages.Add(dto);
-                db.SaveChanges();
+                model.Pages = new SelectList(db.Pages.ToList(), "id", "Title");
             }
 
-            // Send notifications through the TempData
-            TempData["SM"] = "You have added a new page!";
+            // Return model in view()
+            return View(model);
+        }
 
-            // Redirected the user to the method INDEX
-            return RedirectToAction("Index");
+        // Add POST method to Adding pages
+        // POST: Admin/Shop/AddPage
+        [HttpPost]
+        public ActionResult AddPage(PageVM model, HttpPostedFileBase file)
+        {
+            // Check model in validation
+            if (!ModelState.IsValid)
+            {
+                using (Db db = new Db())
+                {
+                    model.Pages = new SelectList(db.Pages.ToList(), "Id", "Title");
+                    return View(model);
+                }
+            }
+
+            // Check the category name for unicity
+            using (Db db = new Db())
+            {
+                if (db.Pages.Any(x => x.Title == model.Title))
+                {
+                    model.Pages = new SelectList(db.Categories.ToList(), "Id", "Title");
+                    ModelState.AddModelError("", "The page name is taken!");
+                    return View(model);
+                }
+            }
+
+            // Assign variable PageID
+            int id;
+
+            // Initialize and save model on base PageDTO
+            using (Db db = new Db())
+            {
+                PagesDTO page = new PagesDTO();
+
+                page.Title = model.Title;
+                page.Slug = model.Slug;
+                page.Body = model.Body;
+
+                db.Pages.Add(page);
+                db.SaveChanges();
+
+                id = page.Id;
+            }
+
+            // Add message in TempData
+            TempData["SM"] = "You have added a page!";
+
+            // Redirect user 
+            return RedirectToAction("AddPage");
         }
 
         // Add GET method to Edit Pages
-        // GET: Admin/Pages/EditPage/id
+        // GET: Admin/Shop/EditPage/id
         [HttpGet]
         public ActionResult EditPage(int id)
         {
-            // Create models PageVM
-            PageVM model;
-
-            using (Db db = new Db())
-            {
-                // Get page data
-                PagesDTO dto = db.Pages.Find(id);
-
-                // Checking, if a page is available
-                if (dto == null)
-                {
-                    return Content("The page does not exist.");
-                }
-
-                // Initialize model dates (Ініціалізуємо модель данними)
-                model = new PageVM(dto);
-
-                // Return model
-                return View(model);
-            }
-        }
-
-        // Add POST method to Edit Pages
-        // POST: Admin/Pages/EditPage
-        [HttpPost]
-        public ActionResult EditPage(PageVM model)
-        {
-            // Check model for validity
-            if (!ModelState.IsValid) // if model does not valid
-            {
-                return View(model);
-            }
-
-            using (Db db = new Db())
-            {
-                // Get ID of the page
-                int id = model.Id;
-
-                // Create variable for short title (temporary variable)
-                string slug = "home";
-
-                // Get page (by id)
-                PagesDTO dto = db.Pages.Find(id);
-
-                // Assign a title for the resulting model to DTO
-                dto.Title = model.Title;
-
-                // Check the short title and assign it, if necessary
-                if (model.Slug != "home")
-                {
-                    if (string.IsNullOrWhiteSpace(model.Slug)) // null or space
-                    {
-                        slug = model.Title;
-                    }
-                    else
-                    {
-                        slug = model.Slug;
-                    }
-                }
-
-                // Check sluh and title in unique
-                if (db.Pages.Where(x => x.Id != id).Any(x => x.Title == model.Title))  // Search the database for all ID in addition to the ID that is entered at the moment,
-                                                                                       // and if Title matches the database with what we entered then we add an error
-                {
-                    ModelState.AddModelError("", "That title already exist.");
-                    return View(model);
-                }
-                else if (db.Pages.Where(x => x.Id != id).Any(x => x.Slug == slug))
-                {
-                    ModelState.AddModelError("", "That slug already exist.");
-                    return View(model);
-                }
-
-                // Write other values to the class DTO
-                dto.Slug = slug;
-                dto.Body = model.Body;
-                dto.HasSidebar = model.HasSidebar;
-
-                // Save Changes in database
-                db.SaveChanges();
-            }
-
-            // Send notifications through the TempData
-            TempData["SM"] = "You have esited the page.";
-
-            // Redirected the user
-            return RedirectToAction("EditPage");
-        }
-
-        // Add GET method to Page Details
-        // GET: Admin/Pages/PageDetails/id
-        public ActionResult PageDetails(int id)
-        {
-            // Assign model PageVM
+            // Assign model CategoryVM
             PageVM model;
 
             using (Db db = new Db())
@@ -200,27 +128,80 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 // Get page
                 PagesDTO dto = db.Pages.Find(id);
 
-                // Confirm, that page is available 
+                // Check, that the page is available 
                 if (dto == null)
                 {
-                    return Content("The page does not exist.");
+                    return Content("That page does not exist!");
                 }
 
-                // Assogn to model information from database
+                // Initialize model to data
                 model = new PageVM(dto);
+
+                // Create the list of pages
+                model.Pages = new SelectList(db.Pages.ToList(), "Id", "Title");
             }
 
-            // Return model in View
+            // Return model in View()
             return View(model);
         }
 
-        // Add GET method to Delete Pages
-        // GET: Admin/Pages/DeletePage/id
+        // Add POST method to Edit Pages
+        // POST: Admin/Shop/EditPage
+        [HttpPost]
+        public ActionResult EditPage(PageVM model, HttpPostedFileBase file)
+        {
+            // Get ID of page
+            int id = model.Id;
+
+            // Fill in the List with pages
+            using (Db db = new Db())
+            {
+                model.Pages = new SelectList(db.Pages.ToList(), "Id", "Name");
+            }
+
+            // Check the model in validity
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // Check the name of page in unicity
+            using (Db db = new Db())
+            {
+                if (db.Pages.Where(x => x.Id != id).Any(x => x.Title == model.Title))
+                {
+                    ModelState.AddModelError("", "That page name is taken!");
+                    return View(model);
+                }
+            }
+
+            // Update page
+            using (Db db = new Db())
+            {
+                PagesDTO dto = db.Pages.Find(id);
+
+                dto.Title = model.Title;
+                dto.Slug = model.Slug;
+                dto.Body = model.Body;
+
+                db.SaveChanges();
+            }
+
+            // Set the message in TempData
+            TempData["SM"] = "You have edited the page!";
+
+            // Redirect user
+            return RedirectToAction("EditPage");
+        }
+
+        // Add GET method to Delete a Page
+        // GET: Admin/Shop/DeletePage/id
+        [HttpGet]
         public ActionResult DeletePage(int id)
         {
             using (Db db = new Db())
             {
-                // Get page
+                // Get the model of page
                 PagesDTO dto = db.Pages.Find(id);
 
                 // Delete page
@@ -233,79 +214,8 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             // Add message about successful delete
             TempData["SM"] = "You have deleted a page!";
 
-            // Return user to the page INDEX
-            return RedirectToAction("Index");
-        }
-
-        // Add POST method to Sorting Pages
-        // POST: Admin/Pages/ReorderPages
-        [HttpPost]
-        public void ReorderPages(int[] id)
-        {
-            using (Db db = new Db())
-            {
-                // Realize variable with type Account
-                int count = 1;
-
-                // Initialize model of date
-                PagesDTO dto;
-
-                // Set the sorting for the each pages
-                foreach (var pageId in id)
-                {
-                    dto = db.Pages.Find(pageId);
-                    dto.Sorting = count;
-
-                    db.SaveChanges();
-
-                    count++;
-                }
-            }
-        }
-
-        // Add GET method to Edit Sidebar
-        // GET: Admin/Pages/EditSidebar
-        [HttpGet]
-        public ActionResult EditSidebar()
-        {
-            // Declare model
-            SidebarVM model;
-
-            using (Db db = new Db())
-            {
-                // Take data on the database
-                SidebarDTO dto = db.Sidebars.Find(1); /* test version, I fix this later - don't try to do this!!! (bad code - Hard values ​​cannot be added!) */
-
-                // Fill the model with data
-                model = new SidebarVM(dto);
-            }
-
-            // Return View with model
-            return View(model);
-        }
-
-        // Add POST method to Edit Sidebar
-        // POST: Admin/Pages/EditSidebar
-        [HttpPost]
-        public ActionResult EditSidebar(SidebarVM model)
-        {
-            using (Db db = new Db())
-            {
-                // Get gata with DTO
-                SidebarDTO dto = db.Sidebars.Find(1); /* test version, I fix this later - don't try to do this!!! (bad code - Hard values ​​cannot be added!) */
-
-                // Assign data to the body (in property Body) 
-                dto.Body = model.Body;
-
-                // Save
-                db.SaveChanges();
-            }
-
-            // Assign message in TempData
-            TempData["SM"] = "You have edited the Sidebar!";
-
-            // Redirect user (admin)
-            return RedirectToAction("EditSidebar");
+            // Return user to the page Pages
+            return RedirectToAction("Pages");
         }
     }
 }

@@ -4577,7 +4577,6 @@ body.menu-pin .page-container {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     height: calc(100% - 0px);
-    padding-bottom: 25px!important;
     width: 100%;
 }
 

@@ -18,8 +18,6 @@ namespace WebStore_Contrast.Models.ViewModels.Pages
             Title = row.Title;
             Slug = row.Slug;
             Body = row.Body;
-            Sorting = row.Sorting;
-            HasSidebar = row.HasSidebar;
         }
 
         public int Id { get; set; }
@@ -35,9 +33,6 @@ namespace WebStore_Contrast.Models.ViewModels.Pages
         [AllowHtml]
         public string Body { get; set; }
 
-        public int Sorting { get; set; }
-
-        [Display(Name = "Sidebar")]
-        public bool HasSidebar { get; set; }
+        public IEnumerable<SelectListItem> Pages { get; set; }
     }
 }

@@ -5,10 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>Admin | Contrast</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
     <link href="/Content/jquery-ui.min.css" type="text/css" rel="stylesheet">
     <link href="/Content/jquery.fancybox.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Front-end/css/font-awesome.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -204,9 +205,31 @@
                                             <input type="hidden" name="manager_menu[left_catalog][left_features_title]" value="FeaturesAdmin">
                                             <a class="fn_learning_FeaturesAdmin nav-link" href="~/admin/shop/Features">
                                                 <span class="icon-thumbnail">
-                                                    С
+                                                    В
                                                 </span>
                                                 <span class="left_features_title title">Властивості</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul id="fn_sort_menu_section" class="menu_items">
+                                <li class="fn_item_sub_switch nav-dropdown" draggable="false">
+                                    <a class="fn_learning_left_catalog nav-link fn_item_switch nav-dropdown-toggle" href="javascript:;">
+                                        <span class="left_catalog title">Сторінки</span>
+                                        <span class="icon-thumbnail">
+                                            <svg width="20px" height="20px" viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg"><path d="M.81.453h2.804v2.805H.81V.453zm0 5.184h2.804v2.805H.81V5.637zm0 5.184h2.804v2.804H.81v-2.804zM4.86.453h10.33v2.805H4.86V.453zm0 5.184h10.33v2.805H4.86V5.637zm0 5.184h10.33v2.804H4.86v-2.804z" fill="currentColor" fill-rule="evenodd"></path></svg>
+                                        </span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="fn_submenu_toggle submenu fn_sort_menu_item">
+                                        <li class="">
+                                            <input type="hidden" name="manager_menu[left_catalog][left_pages_title]" value="PagesAdmin">
+                                            <a class="fn_learning_ProductsAdmin nav-link" href="~/admin/pages/Pages">
+                                                <span class="icon-thumbnail">
+                                                    С
+                                                </span>
+                                                <span class="left_products_title title">Сторінки</span>
                                             </a>
                                         </li>
                                     </ul>

@@ -248,6 +248,8 @@ $(document).ready(function() {
 // 	  $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
 // 	   " - $" + $( "#slider-range" ).slider( "values", 1 ) );
 // 	});	
+<<<<<<< HEAD
+=======
 
 
 // /*--------------------------
@@ -259,3 +261,4 @@ $(document).ready(function() {
 //         animation: 'fade'
 //     }); 	
 // })(jQuery); 
+>>>>>>> c72f74c701e936851260f364945b3d7384095de9

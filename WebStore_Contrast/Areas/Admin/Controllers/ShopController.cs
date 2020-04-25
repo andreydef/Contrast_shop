@@ -771,12 +771,90 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 brand.Meta_keywords = model.Meta_keywords;
                 brand.Meta_description = model.Meta_description;
                 brand.Body = model.Body;
+                brand.ImageName = model.ImageName;
 
                 db.Brands.Add(brand);
                 db.SaveChanges();
 
                 id = brand.Id;
             }
+
+            #region Upload Image
+
+            // Create the necessary links of directories
+            var originalDirectory = new DirectoryInfo(string.Format($"{Server.MapPath(@"\")}Images\\Uploads"));
+
+            var pathString1 = Path.Combine(originalDirectory.ToString(), "Brands");
+            var pathString2 = Path.Combine(originalDirectory.ToString(), "Brands\\" + id.ToString());
+            var pathString3 = Path.Combine(originalDirectory.ToString(), "Brands\\" + id.ToString() + "\\Thumbs");
+
+            // Check availability of directories (if not, create)
+            if (!Directory.Exists(pathString1))
+                Directory.CreateDirectory(pathString1);
+
+            if (!Directory.Exists(pathString2))
+                Directory.CreateDirectory(pathString2);
+
+            if (!Directory.Exists(pathString3))
+                Directory.CreateDirectory(pathString3);
+
+            // Check that the file has been downloaded 
+            if (file != null && file.ContentLength > 0)
+            {
+                // Get the file extension
+                string ext = file.ContentType.ToLower();
+
+                // Check file extension
+                if (ext != "image/jpg" &&
+                    ext != "image/jpeg" &&
+                    ext != "image/pjpeg" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/gif" &&
+                    ext != "image/x-png" &&
+                    ext != "image/png" &&
+                    ext != "image/xbm" &&
+                    ext != "image/tif" &&
+                    ext != "image/pjp" &&
+                    ext != "image/jfif" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/ico" &&
+                    ext != "image/tiff" &&
+                    ext != "image/svg" &&
+                    ext != "image/bmp" &&
+                    ext != "image/svgz" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/webp")   // A few (рідкісне) image extension but sometimes used
+                {
+                    using (Db db = new Db())
+                    {
+                        model.Brands = new SelectList(db.Brands.ToList(), "Id", "Name");
+                        ModelState.AddModelError("", "The image was not uploaded - wrong image extension!");
+                        return View(model);
+                    }
+                }
+
+                // Assign variable with name of image
+                string imageName = file.FileName;
+
+                // Save the name of image in model DTO
+                using (Db db = new Db())
+                {
+                    BrandsDTO dto = db.Brands.Find(id);
+                    dto.ImageName = imageName;
+
+                    db.SaveChanges();
+                }
+
+                // Assign paths to the original and reduced image
+                var path = string.Format($"{pathString2}\\{imageName}");
+                var path2 = string.Format($"{pathString3}\\{imageName}");
+
+                // Save original image
+                file.SaveAs(path);
+
+                // Create and save reduced copy of image
+                WebImage img = new WebImage(file.InputStream);
+                img.Resize(200, 200).Crop(1, 1);
+                img.Save(path2);
+            }
+            #endregion
 
             // Add message in TempData
             TempData["SM"] = "You have added a brand!";
@@ -815,9 +893,9 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
         // Add POST method to Edit Brands
         // POST: Admin/Shop/EditBrand
         [HttpPost]
-        public ActionResult EditBrand(BrandsVM model)
+        public ActionResult EditBrand(BrandsVM model, HttpPostedFileBase file)
         {
-            // Get ID of brand 
+            // Get ID of product 
             int id = model.Id;
 
             // Fill in the List with brands
@@ -832,7 +910,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 return View(model);
             }
 
-            // Check the name of brand in unicity
+            // Check the name of product in unicity
             using (Db db = new Db())
             {
                 if (db.Brands.Where(x => x.Id != id).Any(x => x.Name == model.Name))
@@ -842,7 +920,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 }
             }
 
-            // Update brand
+            // Update product 
             using (Db db = new Db())
             {
                 BrandsDTO dto = db.Brands.Find(id);
@@ -853,12 +931,93 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 dto.Meta_keywords = model.Meta_keywords;
                 dto.Meta_description = model.Meta_description;
                 dto.Body = model.Body;
+                dto.ImageName = model.ImageName;
 
                 db.SaveChanges();
             }
 
             // Set the message in TempData
             TempData["SM"] = "You have edited the brand!";
+
+            // Realize the logic of image processing
+
+            #region Image Upload
+
+            // Check the file downloading
+            if (file != null && file.ContentLength > 0)
+            {
+                // Get the image extension
+                string ext = file.ContentType.ToLower();
+
+                // Check the extension
+                if (ext != "image/jpg" &&
+                    ext != "image/jpeg" &&
+                    ext != "image/pjpeg" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/gif" &&
+                    ext != "image/x-png" &&
+                    ext != "image/png" &&
+                    ext != "image/xbm" &&
+                    ext != "image/tif" &&
+                    ext != "image/pjp" &&
+                    ext != "image/jfif" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/ico" &&
+                    ext != "image/tiff" &&
+                    ext != "image/svg" &&
+                    ext != "image/bmp" &&
+                    ext != "image/svgz" && // A few (рідкісне) image extension but sometimes used
+                    ext != "image/webp")   // A few (рідкісне) image extension but sometimes used
+                {
+                    using (Db db = new Db())
+                    {
+                        ModelState.AddModelError("", "The image was not uploaded - wrong image extension!");
+                        return View(model);
+                    }
+                }
+
+                // Set path for download
+                var originalDirectory = new DirectoryInfo(string.Format($"{Server.MapPath(@"\")}Images\\Uploads"));
+
+                var pathString1 = Path.Combine(originalDirectory.ToString(), "Brands\\" + id.ToString());
+                var pathString2 = Path.Combine(originalDirectory.ToString(), "Brands\\" + id.ToString() + "\\Thumbs");
+
+                // Delete the existent files and directories 
+                DirectoryInfo di1 = new DirectoryInfo(pathString1);
+                DirectoryInfo di2 = new DirectoryInfo(pathString2);
+
+                foreach (var file2 in di1.GetFiles())
+                {
+                    file2.Delete();
+                }
+
+                foreach (var file3 in di2.GetFiles())
+                {
+                    file3.Delete();
+                }
+
+                // Save the image
+                string imageName = file.FileName;
+
+                using (Db db = new Db())
+                {
+                    BrandsDTO dto = db.Brands.Find(id);
+                    dto.ImageName = imageName;
+
+                    db.SaveChanges();
+                }
+
+                // Save the original and preview version 
+                var path = string.Format($"{pathString1}\\{imageName}");
+                var path2 = string.Format($"{pathString2}\\{imageName}");
+
+                // Save original image
+                file.SaveAs(path);
+
+                // Create and save reduced copy of image
+                WebImage img = new WebImage(file.InputStream);
+                img.Resize(200, 200).Crop(1, 1);
+                img.Save(path2);
+            }
+            #endregion
 
             // Redirect user
             return RedirectToAction("EditBrand");
