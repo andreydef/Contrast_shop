@@ -72,7 +72,7 @@ namespace WebStore_Contrast.Controllers
                 model.Price = 0m;
             }
 
-            // Return the PartialView() of View() with model
+            // Return the View() with model
             return View("Cart", model);
         }
 

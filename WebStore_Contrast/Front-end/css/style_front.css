@@ -330,6 +330,8 @@ p.welcome-msg {
     margin-bottom: -5px;
 }
 
+
+
 .top-link>ul.link>li {
     border-left: 1px solid #ddd;
     display: inline-block;
@@ -343,7 +345,7 @@ p.welcome-msg {
     border-right: 1px solid #ddd;
 }
 
-.top-link>ul.link>li a {
+/* .top-link>ul.link>li a {
     color: #adadad;
     display: block;
     font-size: 0;
@@ -353,10 +355,10 @@ p.welcome-msg {
     text-decoration: none;
     text-shadow: 0 1px 0 #fff;
     text-transform: capitalize;
-    transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s; 
     white-space: nowrap;
     width: 50px;
-}
+} */
 
 .top-link>ul.link>li a i {
     font-size: 16px;
@@ -492,8 +494,7 @@ p.welcome-msg {
     height: 48px;
     line-height: 26px;
     padding: 10px 65px 10px 15px;
-    width: 430px;
-    border-left: 2px solid #ddd;
+    width: 600px;
     position: relative;
 }
 

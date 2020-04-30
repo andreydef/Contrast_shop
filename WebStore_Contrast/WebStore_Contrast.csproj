@@ -1164,7 +1164,7 @@
     <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Cart\Cart.cshtml" />
-    <Content Include="Views\Shared\About.cshtml" />
+    <Content Include="Views\Shop\Brands.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

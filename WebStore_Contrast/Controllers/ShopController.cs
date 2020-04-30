@@ -18,7 +18,7 @@ namespace WebStore_Contrast.Controllers
         }
 
         // GET: Shop/CategoryMenuPartial
-        public ActionResult CategoryMenuPartial()
+        public ActionResult CategoryMenuPartial(CategoryVM model)
         {
             // Assign the model with type List<> CategoryVM
             List<CategoryVM> categoryVMList;
@@ -28,52 +28,17 @@ namespace WebStore_Contrast.Controllers
             {
                 categoryVMList = db.Categories.ToArray()
                     .Select(x => new CategoryVM(x)).ToList();
+
+                if (db.Categories.Any(x => x.Name == model.Name))
+                {
+                    model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+                    ModelState.AddModelError("", "The category name is taken!");
+                    return View(model);
+                }
             }
 
             // Return PartialView() with model 
             return PartialView("_CategoryMenuPartial", categoryVMList);
-        }
-
-        // GET: Shop/Category/name
-        public ActionResult Category(string name)
-        {
-            // Assign the list with type List<>
-            List<ProductVM> productVMList;
-
-            using (Db db = new Db())
-            {
-                // Get ID of category
-                CategoryDTO categoryDTO = db.Categories.Where(x => x.Short_desc == name).FirstOrDefault();
-
-                int catId = categoryDTO.Id;
-
-                // Initialize the list to data
-                productVMList = db.Products.ToArray()
-                                    .Where(x => x.CategoryId == catId)
-                                    .Select(x => new ProductVM(x))
-                                    .ToList();
-
-                // Get the name of category 
-                var productCat = db.Products.Where(x => x.CategoryId == catId).FirstOrDefault();
-
-                // Doing a check on NULL
-                if (productCat == null)
-                {
-                    var catName = db.Categories
-                        .Where(x => x.Short_desc == name)
-                        .Select(x => x.Name)
-                        .FirstOrDefault();
-
-                    ViewBag.CategoryName = catName;
-                }
-                else
-                {
-                    ViewBag.CategoryName = productCat.CategoryName;
-                }
-            }
-
-            // Return View() with model
-            return View(productVMList);
         }
 
         // GET: Shop/product-details/name

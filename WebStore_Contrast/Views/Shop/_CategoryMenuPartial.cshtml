@@ -1,3 +1,8 @@
 ﻿@model IEnumerable<WebStore_Contrast.Models.ViewModels.Shop.CategoryVM>
 
-<h3>Categories</h3>
+@foreach (var item in Model)
+{
+    <a href="/@item.Name">
+        @item.Name <br />
+    </a>
+}

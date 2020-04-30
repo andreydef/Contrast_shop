@@ -71,8 +71,7 @@
 
                 var url = "/cart/AddToCartPartial";
 
-                $.get(url, { id: @Model.Id
-                }, function myfunction(data) {
+                $.get(url, { id: @Model.Id}, function myfunction(data) {
                     $(".ajaxcart").html(data);
                 }).done(function () {
                     $("span.loader").removeClass("ib");
