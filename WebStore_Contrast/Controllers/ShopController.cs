@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,6 +42,47 @@ namespace WebStore_Contrast.Controllers
             return PartialView("_CategoryMenuPartial", categoryVMList);
         }
 
+        //GET: Shop/Category/name
+        public ActionResult Category(string name)
+        {
+            // Assign the list of type List<>
+            List<ProductVM> productVMList;
+
+            using (Db db = new Db())
+            {
+                // Get the ID of category
+                CategoryDTO categoryDTO = db.Categories
+                    .Where(x => x.Short_desc == name).FirstOrDefault();
+
+                int catId = categoryDTO.Id;
+
+                // Initialize the list of data
+                productVMList = db.Products.ToArray()
+                    .Where(x => x.CategoryId == catId)
+                    .Select(x => new ProductVM(x)).ToList();
+
+                // Get the name of category
+                var productCat = db.Products
+                    .Where(x => x.CategoryId == catId).FirstOrDefault();
+
+                // Check on NULL
+                if (productCat == null)
+                {
+                    var catName = db.Categories
+                        .Where(x => x.Short_desc == name)
+                        .Select(x => x.Name).FirstOrDefault();
+                    ViewBag.CategoryName = catName;
+                }
+                else
+                {
+                    ViewBag.CategoryName = productCat.CategoryName;
+                }
+            }
+
+            // Get the partial view with model of data
+            return View(productVMList);
+        }
+
         // GET: Shop/product-details/name
         [ActionName("product-details")]
         public ActionResult ProductDetails(string name)
@@ -77,6 +119,41 @@ namespace WebStore_Contrast.Controllers
 
             // Return the model in View()
             return View("ProductDetails", model);
+        }
+
+        // Add GET method the list of goods
+        // GET: Admin/Shop/Products
+        [HttpGet]
+        public ActionResult Products(int? page, int? catId)
+        {
+            // Assign model ProductVM with type List
+            List<ProductVM> listOfProductVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfProductVM = db.Products.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
+                    .Select(x => new ProductVM(x))
+                    .ToList();
+
+                // Fill in the categories with data
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+
+                // Set the selected category
+                ViewBag.SelectedCat = catId.ToString();
+            }
+
+            // Set a page navigation
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // 3 - the number of goods in page
+            ViewBag.onePageOfProducts = onePageOfProducts;
+
+            // Return View() with data
+            return View(listOfProductVM);
         }
     }
 }

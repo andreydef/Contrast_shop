@@ -10,21 +10,21 @@ $(document).ready(function() {
 
 	$(window).load(function() {
 
-		$('#ensign-nivoslider').nivoSlider({ // Nivo Slider 
-			autoplay: true,
-			slices: 15,
-			animSpeed: 500,
-			pauseTime: 5000,
-			startSlide: 0,
-			directionNav:true,
-			controlNav:true,
-			controlNavThumbs:false,
-			pauseOnHover:true,
-			manualAdvance:false,
-			prevText:'',
-			nextText:'',
-			randomStart:false,
-		});
+		// $('#ensign-nivoslider').nivoSlider({ // Nivo Slider 
+		// 	autoplay: true,
+		// 	slices: 15,
+		// 	animSpeed: 500,
+		// 	pauseTime: 5000,
+		// 	startSlide: 0,
+		// 	directionNav:true,
+		// 	controlNav:true,
+		// 	controlNavThumbs:false,
+		// 	pauseOnHover:true,
+		// 	manualAdvance:false,
+		// 	prevText:'',
+		// 	nextText:'',
+		// 	randomStart:false,
+		// });
 
 		// $(".active-hot-deals").owlCarousel({ // Active Hot-Deals
 		// 	autoPlay: false, 
@@ -153,9 +153,9 @@ $(document).ready(function() {
 // 	  itemsMobile : [479,1],
 //   });
 
-//  /*----------------------------
+//  ----------------------------
 //  Active-Hot-Deals-Style-2
-// ------------------------------ */  
+// ------------------------------   
 //   $(".active-hot-deals-style-2").owlCarousel({
 //       autoPlay: false, 
 // 	  slideSpeed:2000,
@@ -248,8 +248,6 @@ $(document).ready(function() {
 // 	  $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
 // 	   " - $" + $( "#slider-range" ).slider( "values", 1 ) );
 // 	});	
-<<<<<<< HEAD
-=======
 
 
 // /*--------------------------
@@ -261,4 +259,3 @@ $(document).ready(function() {
 //         animation: 'fade'
 //     }); 	
 // })(jQuery); 
->>>>>>> c72f74c701e936851260f364945b3d7384095de9

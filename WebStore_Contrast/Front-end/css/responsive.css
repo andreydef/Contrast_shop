@@ -181,6 +181,7 @@
     }
     .quick-access .search-by-category {
         margin-right: 0;
+        margin-left: 110px;
     }
     .search-container::after {
         right: 3px;
@@ -414,9 +415,6 @@
     .container {
         width: 450px
     }
-    .search-by-category .header-search input {
-        width: 310px;
-    }
     .header-middle button {
         width: 55px;
     }
@@ -443,5 +441,12 @@
     .product-menu.style-2>ul li a {
         font-size: 14px;
         padding: 0 5px;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .quick-access .search-by-category {
+        margin-right: 0;
+        margin-left: 45px;
     }
 }

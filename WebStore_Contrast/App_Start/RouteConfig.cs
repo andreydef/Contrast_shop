@@ -22,10 +22,10 @@ namespace WebStore_Contrast
             routes.MapRoute("PagesMenuPartial", "Pages/PagesMenuPartial", new { controller = "Pages", action = "PagesMenuPartial" },
                 new[] { "WebStore_Contrast.Controllers" });
 
-            routes.MapRoute("SidebarPartial", "Pages/SidebarPartial", new { controller = "Pages", action = "SidebarPartial" },
+            routes.MapRoute("Shop", "Shop/{action}/{name}", new { controller = "Shop", action = "Index", name = UrlParameter.Optional },
                 new[] { "WebStore_Contrast.Controllers" });
 
-            routes.MapRoute("Shop", "Shop/{action}/{name}", new { controller = "Shop", action = "Index", name = UrlParameter.Optional },
+            routes.MapRoute("product-details", "Shop/product-details/{name}", new { controller = "Shop", action = "product-details", name = UrlParameter.Optional },
                 new[] { "WebStore_Contrast.Controllers" });
 
             routes.MapRoute("Cart", "Cart/{action}/{id}", new { controller = "Cart", action = "Index", id = UrlParameter.Optional },

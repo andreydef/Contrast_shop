@@ -15,6 +15,41 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
     {
         #region Products
 
+        // Add GET method the list of goods
+        // GET: Admin/Shop/Products
+        [HttpGet]
+        public ActionResult Products(int? page, int? catId)
+        {
+            // Assign model ProductVM with type List
+            List<ProductVM> listOfProductVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfProductVM = db.Products.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
+                    .Select(x => new ProductVM(x))
+                    .ToList();
+
+                // Fill in the categories with data
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+
+                // Set the selected category
+                ViewBag.SelectedCat = catId.ToString();
+            }
+
+            // Set a page navigation
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // 3 - the number of goods in page
+            ViewBag.onePageOfProducts = onePageOfProducts;
+
+            // Return View() with data
+            return View(listOfProductVM);
+        }
+
         // Add GET method to Adding goods
         // GET: Admin/Shop/AddProduct
         [HttpGet]
@@ -172,41 +207,6 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
 
             // Redirect user 
             return RedirectToAction("AddProduct");
-        }
-
-        // Add GET method the list of goods
-        // GET: Admin/Shop/Products
-        [HttpGet]
-        public ActionResult Products(int? page, int? catId)
-        {
-            // Assign model ProductVM with type List
-            List<ProductVM> listOfProductVM;
-
-            // Set the number of page
-            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
-                                               if it returns a value instead of 1 it will be this value */
-
-            using (Db db = new Db())
-            {
-                // Initialize List and fill in data
-                listOfProductVM = db.Products.ToArray()
-                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
-                    .Select(x => new ProductVM(x))
-                    .ToList();
-
-                // Fill in the categories with data
-                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
-
-                // Set the selected category
-                ViewBag.SelectedCat = catId.ToString();
-            }
-
-            // Set a page navigation
-            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // 3 - the number of goods in page
-            ViewBag.onePageOfProducts = onePageOfProducts;
-
-            // Return View() with data
-            return View(listOfProductVM);
         }
 
         // Add GET method to Edit Products

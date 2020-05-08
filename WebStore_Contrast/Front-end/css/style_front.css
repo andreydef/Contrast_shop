@@ -486,6 +486,10 @@ p.welcome-msg {
     float: left;
 }
 
+.search-by-category .header-search form {
+    margin-block-end: 0rem !important;
+}
+
 .search-by-category .header-search input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: 0 none;

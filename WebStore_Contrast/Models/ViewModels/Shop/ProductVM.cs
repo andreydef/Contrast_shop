@@ -33,11 +33,9 @@ namespace WebStore_Contrast.Models.ViewModels.Shop
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public string Slug { get; set; }
 
         [Required]
-        [AllowHtml]
         public string Description { get; set; }
 
         public decimal Price { get; set; }

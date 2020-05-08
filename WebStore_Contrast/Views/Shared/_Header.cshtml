@@ -1,0 +1,190 @@
+﻿<header class="header-area">
+    <!-- HEADER-TOP START -->
+    <div class="header-top hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="top-menu">
+                        <!-- Start Language -->
+                        <ul class="language">
+                            <li>
+                                <a href="/"><img class="right-5" src="~/Front-end/img/flags/gb.png" alt="#">English @* <i class="fa fa-caret-down left-5"></i> *@</a>
+                            </li>
+                        </ul>
+                        <!-- End Language -->
+                        <!-- Start Currency -->
+                        <ul class="currency">
+                            <li>
+                                <a href="/"><strong>$</strong> USD @* <i class="fa fa-caret-down left-5" >*@</i></a>
+                            </li>
+                        </ul>
+                        <!-- End Currency -->
+                        @if (Request.IsAuthenticated)
+                        {
+                            <p class="welcome-msg">You already is loggined! </p>
+                        }
+                        else
+                        {
+                            <p class="welcome-msg">Please, login!</p>
+                        }
+                    </div>
+                    <!-- Start Top-Link -->
+                    <div class="top-link">
+                        <ul class="link">
+
+                            @if (Request.IsAuthenticated == false)
+                            {
+                                <li><a href="#">Wish List (0)</a></li>
+                                <li><a href="#">Checkout</a></li>
+                            }
+
+                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                                <li>@Html.ActionLink("Admin Area", "Index", "Dashboard", new { area = "Admin" }, null)</li>
+                            }
+
+                            @if (Request.IsAuthenticated && User.IsInRole("User"))
+                            {
+                                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i> Wish List (0)</a></li>
+                                <li><a href="#"><i class="fa fa-share"></i> Checkout</a></li>
+                            }
+
+                            @if (Request.IsAuthenticated)
+                            {
+                                <li> @Html.ActionLink("Logout", "Logout", "Account") </li>
+                            }
+                            else
+                            {
+                                if (ViewBag.Title == "Login")
+                                {
+                                    <li>  @Html.ActionLink("Login", "Login", "Account") </li>
+                                }
+                                else
+                                {
+                                    <li> @Html.ActionLink("Login", "Login", "Account") </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <!-- End Top-Link -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HEADER-TOP END -->
+    <!-- HEADER-MIDDLE START -->
+    <div class="header-middle">
+        <div class="container">
+            <!-- Start logo & Search Box -->
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <div class="logo">
+                        <a href="/" title="Contrast"><img src="~/Front-end/img/logo.png" alt="Contrast"></a>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="quick-access">
+                        <div class="search-by-category">
+                            <div class="header-search">
+                                <form action="#">
+                                    <input type="text" placeholder="Search">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        @if (Request.IsAuthenticated == false || User.IsInRole("User"))
+                        {
+                            <div class="top-cart">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <span class="cart-icon"><i class="fa fa-shopping-cart"></i></span>
+                                            <span class="cart-total">
+                                                <span class="cart-title">shopping cart</span>
+                                                <span class="cart-item">0 item(s)- </span>
+                                                <span class="top-cart-price">₴0.00</span>
+                                            </span>
+                                        </a>
+                                        <div class="mini-cart-content">
+                                            <div class="cart-inner-bottom">
+                                                <span class="total">
+                                                    Total:
+                                                    <span class="amount">₴0.00</span>
+                                                </span>
+                                                <span class="cart-button-top">
+                                                    @Html.ActionLink("View Cart", "CartPartial", "Cart")
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- End logo & Search Box -->
+        </div>
+    </div>
+    <!-- HEADER-MIDDLE END -->
+    <!-- START MAINMENU-AREA -->
+    <div class="mainmenu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mainmenu hidden-sm hidden-xs">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="/">Home</a>
+                                </li>
+                                <li><a href="/shop/Products">Products</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN-MENU-AREA -->
+    <!-- Start Mobile-menu -->
+    <div class="mobile-menu-area hidden-md hidden-lg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <nav id="mobile-menu" style="display: block;">
+                        <ul>
+                            <li>
+                                <a href="#">Home</a>
+                                <ul>
+                                    <li><a href="#">Home Page 1</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Bestseller Products</a></li>
+                            <li><a href="#">New Products</a></li>
+                            <li>
+                                <a href="#">Pages</a>
+                                <ul>
+                                    <li><a href="#">Cart</a></li>
+                                    <li><a href="#">Checkout</a></li>
+                                    <li><a href="#">Create Account</a></li>
+                                    <li><a href="#">Login</a></li>
+                                    <li><a href="#">My Account</a></li>
+                                    <li><a href="#">Product details</a></li>
+                                    <li><a href="#">Shop Grid View</a></li>
+                                    <li><a href="#">Shop List View</a></li>
+                                    <li><a href="#">Wish List</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile-menu -->
+</header>

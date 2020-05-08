@@ -49,6 +49,7 @@ namespace WebStore_Contrast.Controllers
             return View(model);
         }
 
+        // GET: Pages/PagesMenuPartial
         public ActionResult PagesMenuPartial()
         {
             // Initialize list PageVM
@@ -65,21 +66,26 @@ namespace WebStore_Contrast.Controllers
             return PartialView("_PagesMenuPartial", pageVMList);
         }
 
-        public ActionResult SidebarPartial()
+        // GET: Pages/PagesRedirect
+        public ActionResult PagesRedirect()
         {
-            // Assign the model
-            SidebarVM model;
+            // Initialize list PageVM
+            List<PageVM> pageVMList;
 
-            // Initialize the model of data 
+            // Get all pages, except HOME
             using (Db db = new Db())
             {
-                SidebarDTO dto = db.Sidebars.Find(1);
-
-                model = new SidebarVM(dto);
+                pageVMList = db.Pages.ToArray().Where(x => x.Slug != "home")
+                    .Select(x => new PageVM(x)).ToList();
             }
 
-            // Return model in partial view()
-            return PartialView("_SidebarPartial", model);
+            return View("PagesRedirect", pageVMList);
+        }
+
+        // Get: Pages/Products
+        public ActionResult Products(int? page)
+        {
+            return View("Products");
         }
     }
 }

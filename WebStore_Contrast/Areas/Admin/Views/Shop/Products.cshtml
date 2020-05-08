@@ -10,350 +10,7 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div class="page-container">
-    <a href="/" class="admin_bookmark"></a>
-
-    <div class="main">
-        <div class="container-fluid">
-            <div class="min_content_fix">
-                <div class="row">
-                    <div class="col-lg-7 col-md-12">
-                        <div class="wrap_heading">
-                            <div class="box_heading heading_page">Товари</div>
-                            <div class="box_btn_heading">
-                                <a class="btn btn_small btn-info" href="~/admin/shop/AddProduct">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="20px" height="20px"><path d="m23,10h-8.5c-0.3,0-0.5-0.2-0.5-0.5v-8.5c0-0.6-0.4-1-1-1h-2c-0.6,0-1,0.4-1,1v8.5c0,0.3-0.2,0.5-0.5,0.5h-8.5c-0.6,0-1,0.4-1,1v2c0,0.6 0.4,1 1,1h8.5c0.3,0 0.5,0.2 0.5,0.5v8.5c0,0.6 0.4,1 1,1h2c0.6,0 1-0.4 1-1v-8.5c0-0.3 0.2-0.5 0.5-0.5h8.5c0.6,0 1-0.4 1-1v-2c0-0.6-0.4-1-1-1z" fill="currentColor"></path></svg>
-                                    <span>Додати товар</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-5 col-xs-12 float-xs-right">
-                        <div class="boxed_search">
-                            <form class="search" method="get">
-                                <input type="hidden" name="controller" value="ProductsAdmin" />
-                                <div class="input-group">
-                                    <input name="keyword" class="form-control" placeholder="пошук товару..." type="text" />
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="btn btn_blue">
-                                            <i class="fa fa-search"></i>
-                                            <span class="hidden-md-down"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="boxed fn_toggle_wrap">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <div class="fn_toggle_wrap">
-                                <div class="heading_box visible_md">
-                                    Фільтр
-                                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
-                                        <a href="javascript:;" class="btn-minimize">
-                                            <i class="fa fn_icon_arrow fa-angle-down"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="fn_step-0 boxed_sorting toggle_body_wrap off fn_card">
-                                    <div class="row">
-                                        <div class="col-md-3 col-lg-3 col-sm-12">
-                                            <div>
-                                                <div class="btn-group bootstrap-select form-control">
-                                                    <div class="dropdown-menu open" role="combobox" style="">
-                                                        <div class="bs-searchbox">
-                                                            <input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search">
-                                                        </div>
-                                                        <ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 880px; overflow-y: auto; min-height: 112px;">
-                                                            <li data-original-index="1" class="selected active">
-                                                                <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="true">
-                                                                    <span class="text">Всі товари</span>
-                                                                    <span class="fa fa-check check-mark"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li data-original-index="2">
-                                                                <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                                                                    <span class="text">Хіти продажу</span>
-                                                                    <span class="fa fa-check check-mark"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li data-original-index="3">
-                                                                <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                                                                    <span class="text">Із знижкою</span>
-                                                                    <span class="fa fa-check check-mark"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li data-original-index="4">
-                                                                <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                                                                    <span class="text">Включені товари</span>
-                                                                    <span class="fa fa-check check-mark"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li data-original-index="5">
-                                                                <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                                                                    <span class="text">Виключені товари</span>
-                                                                    <span class="fa fa-check check-mark"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li data-original-index="6">
-                                                                <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                                                                    <span class="text">Відсутні</span>
-                                                                    <span class="fa fa-check check-mark"></span>
-                                                                </a>
-                                                            </li>
-                                                            <li data-original-index="7">
-                                                                <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                                                                    <span class="text">Без зображень</span>
-                                                                    <span class="fa fa-check check-mark"></span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <select name="products_filter" id="id_filter" class="selectpicker form-control" title="Фільтр по товарам" data-live-search="true" onchange="location = this.value;" tabindex="-98">
-                                                        <option value="" class="bs-title-option">Фільтр по товарам</option>
-                                                        <option value="/admin/shop/products" selected="">Всі товари</option>
-                                                        <option value="#">Хіти продажу</option>
-                                                        <option value="#">Із знижкою</option>
-                                                        <option value="#">Включені товари</option>
-                                                        <option value="#">Виключені товари</option>
-                                                        <option value="#">Відсутні</option>
-                                                        <option value="#">Без зображень</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-lg-3 col-sm-12">
-                                            <div class="btn-group bootstrap-select form-control">
-                                                <div class="dropdown-menu open" role="combobox" style="">
-                                                    <div class="bs-searchbox">
-                                                        <input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search">
-                                                    </div>
-                                                    <ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 880px; overflow-y: auto; min-height: 112px;">
-                                                        <li data-original-index="1" class="selected active">
-                                                            <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="true">
-                                                                <span class="text">Всі категорії</span>
-                                                                <span class="fa fa-check check-mark"></span>
-                                                            </a>
-                                                        </li>
-                                                        <li data-original-index="2">
-                                                            <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                                                                <span class="text">Без категорій</span>
-                                                                <span class="fa fa-check check-mark"></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <select name="categories_filter" id="id_categories" class="selectpicker form-control" title="Фільтр по категоріям" data-live-search="true" onchange="location = this.value;" tabindex="-98">
-                                                    <option value="" class="bs-title-option">Фільтр по категоріям</option>
-                                                    <option value="/admin/shop/products" selected="">Всі категорії</option>
-                                                    <option value="#">Без категорій</option>
-                                                    @foreach (var item in ViewBag.Categories)
-                                                    {
-                                                        if (ViewBag.SelectedCat == item.Value)
-                                                        {
-                                                            <option selected="selected" value="@item.Value">@item.Text</option>
-                                                        }
-                                                        else
-                                                        {
-                                                            <option value="@item.Value">@item.Text</option>
-                                                        }
-                                                    }
-                                                </select>
-                                            </div>
-                                        </div>
-                                        @* Add brands  *@
-                                        <div class="col-md-3 col-lg-3 col-sm-12">
-                                            <div class="btn-group bootstrap-select form-control">
-                                                <div class="dropdown-menu open" role="combobox" style="">
-                                                    <div class="bs-searchbox">
-                                                        <input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search">
-                                                    </div>
-                                                    <ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 880px; overflow-y: auto; min-height: 112px;">
-                                                        <li data-original-index="1" class="selected active">
-                                                            <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="true">
-                                                                <span class="text">Всі бренди</span>
-                                                                <span class="fa fa-check check-mark"></span>
-                                                            </a>
-                                                        </li>
-                                                        <li data-original-index="2">
-                                                            <a tabindex="0" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                                                                <span class="text">Без бренда</span>
-                                                                <span class="fa fa-check check-mark"></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <select name="brands_filter" id="id_brands" class="selectpicker form-control" title="Фільтр по брендам" data-live-search="true" onchange="location = this.value;" tabindex="-98">
-                                                    <option value="" class="bs-title-option">Фільтр по брендам</option>
-                                                    <option value="/admin/shop/products" selected="">Всі бренди</option>
-                                                    <option value="#">Без брендів</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        @* Add display of goods  *@
-                                        <div class="col-md-3 col-lg-3 col-sm-12">
-                                            <div class="pull-right">
-                                                <div class="btn-group bootstrap-select">
-                                                    <div class="dropdown-menu open" role="combobox" style="">
-                                                        <ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 880px; overflow-y: auto; min-height: 112px;">
-                                                        </ul>
-                                                    </div>
-                                                    <select class="selectpicker" onchange="location = this.value;" tabindex="-98">
-                                                        <option value="#">Показати по: 5</option>
-                                                        <option value="#">Показати по: 10</option>
-                                                        <option value="#">Показати по: 25</option>
-                                                        <option value="#">Показати по: 50</option>
-                                                        <option value="#">Показати по: 100</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <form method="post" class="fn_form_list fn_fast_button">
-                                <div class="contrast_list products_list fn_sort_list" style="min-height: 939px;">
-                                    <div class="fn_step_sorting contrast_list_head">
-                                        <div class="contrast_list_boding contrast_list_drag"></div>
-                                        <div class="contrast_list_heading contrast_list_check">
-                                            <input class="hidden_check fn_check_all" type="checkbox" id="check_all_1" name="" value="">
-                                            <label class="contrast_checkbox" for="check_all_1"></label>
-                                        </div>
-                                        <div class="contrast_list_heading contrast_list_photo">
-                                            <a href="#" class="main_image_id">
-                                                <!-- Add sorting of image -->
-                                                Фото
-                                                <svg viewBox="0 0 512 512" width="20px" height="20px"><path class="left_s" d="M267.998,125.671L177.997,5.669c-5.654-7.559-18.34-7.559-23.994,0L64.002,125.671c-7.399,9.844-0.355,23.994,11.997,23.994h45.001v285.003c0,8.291,6.709,15,15,15H196c8.291,0,14.8-6.709,14.8-15V149.665h45.2C268.363,149.665,275.389,135.505,267.998,125.671z"></path><path class="right_s" d="M436.003,362.005h-45.201V77.001c0-8.291-6.509-15-14.8-15h-60.001c-8.291,0-15,6.709-15,15v285.003h-45.001c-12.353,0-19.396,14.15-11.997,23.994L334.005,506c5.989,8.006,18.014,7.994,23.994,0L448,385.999C455.391,376.165,448.365,362.005,436.003,362.005z"></path></svg>
-                                            </a>
-                                        </div>
-                                        <div class="contrast_list_heading contrast_list_name">
-                                            <a href="#">
-                                                <!-- Add sorting for name -->
-                                                Назва
-                                                <svg viewBox="0 0 512 512" width="20px" height="20px"><path class="left_s" d="M267.998,125.671L177.997,5.669c-5.654-7.559-18.34-7.559-23.994,0L64.002,125.671c-7.399,9.844-0.355,23.994,11.997,23.994h45.001v285.003c0,8.291,6.709,15,15,15H196c8.291,0,14.8-6.709,14.8-15V149.665h45.2C268.363,149.665,275.389,135.505,267.998,125.671z"></path><path class="right_s" d="M436.003,362.005h-45.201V77.001c0-8.291-6.509-15-14.8-15h-60.001c-8.291,0-15,6.709-15,15v285.003h-45.001c-12.353,0-19.396,14.15-11.997,23.994L334.005,506c5.989,8.006,18.014,7.994,23.994,0L448,385.999C455.391,376.165,448.365,362.005,436.003,362.005z"></path></svg>
-                                            </a>
-                                        </div>
-                                        <div class="contrast_list_heading contrast_list_price">
-                                            <a href="#">
-                                                <!-- Add sorting for price -->
-                                                Ціна
-                                                <svg viewBox="0 0 512 512" width="20px" height="20px"><path class="left_s" d="M267.998,125.671L177.997,5.669c-5.654-7.559-18.34-7.559-23.994,0L64.002,125.671c-7.399,9.844-0.355,23.994,11.997,23.994h45.001v285.003c0,8.291,6.709,15,15,15H196c8.291,0,14.8-6.709,14.8-15V149.665h45.2C268.363,149.665,275.389,135.505,267.998,125.671z"></path><path class="right_s" d="M436.003,362.005h-45.201V77.001c0-8.291-6.509-15-14.8-15h-60.001c-8.291,0-15,6.709-15,15v285.003h-45.001c-12.353,0-19.396,14.15-11.997,23.994L334.005,506c5.989,8.006,18.014,7.994,23.994,0L448,385.999C455.391,376.165,448.365,362.005,436.003,362.005z"></path></svg>
-                                            </a>
-                                        </div>
-                                        <div class="contrast_list_heading contrast_list_count">
-                                            <a href="#">
-                                                <!-- Add sorting for count -->
-                                                Кількість
-                                                <svg viewBox="0 0 512 512" width="20px" height="20px"><path class="left_s" d="M267.998,125.671L177.997,5.669c-5.654-7.559-18.34-7.559-23.994,0L64.002,125.671c-7.399,9.844-0.355,23.994,11.997,23.994h45.001v285.003c0,8.291,6.709,15,15,15H196c8.291,0,14.8-6.709,14.8-15V149.665h45.2C268.363,149.665,275.389,135.505,267.998,125.671z"></path><path class="right_s" d="M436.003,362.005h-45.201V77.001c0-8.291-6.509-15-14.8-15h-60.001c-8.291,0-15,6.709-15,15v285.003h-45.001c-12.353,0-19.396,14.15-11.997,23.994L334.005,506c5.989,8.006,18.014,7.994,23.994,0L448,385.999C455.391,376.165,448.365,362.005,436.003,362.005z"></path></svg>
-                                            </a>
-                                        </div>
-                                        <div class="contrast_list_heading contrast_list_status">
-                                            <a href="#">
-                                                <!-- Add sorting for activity -->
-                                                Активність
-                                                <svg viewBox="0 0 512 512" width="20px" height="20px"><path class="left_s" d="M267.998,125.671L177.997,5.669c-5.654-7.559-18.34-7.559-23.994,0L64.002,125.671c-7.399,9.844-0.355,23.994,11.997,23.994h45.001v285.003c0,8.291,6.709,15,15,15H196c8.291,0,14.8-6.709,14.8-15V149.665h45.2C268.363,149.665,275.389,135.505,267.998,125.671z"></path><path class="right_s" d="M436.003,362.005h-45.201V77.001c0-8.291-6.509-15-14.8-15h-60.001c-8.291,0-15,6.709-15,15v285.003h-45.001c-12.353,0-19.396,14.15-11.997,23.994L334.005,506c5.989,8.006,18.014,7.994,23.994,0L448,385.999C455.391,376.165,448.365,362.005,436.003,362.005z"></path></svg>
-                                            </a>
-                                        </div>
-                                        <div class="contrast_list_heading contrast_list_setting contrast_list_products_setting">Дії</div>
-                                        <div class="contrast_list_heading contrast_list_close"></div>
-                                    </div>
-
-                                    <div class="contrast_list_body sort_extended ui-sortable">
-                                        @if (!Model.Any())
-                                        {
-                                            <h1 class="text-center"> There are no products. </h1>
-                                        }
-                                        else
-                                        {
-                                            foreach (var item in Model)
-                                            {
-                                                <div class="fn_step-1 fn_row contrast_list_body_item fn_sort_item">
-                                                    <div class="contrast_list_row">
-                                                        <input type="hidden" name="positions[@item.Id]" value="@item.Id">
-                                                        <div class="contrast_list_boding contrast_list_drag move_zone ui-sortable-handle">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" width="20px" height="20px"><polygon points="18,20 18,26 22,26 16,32 10,26 14,26 14,20    " fill="currentColor"></polygon><polygon points="14,12 14,6 10,6 16,0 22,6 18,6 18,12    " fill="currentColor"></polygon></svg>
-                                                        </div>
-                                                        <div class="contrast_list_boding contrast_list_check">
-                                                            <input class="hidden_check" type="checkbox" id="@item.Id" name="check[]" value="@item.Id">
-                                                            <label class="contrast_checkbox" for="@item.Id"></label>
-                                                        </div>
-                                                        <div class="contrast_list_boding contrast_list_brands_name">
-                                                            <a href="/admin/shop/EditProduct/@item.Id">
-                                                                @item.Name
-                                                            </a>
-                                                        </div>
-                                                        <div class="contrast_list_setting">
-                                                            <a href="#" target="_blank" data-hint="Подивитись на сайті" class="setting_icon setting_icon_open hint-bottom-middle-t-info-s-small-mobile hint-anim">
-                                                                @* Display on site *@
-                                                                <svg width="20px" height="20px" viewBox="0 0 512 512"><path fill="currentColor" d="m496.4,243.1c-63.9-78.7-149.3-122.1-240.4-122.1-91.1,0-176.5,43.4-240.4,122.1-6.1,7.5-6.1,18.2 0,25.7 63.9,78.8 149.3,122.2 240.4,122.2 91.1,0 176.5-43.4 240.4-122.1 6.1-7.5 6.1-18.3 0-25.8zm-240.4,79.8c-36.9,0-66.9-30-66.9-66.9 0-36.9 30-66.9 66.9-66.9 36.9,0 66.9,30 66.9,66.9 0,36.9-30,66.9-66.9,66.9zm-197.8-66.9c37.8-42.2 82.9-71.1 131.5-84.9-25.2,19.7-41.5,50.4-41.5,84.9 0,34.4 16.2,65.1 41.5,84.9-48.6-13.8-93.6-42.7-131.5-84.9zm264.1,84.9c25.2-19.7 41.5-50.4 41.5-84.9 0-34.4-16.2-65.1-41.5-84.9 48.6,13.8 93.7,42.7 131.5,84.9-37.9,42.2-82.9,71.1-131.5,84.9z"></path></svg>
-                                                            </a>
-                                                        </div>
-                                                        <div class="contrast_list_boding contrast_list_close btn_close fn_remove hint-bottom-right-t-info-s-small-mobile hint-anim">
-                                                            <a href="@Url.Action("DeleteProduct", "Shop", new { id = item.Id })" class="delete">
-                                                                <svg width="20px" height="20px" viewBox="0 0 512 512"><polygon points="353.574,176.526 313.496,175.056 304.807,412.34 344.885,413.804" fill="currentColor"></polygon><rect x="235.948" y="175.791" width="40.104" height="237.285" fill="currentColor"></rect><polygon points="207.186,412.334 198.497,175.049 158.419,176.52 167.109,413.804" fill="currentColor"></polygon><path d="M17.379,76.867v40.104h41.789L92.32,493.706C93.229,504.059,101.899,512,112.292,512h286.74c10.394,0,19.07-7.947,19.972-18.301l33.153-376.728h42.464V76.867H17.379z M380.665,471.896H130.654L99.426,116.971h312.474L380.665,471.896z" fill="currentColor"></path><path d="M321.504,0H190.496c-18.428,0-33.42,14.992-33.42,33.42v63.499h40.104V40.104h117.64v56.815h40.104V33.42C354.924,14.992,339.932,0,321.504,0z" fill="currentColor"></path></svg>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                        }
-                                    </div>
-
-                                    @* Bottom of products *@
-                                    <div class="contrast_list_footer fn_action_block">
-                                        <div class="contast_list_foot_left">
-                                            <div class="contrast_list_boding contrast_list_drag"></div>
-                                            <div class="contrast_list_heading contrast_list_check"></div>
-                                            <div class="contrast_list_option"></div>
-                                            <div class="fn_additional_params"></div>
-                                        </div>
-                                        <button type="submit" class="btn btn_small btn_blue">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 26 26" width="20px" height="20px"><path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z" fill="currentColor"></path></svg>
-                                            <span>Застосувати</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm txt_center"></div>
-                    </div>
-                </div>
-
-
-
-            </div>
-            <footer id="footer">
-                <div class="col-md-12 font_12 text_white">
-                    <a href="/admin/dashboard/">CONTRAST</a>
-                    © 2020 v.1.0.0 | Ви ввійшли як Admin
-                </div>
-            </footer>
-        </div>
-
-
-        <div class="fn_fast_save"></div>
-    </div>
-    <div id="fn_action_modal" class="modal fade show" role="document"></div>
-</div>
-
-@Html.PagedListPager((IPagedList)ViewBag.onePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
-
-@section Scripts
-{
-    <script src="~/Content/ShopJS/ProductsScript.js"></script>
-}
-
-
-
-@*<h2>Products</h2>
+    <h2>Products</h2>
 
     <select id="SelectCategory" name="SelectCategory">
         <option value="0">All</option>
@@ -425,11 +82,135 @@
             </tr>
         }
     </table>
-
     @Html.PagedListPager((IPagedList)ViewBag.onePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
+</div>
 
-    @section Scripts
-    {
-        <script src="~/Content/ShopJS/ProductsScript.js"></script>
-    }
-*@
+@section Scripts
+{
+    <script src="~/Content/ShopJS/ProductsScript.js"></script>
+}
+
+@*<div class="page-container">
+        <a href="/" class="admin_bookmark"></a>
+
+        <div class="main">
+            <div class="container-fluid">
+                <div class="min_content_fix">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12">
+                            <div class="wrap_heading">
+                                <div class="box_heading heading_page">Категорії</div>
+                                <div class="box_btn_heading">
+                                    <a class="btn btn_small btn-info" href="~/admin/shop/AddProduct">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="20px" height="20px"><path d="m23,10h-8.5c-0.3,0-0.5-0.2-0.5-0.5v-8.5c0-0.6-0.4-1-1-1h-2c-0.6,0-1,0.4-1,1v8.5c0,0.3-0.2,0.5-0.5,0.5h-8.5c-0.6,0-1,0.4-1,1v2c0,0.6 0.4,1 1,1h8.5c0.3,0 0.5,0.2 0.5,0.5v8.5c0,0.6 0.4,1 1,1h2c0.6,0 1-0.4 1-1v-8.5c0-0.3 0.2-0.5 0.5-0.5h8.5c0.6,0 1-0.4 1-1v-2c0-0.6-0.4-1-1-1z" fill="currentColor"></path></svg>
+                                        <span>Додати товар</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxed fn_toggle_wrap">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <form method="post" class="fn_form_list fn_fast_button">
+                                    <div class="contrast_list products_list fn_sort_list" style="min-height: 939px;">
+                                        <div class="fn_step_sorting contrast_list_head">
+                                            <div class="contrast_list_boding contrast_list_drag"></div>
+                                            <div class="contrast_list_heading contrast_list_check">
+                                                <input class="hidden_check fn_check_all" type="checkbox" id="check_all_1" name="" value="">
+                                                <label class="contrast_checkbox" for="check_all_1"></label>
+                                            </div>
+                                            <div class="contrast_list_heading contrast_list_name">
+                                                <a href="#">
+                                                    <!-- Add sorting for name -->
+                                                    Назва
+                                                </a>
+                                            </div>
+                                            <div class="contrast_list_heading contrast_list_setting contrast_list_products_setting">
+                                                <a href="#" class="settings_a">Дії</a>
+                                            </div>
+                                            <div class="contrast_list_heading contrast_list_close"></div>
+                                        </div>
+
+                                        <div class="contrast_list_body sort_extended ui-sortable">
+                                            @if (!Model.Any())
+                                            {
+                                                <h1 class="text-center"> There are no products. </h1>
+                                            }
+                                            else
+                                            {
+                                                foreach (var item in Model)
+                                                {
+                                                    <div class="fn_step-1 fn_row contrast_list_body_item fn_sort_item">
+                                                        <div class="contrast_list_row">
+                                                            <input type="hidden" name="positions[@item.Id]" value="@item.Id">
+                                                            <div class="contrast_list_boding contrast_list_drag move_zone ui-sortable-handle">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" width="20px" height="20px"><polygon points="18,20 18,26 22,26 16,32 10,26 14,26 14,20    " fill="currentColor"></polygon><polygon points="14,12 14,6 10,6 16,0 22,6 18,6 18,12    " fill="currentColor"></polygon></svg>
+                                                            </div>
+                                                            <div class="contrast_list_boding contrast_list_check">
+                                                                <input class="hidden_check" type="checkbox" id="@item.Id" name="check[]" value="@item.Id">
+                                                                <label class="contrast_checkbox" for="@item.Id"></label>
+                                                            </div>
+                                                            <div class="contrast_list_boding contrast_list_photo">
+                                                                <a href="/admin/shop/EditProduct/@item.Id">
+                                                                    @if (@item.ImageName == null)
+                                                                    {
+                                                                        <img src="/Content/img/no_image.png" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <img src="/Images/Uploads/Products/@item.Id/Thumbs/@item.ImageName" />
+                                                                    }
+                                                                </a>
+                                                            </div>
+                                                            <div class="contrast_list_boding contrast_list_categories_name">
+                                                                <a href="/admin/shop/EditProduct/@item.Id">
+                                                                    @item.Name
+                                                                </a>
+                                                            </div>
+                                                            <div class="contrast_list_setting">
+                                                                <a href="#" target="_blank" data-hint="Подивитись на сайті" class="setting_icon setting_icon_open hint-bottom-middle-t-info-s-small-mobile hint-anim">
+                                                                    @* Display on site
+                                                                    <svg width="20px" height="20px" viewBox="0 0 512 512"><path fill="currentColor" d="m496.4,243.1c-63.9-78.7-149.3-122.1-240.4-122.1-91.1,0-176.5,43.4-240.4,122.1-6.1,7.5-6.1,18.2 0,25.7 63.9,78.8 149.3,122.2 240.4,122.2 91.1,0 176.5-43.4 240.4-122.1 6.1-7.5 6.1-18.3 0-25.8zm-240.4,79.8c-36.9,0-66.9-30-66.9-66.9 0-36.9 30-66.9 66.9-66.9 36.9,0 66.9,30 66.9,66.9 0,36.9-30,66.9-66.9,66.9zm-197.8-66.9c37.8-42.2 82.9-71.1 131.5-84.9-25.2,19.7-41.5,50.4-41.5,84.9 0,34.4 16.2,65.1 41.5,84.9-48.6-13.8-93.6-42.7-131.5-84.9zm264.1,84.9c25.2-19.7 41.5-50.4 41.5-84.9 0-34.4-16.2-65.1-41.5-84.9 48.6,13.8 93.7,42.7 131.5,84.9-37.9,42.2-82.9,71.1-131.5,84.9z"></path></svg>
+                                                                </a>
+                                                            </div>
+                                                            <div class="contrast_list_boding contrast_list_close btn_close fn_remove hint-bottom-right-t-info-s-small-mobile hint-anim">
+                                                                <a href="@Url.Action("DeleteProduct", "Shop", new { id = item.Id })" class="delete">
+                                                                    <svg width="20px" height="20px" viewBox="0 0 512 512"><polygon points="353.574,176.526 313.496,175.056 304.807,412.34 344.885,413.804" fill="currentColor"></polygon><rect x="235.948" y="175.791" width="40.104" height="237.285" fill="currentColor"></rect><polygon points="207.186,412.334 198.497,175.049 158.419,176.52 167.109,413.804" fill="currentColor"></polygon><path d="M17.379,76.867v40.104h41.789L92.32,493.706C93.229,504.059,101.899,512,112.292,512h286.74c10.394,0,19.07-7.947,19.972-18.301l33.153-376.728h42.464V76.867H17.379z M380.665,471.896H130.654L99.426,116.971h312.474L380.665,471.896z" fill="currentColor"></path><path d="M321.504,0H190.496c-18.428,0-33.42,14.992-33.42,33.42v63.499h40.104V40.104h117.64v56.815h40.104V33.42C354.924,14.992,339.932,0,321.504,0z" fill="currentColor"></path></svg>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                        <div class="contrast_list_footer fn_action_block">
+                                            <div class="contast_list_foot_left">
+                                                <div class="contrast_list_boding contrast_list_drag"></div>
+                                                <div class="contrast_list_heading contrast_list_check"></div>
+                                                <div class="contrast_list_option"></div>
+                                                <div class="fn_additional_params"></div>
+                                            </div>
+                                            <button type="button" class="btn btn_small btn_blue" onclick="document.location.reload(true);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 26 26" width="20px" height="20px"><path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z" fill="currentColor"></path></svg>
+                                                <span>Застосувати</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm txt_center"></div>
+                        </div>
+                    </div>
+                </div>
+                <footer id="footer">
+                    <div class="col-md-12 font_12 text_white">
+                        <a href="/admin/dashboard/">CONTRAST</a>
+                        © 2020 v.1.0.0 | Ви ввійшли як Admin
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>*@

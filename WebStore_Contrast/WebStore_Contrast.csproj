@@ -985,9 +985,7 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Pages\AddPage.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Pages\EditPage.cshtml" />
     <Content Include="fileman\asp_net\main.ashx" />
     <Content Include="fileman\conf.json" />
     <Content Include="fileman\lang\bg.json" />
@@ -1040,6 +1038,11 @@
     <Content Include="fonts\QAUlVt1jXOgQavlW5wEfxQLUuEpTyoUstqEm5AMlJo4.woff2" />
     <Content Include="fonts\xkvoNo9fC8O2RDydKj12bwzyDMXhdD8sAj6OAJTFsBI.woff2" />
     <Content Include="Front-end\img\product\.DS_Store" />
+    <Content Include="Areas\Admin\Views\Pages\AddPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Pages\EditPage.cshtml" />
+    <Content Include="Areas\Admin\Views\Pages\Pages.cshtml" />
+    <Content Include="Areas\Admin\Views\Pages\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Pages\PageDetails.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1150,21 +1153,24 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Pages\_PagesMenuPartial.cshtml" />
-    <Content Include="Views\Pages\Index.cshtml" />
     <Content Include="Views\Shop\_CategoryMenuPartial.cshtml" />
-    <Content Include="Views\Pages\_SidebarPartial.cshtml" />
     <Content Include="Views\Shop\ProductDetails.cshtml" />
-    <Content Include="Views\Shop\Category.cshtml" />
     <Content Include="Views\Cart\MainCart.cshtml" />
     <Content Include="Views\Cart\_AddToCartPartial.cshtml" />
     <Content Include="Views\Account\CreateAccount.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\UserNavPartial.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
-    <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Cart\Cart.cshtml" />
-    <Content Include="Views\Shop\Brands.cshtml" />
+    <Content Include="Views\Pages\_PagesMenuPartial.cshtml" />
+    <Content Include="Views\Pages\_SidebarPartial.cshtml" />
+    <Content Include="Views\Pages\Index.cshtml" />
+    <Content Include="Views\Shop\Category.cshtml" />
+    <Content Include="Views\Shop\Products.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\_Styles.cshtml" />
+    <Content Include="Views\_Scripts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
