@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-    /* Select product from specified category */
+    /* Select product from specified category(admin) */
 
     $("#SelectCategory").on("change", function () {
         var url = $(this).val();
@@ -10,6 +10,18 @@
         }
         return false;
     });
+
+    /* Select product from specified category(front-end) */
+
+    $("#SelectCategory").on("change", function () {
+        var url = $(this).val();
+
+        if (url) {
+            window.location = "/shop/Products?catId=" + url;
+        }
+        return false;
+    });
+
 
     /*-----------------------------------------------------------*/
 

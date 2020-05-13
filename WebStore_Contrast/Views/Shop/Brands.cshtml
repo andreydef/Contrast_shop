@@ -1,16 +1,14 @@
-﻿@model IEnumerable<WebStore_Contrast.Models.ViewModels.Shop.ProductVM>
+﻿@model IEnumerable<WebStore_Contrast.Models.ViewModels.Shop.BrandsVM>
 
 @{
-    ViewBag.Title = "Products";
+    ViewBag.Title = "Brands";
     Layout = null;
 }
 
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<title>Contrast | Brands</title>
 
 @using PagedList.Mvc;
 @using PagedList;
-
-<title>Contrast | Products</title>
 
 @Html.Partial("~/Views/_Styles.cshtml")
 
@@ -37,21 +35,21 @@
                 </div>
                 <!-- END CATEGORY-MENU-LIST -->
                 <!-- shop-filter start -->
-                <div class="shop-filter">
-                    <div class="area-title">
-                        <h3 class="title-group gfont-1">Filters Products</h3>
-                    </div>
-                    <h4 class="shop-price-title">Price</h4>
-                    <div class="info_widget">
-                        <div class="price_filter">
-                            <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 3.57143%; width: 91.0714%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 3.57143%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 94.6429%;"></span></div>
-                            <div class="price_slider_amount">
-                                <input type="text" id="amount" name="price" placeholder="Add Your Price">
-                                <input type="submit" value="Filter">
+                @*<div class="shop-filter">
+                        <div class="area-title">
+                            <h3 class="title-group gfont-1">Filters Brands</h3>
+                        </div>
+                        <h4 class="shop-price-title">Price</h4>
+                        <div class="info_widget">
+                            <div class="price_filter">
+                                <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 3.57143%; width: 91.0714%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 3.57143%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 94.6429%;"></span></div>
+                                <div class="price_slider_amount">
+                                    <input type="text" id="amount" name="price" placeholder="Add Your Price">
+                                    <input type="submit" value="Filter">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>*@
                 <!-- shop-filter start -->
                 <!-- filter-by start -->
                 <div class="accordion_one">
@@ -75,12 +73,12 @@
                 <!-- filter-by end -->
             </div>
             <div class="col-md-9">
-                @*<!-- START PRODUCT-BANNER -->
+                @*<!-- START BRAND-BANNER -->
                     <div class="product-banner">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="banner">
-                                    <a href="#"><img src="Front-end/img/banner/12.jpg" alt="Product Banner"></a>
+                                    <a href="#"><img src="Front-end/img/banner/12.jpg" alt="Brand Banner"></a>
                                 </div>
                             </div>
                         </div>
@@ -90,10 +88,10 @@
                 <div class="product-area">
                     <div class="row">
                         <div class="col-xs-12">
-                            <!-- Start Product-Menu -->
+                            <!-- Start Brand-Menu -->
                             <div class="product-menu">
                                 <div class="product-title">
-                                    <h3 class="title-group-3 gfont-1">Categories</h3>
+                                    <h3 class="title-group-3 gfont-1">Brands</h3>
                                 </div>
                             </div>
                             <div class="product-filter">
@@ -114,7 +112,7 @@
                                 <div class="limit">
                                     <label>Show:</label>
                                     <select>
-                                        <option value="#">3</option>
+                                        <option value="#">6</option>
                                     </select>
                                 </div>
                             </div>
@@ -133,18 +131,18 @@
                                             <div class="listview">
                                                 <!-- Start Single-Product -->
                                                 <div class="single-product">
-                                                    @foreach (var product in ViewBag.onePageOfProducts)
+                                                    @foreach (var brand in ViewBag.onePageOfBrands)
                                                     {
                                                         <div class="col-md-3 col-sm-4 col-xs-12">
                                                             <div class="product-img">
-                                                                <a href="/shop/product-details/@product.Name">
-                                                                    @if (@product.ImageName == null)
+                                                                <a href="/shop/product-details/@brand.Name">
+                                                                    @if (brand.ImageName == null)
                                                                     {
                                                                         <img src="/Content/img/no_image.png" />
                                                                     }
                                                                     else
                                                                     {
-                                                                        <img src="/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" />
+                                                                        <img src="/Images/Uploads/Brands/@brand.Id/Thumbs/@brand.ImageName" />
                                                                     }
                                                                     @* <img class="secondary-img" src="Front-end/img/product/mediam/10bg.jpg" alt="Product"> *@
                                                                 </a>
@@ -152,27 +150,23 @@
                                                         </div>
                                                         <div class="col-md-9 col-sm-8 col-xs-12">
                                                             <div class="product-description">
-                                                                <h5>@product.Name</h5>
-                                                                <div class="price-box">
-                                                                    <span class="price">@product.Price</span>
-                                                                    @*<span class="old-price">$110.00</span>*@
-                                                                </div>
+                                                                <h5>@brand.Name</h5>
                                                                 <span class="rating">
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star-o"></i>
+                                                                    @*<i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star-o"></i>*@
                                                                 </span>
-                                                                <p class="description">@product.Description</p>
+                                                                <p class="description">@brand.Short_desc</p>
                                                                 <div class="product-action">
                                                                     <div class="button-group">
-                                                                        <div class="product-button">
-                                                                            <button><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                                                        </div>
+                                                                        @*<div class="product-button">
+                                                                                <button><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                                                            </div>*@
                                                                         <div class="product-button-2">
-                                                                            <a href="#" data-toggle="tooltip" title="" data-original-title="Wishlist"><i class="fa fa-heart-o"></i></a>
-                                                                            <a href="#" data-toggle="tooltip" title="" data-original-title="Checkout"><i class="fa fa-shopping-cart"></i></a>
+                                                                            @*<a href="#" data-toggle="tooltip" title="" data-original-title="Wishlist"><i class="fa fa-heart-o"></i></a>
+                                                                                <a href="#" data-toggle="tooltip" title="" data-original-title="Checkout"><i class="fa fa-shopping-cart"></i></a>*@
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -185,7 +179,7 @@
                                         </div>
                                         <!-- Start Pagination Area -->
                                         <div class="pagination-area">
-                                            @Html.PagedListPager((IPagedList)ViewBag.onePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
+                                            @Html.PagedListPager((IPagedList)ViewBag.onePageOfBrands, page => Url.Action("Brands", new { page, brandId = ViewBag.SelectedBrand }))
                                         </div>
                                         <!-- End Pagination Area -->
                                     </div>
@@ -217,7 +211,7 @@
                             @foreach (var brand in ViewBag.onePageOfBrands)
                             {
                                 <div class="owl-item" style="width: 195px;">
-                                    <div class="col-md-2 row-cols-2">
+                                    <div class="col-md-2">
                                         <a href="/shop/Brands">
                                             @if (brand.ImageName == null)
                                             {
@@ -267,11 +261,6 @@
     </div>
     <!-- END SUBSCRIBE-AREA -->
 </section>
-
-@section Scripts
-{
-    <script src="~/Content/ShopJS/ProductsScript.js"></script>
-}
 
 @Html.Partial("_Footer")
 

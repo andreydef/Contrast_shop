@@ -82,10 +82,22 @@ namespace WebStore_Contrast.Controllers
             return View("PagesRedirect", pageVMList);
         }
 
-        // Get: Pages/Products
+        // GET: Pages/Products
         public ActionResult Products(int? page)
         {
             return View("Products");
+        }
+
+        // GET: Pages/Brands
+        public ActionResult Brands(int? page)
+        {
+            return View("Brands");
+        }
+
+        // GET: Pages/Features
+        public ActionResult Features(int? page)
+        {
+            return View("Features");
         }
     }
 }

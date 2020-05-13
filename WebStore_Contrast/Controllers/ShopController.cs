@@ -33,13 +33,35 @@ namespace WebStore_Contrast.Controllers
                 if (db.Categories.Any(x => x.Name == model.Name))
                 {
                     model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
-                    ModelState.AddModelError("", "The category name is taken!");
                     return View(model);
                 }
             }
 
             // Return PartialView() with model 
             return PartialView("_CategoryMenuPartial", categoryVMList);
+        }
+
+        // GET: Shop/FeaturesMenuPartial
+        public ActionResult FeaturesMenuPartial(FeaturesVM model)
+        {
+            // Assign the model with type List<> FeaturesVM
+            List<FeaturesVM> featuresVMList;
+
+            // Initialize the model to data
+            using (Db db = new Db())
+            {
+                featuresVMList = db.Features.ToArray()
+                    .Select(x => new FeaturesVM(x)).ToList();
+
+                if (db.Features.Any(x => x.Name == model.Name))
+                {
+                    model.Features = new SelectList(db.Features.ToList(), "Id", "Name");
+                    return View(model);
+                }
+            }
+
+            // Return PartialView() with model 
+            return PartialView("_FeaturesMenuPartial", featuresVMList);
         }
 
         //GET: Shop/Category/name
@@ -122,12 +144,15 @@ namespace WebStore_Contrast.Controllers
         }
 
         // Add GET method the list of goods
-        // GET: Admin/Shop/Products
+        // GET: Shop/Products
         [HttpGet]
         public ActionResult Products(int? page, int? catId)
         {
             // Assign model ProductVM with type List
             List<ProductVM> listOfProductVM;
+
+            // Assign model ProductVM with type List
+            List<BrandsVM> listOfBrandVM;
 
             // Set the number of page
             var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
@@ -141,19 +166,118 @@ namespace WebStore_Contrast.Controllers
                     .Select(x => new ProductVM(x))
                     .ToList();
 
+                // Initialize List and fill in data
+                listOfBrandVM = db.Brands.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.Id == catId)
+                    .Select(x => new BrandsVM(x))
+                    .ToList();
+
                 // Fill in the categories with data
                 ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+
+                // Fill in the brands with data
+                ViewBag.Brands = new SelectList(db.Brands.ToList(), "Id", "Name");
 
                 // Set the selected category
                 ViewBag.SelectedCat = catId.ToString();
             }
 
             // Set a page navigation
-            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // 3 - the number of goods in page
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // the number of goods in page
             ViewBag.onePageOfProducts = onePageOfProducts;
+
+            // Set a page navigation
+            var onePageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 6); // the number of brands in page
+            ViewBag.onePageOfBrands = onePageOfBrands;
 
             // Return View() with data
             return View(listOfProductVM);
+        }
+
+        // Add GET method the list of brands
+        // GET: Shop/Products
+        [HttpGet]
+        public ActionResult Brands(int? page, int? brandId)
+        {
+            // Assign model BrandsVM with type List
+            List<BrandsVM> listOfBrandVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfBrandVM = db.Brands.ToArray()
+                    .Where(x => brandId == null || brandId == 0 || x.Id == brandId)
+                    .Select(x => new BrandsVM(x))
+                    .ToList();
+
+                // Fill in the brands with data
+                ViewBag.Brands = new SelectList(db.Brands.ToList(), "Id", "Name");
+
+                // Set the selected brand
+                ViewBag.SelectedBrand = brandId.ToString();
+            }
+
+            // Set a page navigation
+            var onePageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 6); // the number of brands in page
+            ViewBag.onePageOfBrands = onePageOfBrands;
+
+            // Return View() with data
+            return View(listOfBrandVM);
+        }
+
+        // Add GET method the list of features
+        // GET: Shop/Features
+        [HttpGet]
+        public ActionResult Features(int? page, int? featureId)
+        {
+            // Assign model FeaturesVM with type List
+            List<FeaturesVM> listOfFeatureVM;
+
+            // Assign model ProductVM with type List
+            List<BrandsVM> listOfBrandVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfFeatureVM = db.Features.ToArray()
+                    .Where(x => featureId == null || featureId == 0 || x.Id == featureId)
+                    .Select(x => new FeaturesVM(x))
+                    .ToList();
+
+                // Initialize List and fill in data
+                listOfBrandVM = db.Brands.ToArray()
+                    .Where(x => featureId == null || featureId == 0 || x.Id == featureId)
+                    .Select(x => new BrandsVM(x))
+                    .ToList();
+
+                // Fill in the categories with data
+                ViewBag.Features = new SelectList(db.Features.ToList(), "Id", "Name");
+
+                // Fill in the brands with data
+                ViewBag.Brands = new SelectList(db.Brands.ToList(), "Id", "Name");
+
+                // Set the selected features
+                ViewBag.SelectedFeatures = featureId.ToString();
+            }
+
+            // Set a page navigation
+            var onePageOfFeatures = listOfFeatureVM.ToPagedList(pageNumber, 3); // the number of goods in page
+            ViewBag.onePageOfFeatures = onePageOfFeatures;
+
+            // Set a page navigation
+            var onePageOfBrands = listOfBrandVM.ToPagedList(pageNumber, 6); // the number of brands in page
+            ViewBag.onePageOfBrands = onePageOfBrands;
+
+            // Return View() with data
+            return View(listOfFeatureVM);
         }
     }
 }
