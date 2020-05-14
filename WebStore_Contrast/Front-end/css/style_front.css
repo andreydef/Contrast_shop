@@ -1,4 +1,4 @@
-﻿/*-----------------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------------
 
     Internet-shop: Contrast
     Description: Contrast internet-shop
@@ -207,6 +207,9 @@ body {
 label {
     font-size: 12px;
     font-weight: normal;
+    position: relative;
+    top: 5px;
+    right: 65px;
 }
 
 optgroup {

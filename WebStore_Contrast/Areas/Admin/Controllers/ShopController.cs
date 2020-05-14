@@ -11,6 +11,7 @@ using WebStore_Contrast.Models.ViewModels.Shop;
 
 namespace WebStore_Contrast.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ShopController : Controller
     {
         #region Products

@@ -31,25 +31,6 @@
                     </div>
                 </div>
                 <!-- END CATEGORY-MENU-LIST -->
-                <!-- START SIDEBAR-BANNER -->
-                @*<div class="sidebar-banner hidden-sm hidden-xs">
-                    <div class="active-sidebar-banner owl-carousel owl-theme" style="opacity: 1; display: block;">
-                        <div class="owl-wrapper-outer">
-                            <div class="owl-wrapper" style="width: 1052px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(-263px, 0px, 0px); transform-origin: 394.5px center; perspective-origin: 394.5px center;">
-                                <div class="owl-item" style="width: 263px;">
-                                    <div class="single-sidebar-banner">
-                                        <a href="#"><img src="Front-end/img/banner/1.jpg" alt="Product Banner"></a>
-                                    </div>
-                                </div><div class="owl-item" style="width: 263px;">
-                                    <div class="single-sidebar-banner">
-                                        <a href="#"><img src="Front-end/img/banner/2.jpg" alt="Product Banner"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
-                <!-- END SIDEBAR-BANNER -->
             </div>
             <div class="col-md-9 col-sm-12 col-xs-12">
                 <!-- Start Toch-Prond-Area -->
@@ -83,18 +64,6 @@
                             <h2 class="title-product">@Model.Name</h2>
                             <h5 class="product-category">@Model.CategoryName</h5>
                             <div class="about-toch-prond">
-                                @*<p>
-                <span class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </span>
-                <a href="#">1 reviews</a>
-                /
-                <a href="#">Write a review</a>
-            </p>*@
                                 <hr>
                                 <p class="short-description">@Model.Description</p>
                                 <hr>
@@ -102,35 +71,6 @@
                                 @*<span class="item-stock">Availability: <span class="text-stock">In Stock</span></span>*@
                             </div>
                             <div class="about-product">
-                                @*<div class="product-select product-color">
-                <label><sup>*</sup>Color</label>
-                <select class="form-control">
-                    <option> --- Please Select --- </option>
-                    <option>Black (+$10.00) </option>
-                    <option>White (+$8.00)</option>
-                    <option>Pink (+$30.00)</option>
-                    <option>Green (+$30.00)</option>
-                </select>
-            </div>
-            <div class="product-select product-Size">
-                <label><sup>*</sup>Size</label>
-                <select class="form-control">
-                    <option> --- Please Select --- </option>
-                    <option>Small (+$10.00)</option>
-                    <option>Medium (+$20.00)</option>
-                    <option>Large (+$30.00)</option>
-                    <option>Extra Large (+$35.00)</option>
-                </select>
-            </div>*@
-                                @*<div class="product-select product-checkbox">
-                <label><sup>*</sup>Checkbox</label>
-                <label><input type="checkbox"> Checkbox 1  (+$5.00)</label>
-            </div>*@
-                                @*<div class="product-select product-button">
-                <button type="submit">
-                    <i class="fa fa-calendar"></i>
-                </button>
-            </div>*@
                             </div>
                             <div class="product-quantity">
                                 <button type="submit" class="toch-button toch-add-cart">Add to Cart</button>
@@ -164,68 +104,6 @@
                                         </div>
                                     </div>
                                     <!-- End display-description -->
-                                    <!-- Start display-reviews -->
-                                    @*<div role="tabpanel" class="tab-pane fade" id="reviews">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <div class="toch-reviews">
-                                                    <div class="toch-table">
-                                                        <table class="table table-striped table-bordered">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td><strong>plaza theme</strong></td>
-                                                                    <td class="text-right"><strong>16/02/2016</strong></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="2">
-                                                                        <p>It is part of Australia's network of offshore processing centres for irregular migrants who arrive by boat, and also houses New Zealanders facing deportation from Australia.</p>
-                                                                        <span><i class="fa fa-star"></i></span>
-                                                                        <span><i class="fa fa-star"></i></span>
-                                                                        <span><i class="fa fa-star"></i></span>
-                                                                        <span><i class="fa fa-star"></i></span>
-                                                                        <span><i class="fa fa-star-o"></i></span>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="toch-review-title">
-                                                        <h2>Write a review</h2>
-                                                    </div>
-                                                    <div class="review-message">
-                                                        <div class="col-xs-12">
-                                                            <p>
-                                                                <sup>*</sup>Your Name <br>
-                                                                <input type="text" class="form-control">
-                                                            </p>
-                                                            <p>
-                                                                <sup>*</sup>Your Name <br>
-                                                                <textarea class="form-control"></textarea>
-                                                            </p>
-                                                        </div>
-                                                        <div class="help-block">
-                                                            <span class="note">Note:</span>
-                                                            HTML is not translated!
-                                                        </div>
-                                                        <div class="get-rating">
-                                                            <span><sup>*</sup>Rating </span>
-                                                            Bad
-                                                            <input type="radio" value="1" name="rating">
-                                                            <input type="radio" value="2" name="rating">
-                                                            <input type="radio" value="3" name="rating">
-                                                            <input type="radio" value="4" name="rating">
-                                                            <input type="radio" value="5" name="rating">
-                                                            Good
-                                                        </div>
-                                                        <div class="buttons clearfix">
-                                                            <button class="btn btn-primary pull-right">Continue</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>*@
-                                    <!-- End Product = display-reviews -->
                                 </div>
                             </div>
                         </div>

@@ -64,47 +64,6 @@ namespace WebStore_Contrast.Controllers
             return PartialView("_FeaturesMenuPartial", featuresVMList);
         }
 
-        //GET: Shop/Category/name
-        public ActionResult Category(string name)
-        {
-            // Assign the list of type List<>
-            List<ProductVM> productVMList;
-
-            using (Db db = new Db())
-            {
-                // Get the ID of category
-                CategoryDTO categoryDTO = db.Categories
-                    .Where(x => x.Short_desc == name).FirstOrDefault();
-
-                int catId = categoryDTO.Id;
-
-                // Initialize the list of data
-                productVMList = db.Products.ToArray()
-                    .Where(x => x.CategoryId == catId)
-                    .Select(x => new ProductVM(x)).ToList();
-
-                // Get the name of category
-                var productCat = db.Products
-                    .Where(x => x.CategoryId == catId).FirstOrDefault();
-
-                // Check on NULL
-                if (productCat == null)
-                {
-                    var catName = db.Categories
-                        .Where(x => x.Short_desc == name)
-                        .Select(x => x.Name).FirstOrDefault();
-                    ViewBag.CategoryName = catName;
-                }
-                else
-                {
-                    ViewBag.CategoryName = productCat.CategoryName;
-                }
-            }
-
-            // Get the partial view with model of data
-            return View(productVMList);
-        }
-
         // GET: Shop/product-details/name
         [ActionName("product-details")]
         public ActionResult ProductDetails(string name)

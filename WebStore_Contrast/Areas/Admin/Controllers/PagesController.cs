@@ -9,6 +9,7 @@ using WebStore_Contrast.Models.ViewModels.Pages;
 
 namespace WebStore_Contrast.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PagesController : Controller
     {
         // Add GET method the list of pages

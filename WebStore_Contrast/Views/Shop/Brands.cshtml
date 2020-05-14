@@ -34,23 +34,6 @@
                     </div>
                 </div>
                 <!-- END CATEGORY-MENU-LIST -->
-                <!-- shop-filter start -->
-                @*<div class="shop-filter">
-                        <div class="area-title">
-                            <h3 class="title-group gfont-1">Filters Brands</h3>
-                        </div>
-                        <h4 class="shop-price-title">Price</h4>
-                        <div class="info_widget">
-                            <div class="price_filter">
-                                <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 3.57143%; width: 91.0714%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 3.57143%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 94.6429%;"></span></div>
-                                <div class="price_slider_amount">
-                                    <input type="text" id="amount" name="price" placeholder="Add Your Price">
-                                    <input type="submit" value="Filter">
-                                </div>
-                            </div>
-                        </div>
-                    </div>*@
-                <!-- shop-filter start -->
                 <!-- filter-by start -->
                 <div class="accordion_one">
                     <h4><a class="accordion-trigger" data-toggle="collapse" href="#divone">Features</a></h4>
@@ -58,14 +41,6 @@
                         <div class="filter-menu">
                             <ul>
                                 @Html.Action("FeaturesMenuPartial", "Shop")
-                                @*<li><a href="#">Black (2)</a></li>
-                                    <li><a href="#">Blue (2)</a></li>
-                                    <li><a href="#">Brown (3)</a></li>
-                                    <li><a href="#">Green (3)</a></li>
-                                    <li><a href="#">Orange (2)</a></li>
-                                    <li><a href="#">Pink (2)</a></li>
-                                    <li><a href="#">Red (11)</a></li>
-                                    <li><a href="#">Yellow (3)</a></li>*@
                             </ul>
                         </div>
                     </div>
@@ -73,17 +48,6 @@
                 <!-- filter-by end -->
             </div>
             <div class="col-md-9">
-                @*<!-- START BRAND-BANNER -->
-                    <div class="product-banner">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="banner">
-                                    <a href="#"><img src="Front-end/img/banner/12.jpg" alt="Brand Banner"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END PRODUCT-BANNER -->*@
                 <!-- START PRODUCT-AREA -->
                 <div class="product-area">
                     <div class="row">
@@ -103,12 +67,6 @@
                                         <a href="#display-1-2" role="tab" data-toggle="tab"></a>
                                     </li>
                                 </ul>
-                                <div class="sort">
-                                    <label>Sort By:</label>
-                                    <select>
-                                        <option value="#">Default</option>
-                                    </select>
-                                </div>
                                 <div class="limit">
                                     <label>Show:</label>
                                     <select>
@@ -151,19 +109,10 @@
                                                         <div class="col-md-9 col-sm-8 col-xs-12">
                                                             <div class="product-description">
                                                                 <h5>@brand.Name</h5>
-                                                                <span class="rating">
-                                                                    @*<i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star-o"></i>*@
-                                                                </span>
+                                                                <span class="rating"></span>
                                                                 <p class="description">@brand.Short_desc</p>
                                                                 <div class="product-action">
                                                                     <div class="button-group">
-                                                                        @*<div class="product-button">
-                                                                                <button><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                                                            </div>*@
                                                                         <div class="product-button-2">
                                                                             @*<a href="#" data-toggle="tooltip" title="" data-original-title="Wishlist"><i class="fa fa-heart-o"></i></a>
                                                                                 <a href="#" data-toggle="tooltip" title="" data-original-title="Checkout"><i class="fa fa-shopping-cart"></i></a>*@
