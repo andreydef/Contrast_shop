@@ -143,7 +143,8 @@
                                                                 <div class="product-action">
                                                                     <div class="button-group">
                                                                         <div class="product-button">
-                                                                            <button><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                                                            @*<button><i class="fa fa-shopping-cart"></i> Add to Cart</button>*@
+                                                                            @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @product.Id }, new { @class = "addtocart toch-button toch-add-cart fa" })
                                                                         </div>
                                                                         <div class="product-button-2">
                                                                             <a href="#" data-toggle="tooltip" title="" data-original-title="Wishlist"><i class="fa fa-heart-o"></i></a>
@@ -242,11 +243,6 @@
     </div>
     <!-- END SUBSCRIBE-AREA -->
 </section>
-
-@section Scripts
-{
-    <script src="~/Content/ShopJS/ProductsScript.js"></script>
-}
 
 @Html.Partial("_Footer")
 

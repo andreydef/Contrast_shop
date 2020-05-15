@@ -38,43 +38,43 @@ namespace WebStore_Contrast.Controllers
             return View(cart);
         }
 
-        // GET: MainCart/CartPartial
-        public ActionResult CartPartial()
-        {
-            // Assign the model CartVM
-            CartVM model = new CartVM();
+        //// GET: MainCart/CartPartial
+        //public ActionResult CartPartial()
+        //{
+        //    // Assign the model CartVM
+        //    CartVM model = new CartVM();
 
-            // Assign the variable of quantity
-            int qty = 0;
+        //    // Assign the variable of quantity
+        //    int qty = 0;
 
-            // Assign the variable of price 
-            decimal price = 0m;
+        //    // Assign the variable of price 
+        //    decimal price = 0m;
 
-            // Check the session of cart
-            if (Session["cart"] != null)
-            {
-                // Get all quantity og goods and price
-                var list = (List<CartVM>)Session["cart"];
+        //    // Check the session of cart
+        //    if (Session["cart"] != null)
+        //    {
+        //        // Get all quantity og goods and price
+        //        var list = (List<CartVM>)Session["cart"];
 
-                foreach (var item in list)
-                {
-                    qty += item.Quantity;
-                    price += item.Quantity * item.Price;
-                }
+        //        foreach (var item in list)
+        //        {
+        //            qty += item.Quantity;
+        //            price += item.Quantity * item.Price;
+        //        }
 
-                model.Quantity = qty;
-                model.Price = price;
-            }
-            else
-            {
-                // Or set the quantity and price to 0
-                model.Quantity = 0;
-                model.Price = 0m;
-            }
+        //        model.Quantity = qty;
+        //        model.Price = price;
+        //    }
+        //    else
+        //    {
+        //        // Or set the quantity and price to 0
+        //        model.Quantity = 0;
+        //        model.Price = 0m;
+        //    }
 
-            // Return the View() with model
-            return View("Cart", model);
-        }
+        //    // Return the View() with model
+        //    return View("Cart", model);
+        //}
 
         // GET: MainCart/AddToCartPartial/id
         public ActionResult AddToCartPartial(int id)

@@ -73,7 +73,8 @@
                             <div class="about-product">
                             </div>
                             <div class="product-quantity">
-                                <button type="submit" class="toch-button toch-add-cart">Add to Cart</button>
+                                @*<button type="submit" class="toch-button toch-add-cart">Add to Cart</button>*@
+                                @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @Model.Id }, new { @class = "addtocart btn toch-button toch-add-cart" })
                                 <button type="submit" class="toch-button toch-wishlist">wishlist</button>
                                 <hr>
                                 <!-- <a href="#"><img src="Front-end/img/icon/social.png" alt="#"></a> -->
@@ -146,102 +147,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><div class="owl-item" style="width: 220px;">
-                                                <div class="col-xs-12">
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="#">
-                                                                <img class="primary-img" src="~/Front-end/img/product/mediam/11.jpg" alt="Product">
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-description">
-                                                            <h5><a href="#">Trid Palm</a></h5>
-                                                            <div class="price-box">
-                                                                <span class="price">$79.00</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><div class="owl-item" style="width: 220px;">
-                                                <div class="col-xs-12">
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="#">
-                                                                <img class="primary-img" src="~/Front-end/img/product/mediam/1.jpg" alt="Product">
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-description">
-                                                            <h5><a href="#">Established Fact</a></h5>
-                                                            <div class="price-box">
-                                                                <span class="price">$75.00</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><div class="owl-item" style="width: 220px;">
-                                                <div class="col-xs-12">
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="#">
-                                                                <img class="primary-img" src="~/Front-end/img/product/mediam/2.jpg" alt="Product">
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-description">
-                                                            <h5><a href="#">Trid Palm</a></h5>
-                                                            <div class="price-box">
-                                                                <span class="price">$95.00</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><div class="owl-item" style="width: 220px;">
-                                                <div class="col-xs-12">
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="#">
-                                                                <img class="primary-img" src="~/Front-end/img/product/mediam/13.jpg" alt="Product">
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-description">
-                                                            <h5><a href="#">Established Fact</a></h5>
-                                                            <div class="price-box">
-                                                                <span class="price">$82.00</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><div class="owl-item" style="width: 220px;">
-                                                <div class="col-xs-12">
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="#">
-                                                                <img class="primary-img" src="~/Front-end/img/product/mediam/10.jpg" alt="Product">
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-description">
-                                                            <h5><a href="#">Trid Palm</a></h5>
-                                                            <div class="price-box">
-                                                                <span class="price">$99.00</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><div class="owl-item" style="width: 220px;">
-                                                <div class="col-xs-12">
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="#">
-                                                                <img class="primary-img" src="~/Front-end/img/product/mediam/10bg.jpg" alt="Product">
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-description">
-                                                            <h5><a href="#">Various Versions</a></h5>
-                                                            <div class="price-box">
-                                                                <span class="price">$95.00</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -276,54 +181,6 @@
                                 <div class="col-md-2">
                                     <div class="single-brand-logo">
                                         <a href="#"><img src="~/Front-end/img/brand/1.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div><div class="owl-item" style="width: 195px;">
-                                <div class="col-md-2">
-                                    <div class="single-brand-logo">
-                                        <a href="#"><img src="~/Front-end/img/brand/2.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div><div class="owl-item" style="width: 195px;">
-                                <div class="col-md-2">
-                                    <div class="single-brand-logo">
-                                        <a href="#"><img src="~/Front-end/img/brand/3.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div><div class="owl-item" style="width: 195px;">
-                                <div class="col-md-2">
-                                    <div class="single-brand-logo">
-                                        <a href="#"><img src="~/Front-end/img/brand/4.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div><div class="owl-item" style="width: 195px;">
-                                <div class="col-md-2">
-                                    <div class="single-brand-logo">
-                                        <a href="#"><img src="~/Front-end/img/brand/5.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div><div class="owl-item" style="width: 195px;">
-                                <div class="col-md-2">
-                                    <div class="single-brand-logo">
-                                        <a href="#"><img src="~/Front-end/img/brand/6.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div><div class="owl-item" style="width: 195px;">
-                                <div class="col-md-2">
-                                    <div class="single-brand-logo">
-                                        <a href="#"><img src="~/Front-end/img/brand/1.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div><div class="owl-item" style="width: 195px;">
-                                <div class="col-md-2">
-                                    <div class="single-brand-logo">
-                                        <a href="#"><img src="~/Front-end/img/brand/2.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div><div class="owl-item" style="width: 195px;">
-                                <div class="col-md-2">
-                                    <div class="single-brand-logo">
-                                        <a href="#"><img src="~/Front-end/img/brand/3.png" alt=""></a>
                                     </div>
                                 </div>
                             </div>

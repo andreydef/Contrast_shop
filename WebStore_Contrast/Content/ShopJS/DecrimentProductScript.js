@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-    $("a.decproduct").click(function (e) {
+    $("button.decproduct").click(function (e) {
         e.preventDefault();
 
         var $this = $(this);
@@ -20,7 +20,7 @@
                 var price = data.qty * data.price;
                 var priceHtml = price.toFixed(2) + "₴";
 
-                $("td.total" + productId).html(priceHtml);
+                $("td.price" + productId).html(priceHtml);
 
                 var gt = parseFloat($("td.grandtotal span").text());
                 var grandtotal = (gt - data.price).toFixed(2);

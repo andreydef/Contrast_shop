@@ -1,6 +1,7 @@
 ﻿@model WebStore_Contrast.Models.ViewModels.Cart.CartVM
 
-
-You cart: @Model.Quantity item(s) - @Model.Price ₴
-<br />
-@Html.ActionLink("Checkout", "MainCart")
+<section class="page-content">
+    You cart: @Model.Quantity item(s) - @Model.Price ₴
+    <br />
+    @Html.ActionLink("Checkout", "MainCart")
+</section>
