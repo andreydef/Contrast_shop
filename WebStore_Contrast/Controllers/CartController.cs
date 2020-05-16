@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Web;
+using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
 using WebStore_Contrast.Models.Data;
 using WebStore_Contrast.Models.ViewModels.Cart;
@@ -37,44 +37,6 @@ namespace WebStore_Contrast.Controllers
             // Return List<> in View()
             return View(cart);
         }
-
-        //// GET: MainCart/CartPartial
-        //public ActionResult CartPartial()
-        //{
-        //    // Assign the model CartVM
-        //    CartVM model = new CartVM();
-
-        //    // Assign the variable of quantity
-        //    int qty = 0;
-
-        //    // Assign the variable of price 
-        //    decimal price = 0m;
-
-        //    // Check the session of cart
-        //    if (Session["cart"] != null)
-        //    {
-        //        // Get all quantity og goods and price
-        //        var list = (List<CartVM>)Session["cart"];
-
-        //        foreach (var item in list)
-        //        {
-        //            qty += item.Quantity;
-        //            price += item.Quantity * item.Price;
-        //        }
-
-        //        model.Quantity = qty;
-        //        model.Price = price;
-        //    }
-        //    else
-        //    {
-        //        // Or set the quantity and price to 0
-        //        model.Quantity = 0;
-        //        model.Price = 0m;
-        //    }
-
-        //    // Return the View() with model
-        //    return View("Cart", model);
-        //}
 
         // GET: MainCart/AddToCartPartial/id
         public ActionResult AddToCartPartial(int id)
@@ -206,6 +168,75 @@ namespace WebStore_Contrast.Controllers
                 // Remode the model
                 cart.Remove(model);
             }
+        }
+
+        // Method to update PayPal form on cart
+        public ActionResult PaypalPartial()
+        {
+            // Get the list of products in cart
+            List<CartVM> cart = Session["cart"] as List<CartVM>;
+
+            // Return partial view with list
+            return PartialView(cart);
+        }
+
+        // POST: /cart/PlaceOrder
+        [HttpPost]
+        public void PlaceOrder()
+        {
+            // Get the list with products in cart
+            List<CartVM> cart = Session["cart"] as List<CartVM>;
+
+            // Get the name of user
+            string userName = User.Identity.Name;
+
+            // Update the variable for orderId
+            int orderId = 0;
+
+            using (Db db = new Db())
+            {
+                // Assign the model OrderDTO
+                OrderDTO orderDTO = new OrderDTO();
+
+                // Get the ID of user
+                var q = db.Users.FirstOrDefault(x => x.Username == userName);
+                int userId = q.Id;
+
+                // Fill in the model OrderDTO to data and save changes
+                orderDTO.UserId = userId;
+                orderDTO.CreatedAt = DateTime.Now;
+
+                db.Orders.Add(orderDTO);
+                db.SaveChanges();
+
+                // Get orderId
+                orderId = orderDTO.OrderId;
+
+                // Assign the model OrderDetailsDTO
+                OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
+
+                // Add in model some data
+                foreach (var item in cart)
+                {
+                    orderDetailsDTO.OrderId = orderId;
+                    orderDetailsDTO.UserId = userId;
+                    orderDetailsDTO.ProductId = item.ProductId;
+                    orderDetailsDTO.Quantity = item.Quantity;
+
+                    db.OrderDetails.Add(orderDetailsDTO);
+                    db.SaveChanges();
+                }
+            }
+            // Send a letter about order to the administrator's mail
+            var client = new SmtpClient("smtp.mailtrap.io", 2525)
+            {
+                Credentials = new NetworkCredential("418e349bdb7551", "e07f93898f2b84"),
+                EnableSsl = true
+            };
+            client.Send("from@example.com", "admin@example.com", "New Order", $"You have a new order. Order number: {orderId}");
+
+            // Update the session
+            Session["cart"] = null;
         }
     }
 }

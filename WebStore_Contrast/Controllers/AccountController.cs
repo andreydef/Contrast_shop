@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using WebStore_Contrast.Models.Data;
 using WebStore_Contrast.Models.ViewModels.Account;
+using WebStore_Contrast.Models.ViewModels.Shop;
 
 namespace WebStore_Contrast.Controllers
 {
@@ -138,12 +139,14 @@ namespace WebStore_Contrast.Controllers
         }
 
         // GET: /account/logout
+        [Authorize]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
-        }  
+        }
 
+        [Authorize]
         public ActionResult UserNavPartial()
         {
             // Get the name of user
@@ -176,6 +179,7 @@ namespace WebStore_Contrast.Controllers
         // GET: /account/user-profile
         [HttpGet]
         [ActionName("user-profile")]
+        [Authorize]
         public ActionResult UserProfile()
         {
             // Get the name of user
@@ -200,6 +204,7 @@ namespace WebStore_Contrast.Controllers
         // POST: /account/user-profile
         [HttpPost]
         [ActionName("user-profile")]
+        [Authorize]
         public ActionResult UserProfile(UserProfileVM model)
         {
             bool userNameIsChanged = false;
@@ -269,6 +274,72 @@ namespace WebStore_Contrast.Controllers
             {
                 return RedirectToAction("Logout");
             }
+        }
+
+        // GET: /acccount/Orders
+        [Authorize(Roles = "User")]
+        public ActionResult Orders()
+        {
+            // Initialize the model OrdersForUserVm
+            List<OrderForUserVM> orderForUser = new List<OrderForUserVM>();
+
+            using (Db db = new Db())
+            {
+                // Get the ID of user
+                UserDTO user = db.Users.FirstOrDefault(x => x.Username == User.Identity.Name);
+                int userId = user.Id;
+
+                // Initialize the model OrderVm
+                List<OrderVM> orders = db.Orders.Where(x => x.UserId == userId).ToArray()
+                    .Select(x => new OrderVM(x)).ToList();
+
+                // Sorting through the list of products for OrderVM
+                foreach (var order in orders)
+                {
+                    // Initialize the dictionary with products
+                    Dictionary<string, int> productsAndQty = new Dictionary<string, int>();
+
+                    // Assign the variable of grand total
+                    decimal total = 0m;
+
+                    // Initialize the model OrderDetailsDTO
+                    List<OrderDetailsDTO> orderDetailsDto = db.OrderDetails.Where(x => x.OrderId == order.OrderId).ToList();
+
+                    // Get the name of user
+                    UserDTO userName = db.Users.FirstOrDefault(x => x.Id == order.UserId);
+                    string username = user.Username;
+
+                    // Sorting through the list OrderDetailsDTO
+                    foreach (var orderDetails in orderDetailsDto)
+                    {
+                        // Get the product
+                        ProductDTO product = db.Products.FirstOrDefault(x => x.Id == orderDetails.ProductId);
+
+                        // Get the price of product
+                        decimal price = product.Price;
+
+                        // Get the name of product
+                        string productName = product.Name;
+
+                        // Add the product to dictionary
+                        productsAndQty.Add(productName, orderDetails.Quantity);
+
+                        // Get the grand price of products
+                        total += orderDetails.Quantity * price;
+                    }
+                    // Add the getting data to model OrdersForUserVM
+                    orderForUser.Add(new OrderForUserVM()
+                    {
+                        OrderNumber = order.OrderId,
+                        UserName = username,
+                        Total = total,
+                        ProductsAndQty = productsAndQty,
+                        CreatedAt = order.CreatedAt
+                    });
+                }
+            }
+            // Return the view with model OrdersForUserVM
+            return View(orderForUser);
         }
     }
 }

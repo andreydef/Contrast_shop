@@ -229,10 +229,9 @@ else
                                                                 <button class="btn btn-primary decproduct" data-toggle="tooltip" data-id="@item.ProductId" title="">
                                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                                 </button>
-                                                                @*<button class="btn btn-danger removeproduct" data-toggle="tooltip" data-id="@item.ProductId" title="">
-                                                                        <i class="fa fa-times-circle"></i>
-                                                                    </button>*@
-                                                                <a href="#" class="btn btn-danger removeproduct" data-id="@item.ProductId">Remove</a>
+                                                                <button class="btn btn-danger removeproduct" data-toggle="tooltip" data-id="@item.ProductId" title="">
+                                                                    <i class="fa fa-times-circle"></i>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -241,6 +240,26 @@ else
                                             }
                                         </tbody>
                                     </table>
+                                    <div class="paypaldiv">
+                                        <form class="paypalform" action="https://www.sandbox.paypal.com/us/cgi-bin/webscr" method="post">
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="upload" value="1" />
+                                            <input type="hidden" name="business" value="sb-iwsos947854@business.example.com">
+
+                                            @foreach (var item in Model)
+                                            {
+                                                <input type="hidden" name="item_name_@count" value="@item.ProductName">
+                                                <input type="hidden" name="amount_@count" value="@item.Price">
+                                                <input type="hidden" name="quantity_@count" value="@item.Quantity">
+                                                count++;
+                                            }
+
+                                            <input type="hidden" name="currency_code" value="USD">
+                                            <div style="display: none">
+                                                <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
 
                                 <!-- End Table -->
@@ -249,15 +268,16 @@ else
                                         <table class="table table-bordered">
                                             <tbody>
                                                 <tr>
-                                                    <td class="grandtotal text-right"> <b>Grand total:</b> <span>@ViewBag.GrandTotal ₴</span> </td>
+                                                    <td class="grandtotal text-right"> <b>Grand total:</b> <span>@ViewBag.GrandTotal $</span> </td>
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <span class="paypal_message"></span>
                                     </div>
                                 </div>
                                 <div class="shopping-checkout">
                                     <a href="/shop/Products" class="btn btn-default pull-left">Continue Shopping</a>
-                                    <a href="#" class="btn btn-primary pull-right">Checkout</a>
+                                    <a href="#" class="placeorder btn btn-primary pull-right">Checkout</a>
                                 </div>
                             </div>
                         </div>
@@ -330,5 +350,3 @@ else
 @Html.Partial("~/Views/_Scripts.cshtml")
 
 <script src="~/Content/ShopJS/IncrementProductScript.js"></script>
-<script src="~/Content/ShopJS/DecrimentProductScript.js"></script>
-<script src="~/Content/ShopJS/RemoveProductScript.js"></script>

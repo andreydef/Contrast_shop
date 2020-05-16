@@ -133,6 +133,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShopController.cs" />
+    <Compile Include="Areas\Admin\Models\ViewModels\Shop\OrdersForAdminVM.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Models\Data\UserDTO.cs" />
     <Compile Include="Models\Data\UserRoleDTO.cs" />
     <Compile Include="Models\ViewModels\Account\LoginUserVM.cs" />
+    <Compile Include="Models\ViewModels\Account\OrderForUserVM.cs" />
     <Compile Include="Models\ViewModels\Account\UserNavPartialVM.cs" />
     <Compile Include="Models\ViewModels\Account\UserProfileVM.cs" />
     <Compile Include="Models\ViewModels\Account\UserVM.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Models\ViewModels\Shop\BrandsVM.cs" />
     <Compile Include="Models\ViewModels\Shop\CategoryVM.cs" />
     <Compile Include="Models\ViewModels\Shop\FeaturesVM.cs" />
+    <Compile Include="Models\ViewModels\Shop\OrderVM.cs" />
     <Compile Include="Models\ViewModels\Shop\ProductVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -195,12 +198,10 @@
     <Content Include="Content\ShopJS\BrandsViewJS.js" />
     <Content Include="Content\ShopJS\CategoriesScript.js" />
     <Content Include="Content\ShopJS\CategoriesViewJS.js" />
-    <Content Include="Content\ShopJS\DecrimentProductScript.js" />
     <Content Include="Content\ShopJS\IncrementProductScript.js" />
     <Content Include="Content\ShopJS\PagesIndexViewJS.js" />
     <Content Include="Content\ShopJS\ProductDetailsScript.js" />
     <Content Include="Content\ShopJS\ProductsScript.js" />
-    <Content Include="Content\ShopJS\RemoveProductScript.js" />
     <Content Include="favicon.ico" />
     <Content Include="fileman\css\images\animated-overlay.gif" />
     <Content Include="fileman\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -1028,6 +1029,7 @@
     <Content Include="Areas\Admin\Views\Pages\PageDetails.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Areas\Admin\Views\Shop\Orders.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -1073,10 +1075,11 @@
     <Content Include="Views\Shop\Brands.cshtml" />
     <Content Include="Views\Shop\_FeaturesMenuPartial.cshtml" />
     <Content Include="Views\Shop\Features.cshtml" />
+    <Content Include="Views\Account\Orders.cshtml" />
+    <Content Include="Views\Cart\PaypalPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="fileman\aspnet_client\system_web\2_0_50727\" />
     <Folder Include="fileman\aspnet_client\system_web\4_0_30319\" />
     <Folder Include="fileman\tmp\" />
