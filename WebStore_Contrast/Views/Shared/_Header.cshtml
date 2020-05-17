@@ -34,21 +34,19 @@
 
                             @if (Request.IsAuthenticated == false)
                             {
-                                <li><a href="#">Wish List (0)</a></li>
-                                <li><a href="#">Checkout</a></li>
+                              <li><a href="/account/create-account"><i class="fa fa-user"></i>Create Account</a></li>
                             }
 
                             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                             {
-                                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                                <li><a href="/account/user-profile"><i class="fa fa-user"></i> My Account</a></li>
                                 <li>@Html.ActionLink("Admin Area", "Index", "Dashboard", new { area = "Admin" }, null)</li>
                             }
 
                             @if (Request.IsAuthenticated && User.IsInRole("User"))
                             {
-                                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                                <li><a href="#"><i class="fa fa-heart"></i> Wish List (0)</a></li>
-                                <li><a href="#"><i class="fa fa-share"></i> Checkout</a></li>
+                                <li><a href="/account/user-profile"><i class="fa fa-user"></i> My Account</a></li>
+                                <li><a href="/account/Orders"><i class="fa fa-share"></i>Orders</a></li>
                             }
 
                             @if (Request.IsAuthenticated)

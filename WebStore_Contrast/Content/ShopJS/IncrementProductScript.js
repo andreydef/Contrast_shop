@@ -22,7 +22,7 @@ $(function () {
 
                 $("td.grandtotal span").text(grandtotal);
                 /*Урок 26*/
-            }).done(function (data) {
+            }).done(function () {
                 var url2 = "/cart/PaypalPartial";
 
                 $.get(url2,
@@ -68,7 +68,7 @@ $(function () {
                         $("td.grandtotal span").text(grandtotal);
                     }
                     /*Урок 26*/
-                }).done(function (data) {
+                }).done(function () {
 
                     var url2 = "/cart/PaypalPartial";
 
@@ -89,13 +89,12 @@ $(function () {
         $("button.removeproduct").click(function (e) {
             e.preventDefault();
 
-            var $this = $(this);
             var productId = $(this).data("id");
             var url = "/cart/RemoveProduct";
 
             $.get(url,
                 { productId: productId },
-                function (data) {
+                function () {
                     location.reload();
                 });
             window.location.reload();
@@ -108,18 +107,13 @@ $(function () {
         $("a.placeorder").click(function (e) {
             e.preventDefault();
 
-            var $this = $(this);
             var url = "/cart/PlaceOrder";
-
-            //$(".ajaxbg").show();
 
             $.post(url,
                 {},
-                function (data) {
-                    $("span.paypal_message").text("Thank you. You will now be redirected to paypal.");
-                    setTimeout(function () {
-                        $('form input[name = "submit"]').click();
-                    }, 2000);
+                function () {
+                    $("span.message").text("Thank you. You will now be redirected to paypal.");
+                    $('form input[name = "submit"]').click();
                 });
         });
     });

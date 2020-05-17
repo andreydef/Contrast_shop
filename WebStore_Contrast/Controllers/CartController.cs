@@ -4,11 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
+using System.Web.UI;
 using WebStore_Contrast.Models.Data;
 using WebStore_Contrast.Models.ViewModels.Cart;
 
 namespace WebStore_Contrast.Controllers
 {
+    [Authorize(Roles = "User")]
     public class CartController : Controller
     {
         // GET: MainCart
@@ -199,8 +201,8 @@ namespace WebStore_Contrast.Controllers
                 OrderDTO orderDTO = new OrderDTO();
 
                 // Get the ID of user
-                var q = db.Users.FirstOrDefault(x => x.Username == userName);
-                int userId = q.Id;
+                var name = db.Users.FirstOrDefault(x => x.Username == userName);
+                int userId = name.Id;
 
                 // Fill in the model OrderDTO to data and save changes
                 orderDTO.UserId = userId;
@@ -237,6 +239,8 @@ namespace WebStore_Contrast.Controllers
 
             // Update the session
             Session["cart"] = null;
+
+            Server.ScriptTimeout = 2000;
         }
     }
 }

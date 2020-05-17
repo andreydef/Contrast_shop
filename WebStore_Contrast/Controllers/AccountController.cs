@@ -276,7 +276,7 @@ namespace WebStore_Contrast.Controllers
             }
         }
 
-        // GET: /acccount/Orders
+        // GET: /account/Orders
         [Authorize(Roles = "User")]
         public ActionResult Orders()
         {

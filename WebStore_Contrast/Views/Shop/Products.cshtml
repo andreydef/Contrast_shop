@@ -6,6 +6,7 @@
 }
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 @using PagedList.Mvc;
 @using PagedList;
@@ -36,23 +37,6 @@
                     </div>
                 </div>
                 <!-- END CATEGORY-MENU-LIST -->
-                <!-- shop-filter start -->
-                <div class="shop-filter">
-                    <div class="area-title">
-                        <h3 class="title-group gfont-1">Filters Products</h3>
-                    </div>
-                    <h4 class="shop-price-title">Price</h4>
-                    <div class="info_widget">
-                        <div class="price_filter">
-                            <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 3.57143%; width: 91.0714%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 3.57143%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 94.6429%;"></span></div>
-                            <div class="price_slider_amount">
-                                <input type="text" id="amount" name="price" placeholder="Add Your Price">
-                                <input type="submit" value="Filter">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- shop-filter start -->
                 <!-- filter-by start -->
                 <div class="accordion_one">
                     <h4><a class="accordion-trigger" data-toggle="collapse" href="#divone">Features</a></h4>
@@ -74,23 +58,7 @@
                             <!-- Start Product-Menu -->
                             <div class="product-menu">
                                 <div class="product-title">
-                                    <h3 class="title-group-3 gfont-1">Categories</h3>
-                                </div>
-                            </div>
-                            <div class="product-filter">
-                                <ul role="tablist">
-                                    <li role="presentation" class="list active">
-                                        <a href="#display-1-1" role="tab" data-toggle="tab"></a>
-                                    </li>
-                                    <li role="presentation" class="grid ">
-                                        <a href="#display-1-2" role="tab" data-toggle="tab"></a>
-                                    </li>
-                                </ul>
-                                <div class="limit">
-                                    <label>Show:</label>
-                                    <select>
-                                        <option value="#">3</option>
-                                    </select>
+                                    <h3 class="title-group-3 gfont-1">Products</h3>
                                 </div>
                             </div>
                             <!-- End Product-Menu -->
@@ -130,7 +98,6 @@
                                                                 <h5>@product.Name</h5>
                                                                 <div class="price-box">
                                                                     <span class="price">@product.Price</span>
-                                                                    @*<span class="old-price">$110.00</span>*@
                                                                 </div>
                                                                 <span class="rating">
                                                                     <i class="fa fa-star"></i>
@@ -143,8 +110,8 @@
                                                                 <div class="product-action">
                                                                     <div class="button-group">
                                                                         <div class="product-button">
-                                                                            @*<button><i class="fa fa-shopping-cart"></i> Add to Cart</button>*@
-                                                                            @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @product.Id }, new { @class = "addtocart toch-button toch-add-cart fa" })
+                                                                            <!-- Link to open the modal page _AddToCartPartial -->
+                                                                            @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @product.Id }, new { @class = "addtocart toch-button toch-add-cart fa", @rel = "modal:open" })
                                                                         </div>
                                                                         <div class="product-button-2">
                                                                             <a href="#" data-toggle="tooltip" title="" data-original-title="Wishlist"><i class="fa fa-heart-o"></i></a>
@@ -247,3 +214,4 @@
 @Html.Partial("_Footer")
 
 @Html.Partial("~/Views/_Scripts.cshtml")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
