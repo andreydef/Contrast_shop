@@ -1,5 +1,4 @@
 ﻿using PagedList;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -45,7 +44,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             }
 
             // Set a page navigation
-            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // 3 - the number of goods in page
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 4); // the number of goods in page
             ViewBag.onePageOfProducts = onePageOfProducts;
 
             // Return View() with data
@@ -385,20 +384,16 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             return RedirectToAction("EditProduct");
         }
 
-        // Add GET method to Delete Product
+        // Add GET method to Delete Products
         // GET: Admin/Shop/DeleteProduct/id
         [HttpGet]
         public ActionResult DeleteProduct(int id)
         {
+            // Delete product from database 
             using (Db db = new Db())
             {
-                // Get the model of product
                 ProductDTO dto = db.Products.Find(id);
-
-                // Delete product
                 db.Products.Remove(dto);
-
-                // Save changes in database
                 db.SaveChanges();
             }
 
@@ -409,10 +404,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             if (Directory.Exists(pathString))
                 Directory.Delete(pathString, true);
 
-            // Add message about successful delete
-            TempData["SM"] = "You have deleted a product!";
-
-            // Return user to the page Products
+            // Redirect user
             return RedirectToAction("Products");
         }
 
@@ -498,7 +490,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             }
 
             // Set a page navigation
-            var onePageOfCategories = listOfCatVM.ToPagedList(pageNumber, 5); // 5 - the number of categories in page
+            var onePageOfCategories = listOfCatVM.ToPagedList(pageNumber, 3); // the number of categories in page
             ViewBag.onePageOfCategories = onePageOfCategories;
 
             // Return View() with data
@@ -1250,20 +1242,27 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
             return RedirectToAction("EditFeature");
         }
 
-        // Add POST method to Delete Features
-        // POST: Admin/Shop/DeleteFeature/id
-        [HttpPost]
+        // Add GET method to Delete Feature
+        // GET: Admin/Shop/DeleteFeature/id
+        [HttpGet]
         public ActionResult DeleteFeature(int id)
         {
-            // Delete feature from database 
             using (Db db = new Db())
             {
+                // Get the model of brand
                 FeaturesDTO dto = db.Features.Find(id);
+
+                // Delete brand
                 db.Features.Remove(dto);
+
+                // Save changes in database
                 db.SaveChanges();
             }
 
-            // Redirect user
+            // Add message about successful delete
+            TempData["SM"] = "You have deleted a feature!";
+
+            // Return user to the page Brands
             return RedirectToAction("Features");
         }
 
@@ -1284,14 +1283,14 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                 // Initialize the model OrderVM
                 List<OrderVM> orders = db.Orders.ToArray().Select(x => new OrderVM(x)).ToList();
 
+                // Assign the variable of total amount
+                decimal total = 0m;
+
                 // Sorting through the data of model OrderVM
                 foreach (var order in orders)
                 {
-                    // Initialize the dictionary with products
+                    // Initialize the dictionary of products
                     Dictionary<string, int> productAndQty = new Dictionary<string, int>();
-
-                    // Assign the variable of grand summ
-                    decimal total = 0m;
 
                     // Initialize the list OrderDetailsDTO
                     List<OrderDetailsDTO> orderDetailsList = db.OrderDetails.Where(x => x.OrderId == order.OrderId).ToList();
@@ -1300,7 +1299,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                     UserDTO user = db.Users.FirstOrDefault(x => x.Id == order.UserId);
                     string username = user.Username;
 
-                    // Sorting through the list of products from OrderDetailsDTO
+                    // Sorting through the list of product with OrderDetailsDTO
                     foreach (var orderDetails in orderDetailsList)
                     {
                         // Get the product
@@ -1312,13 +1311,13 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                         // Get the name of product
                         string productName = product.Name;
 
-                        // Add the product to list
+                        // Add product to dictionary
                         productAndQty.Add(productName, orderDetails.Quantity);
 
-                        // Get the total price of products
+                        // Get the total price of product
                         total += orderDetails.Quantity * price;
                     }
-                    // Add the data  to model
+                    // Add the data to model OrdersForAdminVM
                     ordersForAdmin.Add(new OrdersForAdminVM()
                     {
                         OrderNumber = order.OrderId,
@@ -1329,7 +1328,7 @@ namespace WebStore_Contrast.Areas.Admin.Controllers
                     });
                 }
             }
-            // Return View() with model OrdersForAdminVM
+            // Return the view with model OrdersForAdminVM
             return View(ordersForAdmin);
         }
 

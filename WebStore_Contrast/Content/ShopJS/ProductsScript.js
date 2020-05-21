@@ -11,25 +11,13 @@
         return false;
     });
 
-    /* Select product from specified category(front-end) */
-
-    $("#SelectCategory").on("change", function () {
-        var url = $(this).val();
-
-        if (url) {
-            window.location = "/shop/Products?catId=" + url;
-        }
-        return false;
-    });
-
-
     /*-----------------------------------------------------------*/
 
     /* Confirm product deletion */
 
-    //$(".delete").click(function () {
-    //    if (!confirm("Confirm product deletion")) return false;
-    //});
+    $(".delete a").click(function () {
+       if (!confirm("Confirm product deletion")) return false;
+    });
 
     $(function () {
 

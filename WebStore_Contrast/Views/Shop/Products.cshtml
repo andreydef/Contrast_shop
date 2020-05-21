@@ -83,39 +83,33 @@
                                                                 <a href="/shop/product-details/@product.Name">
                                                                     @if (@product.ImageName == null)
                                                                     {
-                                                                        <img src="/Content/img/no_image.png" />
+                                                                        <img src="/Content/img/no_image.png" style="height: 124px; margin-left: 35px;" />
                                                                     }
                                                                     else
                                                                     {
                                                                         <img src="/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" />
                                                                     }
-                                                                    @* <img class="secondary-img" src="Front-end/img/product/mediam/10bg.jpg" alt="Product"> *@
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                                        <div class="col-md-9 col-sm-8 col-xs-12" style="margin-bottom: 20px;">
                                                             <div class="product-description">
                                                                 <h5>@product.Name</h5>
                                                                 <div class="price-box">
                                                                     <span class="price">@product.Price</span>
                                                                 </div>
-                                                                <span class="rating">
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star-o"></i>
-                                                                </span>
-                                                                <p class="description">@product.Description</p>
+                                                                <p class="description">@Html.Raw(@product.Description)</p>
                                                                 <div class="product-action">
                                                                     <div class="button-group">
                                                                         <div class="product-button">
-                                                                            <!-- Link to open the modal page _AddToCartPartial -->
-                                                                            @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @product.Id }, new { @class = "addtocart toch-button toch-add-cart fa", @rel = "modal:open" })
-                                                                        </div>
-                                                                        <div class="product-button-2">
-                                                                            <a href="#" data-toggle="tooltip" title="" data-original-title="Wishlist"><i class="fa fa-heart-o"></i></a>
-                                                                            <a href="#" data-toggle="tooltip" title="" data-original-title="Checkout"><i class="fa fa-shopping-cart"></i></a>
+                                                                            @if (User.IsInRole("User"))
+                                                                            {
+                                                                                @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @product.Id }, new { @class = "addtocart toch-button toch-add-cart fa", @rel = "modal:open" })
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @Html.ActionLink("Add to cart", "AddToCartPartial", "Cart", new { id = @product.Id }, new { @class = "addtocart toch-button toch-add-cart fa" })
+                                                                            }
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -164,7 +158,7 @@
                                         <a href="/shop/Brands">
                                             @if (brand.ImageName == null)
                                             {
-                                                <img src="/Content/img/no_image.png" />
+                                                <img src="/Content/img/no_image.png" style="height: 67px; margin-left: 45px;" />
                                             }
                                             else
                                             {

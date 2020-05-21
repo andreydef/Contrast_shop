@@ -250,10 +250,4 @@ $('[data-toggle="tooltip"]').tooltip();
         scrollSpeed: 900,
         animation: 'fade'
     }); 	
-
-
-
-
-
- 
 })(jQuery); 

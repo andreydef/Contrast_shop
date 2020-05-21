@@ -14,7 +14,93 @@
 
 @if (ViewBag.Message != null)
 {
-    <center><h3>@ViewBag.Message</h3></center>
+    <section class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- CATEGORY-MENU-LIST START -->
+                    <div class="left-category-menu hidden-sm hidden-xs">
+                        <div class="left-product-cat">
+                            <div class="category-heading">
+                                <h2>categories</h2>
+                            </div>
+                            <div class="category-menu-list">
+                                <ul>
+                                    <li>
+                                        @Html.Action("CategoryMenuPartial", "Shop")
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END CATEGORY-MENU-LIST -->
+                    <!-- START SMALL-PRODUCT-AREA -->
+                    <div class="small-product-area carosel-navigation">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="area-title">
+                                    <h3 class="title-group gfont-1">Bestseller</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="active-bestseller sidebar owl-carousel owl-theme" style="opacity: 1; display: block;">
+                                <div class="owl-wrapper-outer">
+                                    <div class="owl-wrapper" style="width: 1172px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
+                                        <div class="owl-item" style="width: 293px;">
+                                            <div class="col-xs-12">
+                                                <!-- Start Single-Product -->
+                                                <div class="single-product">
+                                                    @Html.Action("SmallProductMenuPartial", "Shop")
+                                                </div>
+                                                <!-- End Single-Product -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"><i class="fa fa-angle-left"></i></div><div class="owl-next"><i class="fa fa-angle-right"></i></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SMALL-PRODUCT-AREA -->
+                </div>
+                <div class="col-md-9">
+                    <!-- Start Shopping-Cart -->
+                    <div class="shopping-cart">
+                        <center><h3>@ViewBag.Message</h3></center>
+                    </div>
+                    <!-- End Shopping-Cart -->
+                </div>
+            </div>
+        </div>
+        <!-- START SUBSCRIBE-AREA -->
+        <div class="subscribe-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-7 col-xs-12">
+                        <label class="hidden-sm hidden-xs">Sign Up for Our Newsletter:</label>
+                        <div class="subscribe">
+                            <form action="#">
+                                <input type="text" placeholder="Enter Your E-mail">
+                                <button type="submit">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-5 col-xs-12">
+                        <div class="social-media">
+                            <a href="#"><i class="fa fa-facebook fb"></i></a>
+                            <a href="#"><i class="fa fa-google-plus gp"></i></a>
+                            <a href="#"><i class="fa fa-twitter tt"></i></a>
+                            <a href="#"><i class="fa fa-youtube yt"></i></a>
+                            <a href="#"><i class="fa fa-linkedin li"></i></a>
+                            <a href="#"><i class="fa fa-rss rs"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SUBSCRIBE-AREA -->
+    </section>
 }
 else
 {
@@ -39,7 +125,7 @@ else
                     </div>
                     <!-- END CATEGORY-MENU-LIST -->
                     <!-- START SMALL-PRODUCT-AREA -->
-                    <div class="small-product-area carosel-navigation  hidden-sm hidden-xs">
+                    <div class="small-product-area carosel-navigation">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="area-title">
@@ -55,127 +141,13 @@ else
                                             <div class="col-xs-12">
                                                 <!-- Start Single-Product -->
                                                 <div class="single-product">
-                                                    <div class="product-img">
-                                                        <a href="#">
-                                                            <img class="primary-img" src="Front-end/img/product/small/1.jpg" alt="Product">
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-description">
-                                                        <h5><a href="#">Trid Palm</a></h5>
-                                                        <div class="price-box">
-                                                            <span class="price">$99.00</span>
-                                                            <span class="old-price">$110.00</span>
-                                                        </div>
-                                                        <span class="rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single-Product -->
-                                            </div>
-                                        </div><div class="owl-item" style="width: 293px;">
-                                            <div class="col-xs-12">
-                                                <!-- Start Single-Product -->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <a href="#">
-                                                            <img class="primary-img" src="Front-end/img/product/small/5.jpg" alt="Product">
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-description">
-                                                        <h5><a href="#">Trid Palm</a></h5>
-                                                        <div class="price-box">
-                                                            <span class="price">$99.00</span>
-                                                            <span class="old-price">$110.00</span>
-                                                        </div>
-                                                        <span class="rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single-Product -->
-                                                <!-- Start Single-Product -->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <a href="#">
-                                                            <img class="primary-img" src="Front-end/img/product/small/6.jpg" alt="Product">
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-description">
-                                                        <h5><a href="#">Various Versions</a></h5>
-                                                        <div class="price-box">
-                                                            <span class="price">$90.00</span>
-                                                            <span class="old-price">$110.00</span>
-                                                        </div>
-                                                        <span class="rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single-Product -->
-                                                <!-- Start Single-Product -->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <a href="#">
-                                                            <img class="primary-img" src="Front-end/img/product/small/7.jpg" alt="Product">
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-description">
-                                                        <h5><a href="#">Trid Palm</a></h5>
-                                                        <div class="price-box">
-                                                            <span class="price">$99.00</span>
-                                                            <span class="old-price">$110.00</span>
-                                                        </div>
-                                                        <span class="rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <!-- End Single-Product -->
-                                                <!-- Start Single-Product -->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <a href="#">
-                                                            <img class="primary-img" src="Front-end/img/product/small/8.jpg" alt="Product">
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-description">
-                                                        <h5><a href="#">Established Fact</a></h5>
-                                                        <div class="price-box">
-                                                            <span class="price">$90.00</span>
-                                                            <span class="old-price">$110.00</span>
-                                                        </div>
-                                                        <span class="rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </span>
-                                                    </div>
+                                                    @Html.Action("SmallProductMenuPartial", "Shop")
                                                 </div>
                                                 <!-- End Single-Product -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"><i class="fa fa-angle-left"></i></div><div class="owl-next"><i class="fa fa-angle-right"></i></div></div></div>
                             </div>
                         </div>
@@ -261,7 +233,6 @@ else
                                         </form>
                                     </div>
                                 </div>
-
                                 <!-- End Table -->
                                 <div class="row">
                                     <div class="col-sm-4 col-sm-offset-8">
@@ -286,35 +257,6 @@ else
                 </div>
             </div>
         </div>
-        <!-- START BRAND-LOGO-AREA -->
-        <div class="brand-logo-area carosel-navigation">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="area-title">
-                            <h3 class="title-group border-red gfont-1">Brand Logo</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="active-brand-logo owl-carousel owl-theme" style="opacity: 1; display: block;">
-                        <div class="owl-wrapper-outer">
-                            <div class="owl-wrapper" style="width: 3510px; left: 0px; display: block; transition: all 0ms ease 0s; transform: translate3d(0px, 0px, 0px);">
-                                <div class="owl-item" style="width: 195px;">
-                                    <div class="col-md-2">
-                                        <div class="single-brand-logo">
-                                            <a href="#"><img src="Front-end/img/brand/1.png" alt=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"><i class="fa fa-angle-left"></i></div><div class="owl-next"><i class="fa fa-angle-right"></i></div></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END BRAND-LOGO-AREA -->
         <!-- START SUBSCRIBE-AREA -->
         <div class="subscribe-area">
             <div class="container">

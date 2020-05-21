@@ -41,6 +41,95 @@ namespace WebStore_Contrast.Controllers
             return PartialView("_CategoryMenuPartial", categoryVMList);
         }
 
+        // GET: Shop/BrandMenuPartial
+        public ActionResult BrandMenuPartial(BrandsVM model)
+        {
+            // Assign the model with type List<> BrandsVM
+            List<BrandsVM> brandVMList;
+
+            // Initialize the model to data
+            using (Db db = new Db())
+            {
+                brandVMList = db.Brands.ToArray()
+                    .Select(x => new BrandsVM(x)).ToList();
+
+                if (db.Brands.Any(x => x.Name == model.Name))
+                {
+                    model.Brands = new SelectList(db.Brands.ToList(), "Id", "Name");
+                    return View(model);
+                }
+            }
+
+            // Return PartialView() with model 
+            return PartialView("_BrandMenuPartial", brandVMList);
+        }
+
+        // GET: Shop/ProductMenuPartial
+        public ActionResult ProductMenuPartial(int? page, int? catId)
+        {
+            // Assign model ProductVM with type List
+            List<ProductVM> listOfProductVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfProductVM = db.Products.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
+                    .Select(x => new ProductVM(x))
+                    .ToList();
+
+                // Fill in the categories with data
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+
+                // Set the selected category
+                ViewBag.SelectedCat = catId.ToString();
+            }
+
+            // Set a page navigation
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // the number of goods in page
+            ViewBag.onePageOfProducts = onePageOfProducts;
+
+            // Return PartialView() with model 
+            return PartialView("_ProductMenuPartial", listOfProductVM);
+        }
+
+        // GET: Shop/SmallProductMenuPartial
+        public ActionResult SmallProductMenuPartial(int? page, int? catId)
+        {
+            // Assign model ProductVM with type List
+            List<ProductVM> listOfProductVM;
+
+            // Set the number of page
+            var pageNumber = page ?? 1; /* if the result returns null it will automatically be set to 1,
+                                               if it returns a value instead of 1 it will be this value */
+
+            using (Db db = new Db())
+            {
+                // Initialize List and fill in data
+                listOfProductVM = db.Products.ToArray()
+                    .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
+                    .Select(x => new ProductVM(x))
+                    .ToList();
+
+                // Fill in the categories with data
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+
+                // Set the selected category
+                ViewBag.SelectedCat = catId.ToString();
+            }
+
+            // Set a page navigation
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3); // the number of goods in page
+            ViewBag.onePageOfProducts = onePageOfProducts;
+
+            // Return PartialView() with model 
+            return PartialView("_SmallProductMenuPartial", listOfProductVM);
+        }
+
         // GET: Shop/FeaturesMenuPartial
         public ActionResult FeaturesMenuPartial(FeaturesVM model)
         {

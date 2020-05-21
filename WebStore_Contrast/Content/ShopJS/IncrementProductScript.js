@@ -81,6 +81,22 @@ $(function () {
                 });
         });
     });
+
+    /*-----------------------------------------------------------*/
+
+    /* Confirm product deletion on cart */
+
+    $("button.removeproduct").click(function () {
+        if (!confirm("Confirm product deletion")) return true;
+    });
+
+    // Function to capture Enter
+    $("button.removeproduct").keyup(function (e) {
+        if (e.keyCode == 13) { // keyCode == 13 (key code -  Enter)
+            $("button.removeproduct").click();
+        }
+    });
+
     /*-----------------------------------------------------------*/
 
     /* Remove product */

@@ -66,12 +66,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -198,6 +207,7 @@
     <Content Include="Content\ShopJS\BrandsViewJS.js" />
     <Content Include="Content\ShopJS\CategoriesScript.js" />
     <Content Include="Content\ShopJS\CategoriesViewJS.js" />
+    <Content Include="Content\ShopJS\FeaturesScript.js" />
     <Content Include="Content\ShopJS\IncrementProductScript.js" />
     <Content Include="Content\ShopJS\PagesIndexViewJS.js" />
     <Content Include="Content\ShopJS\ProductDetailsScript.js" />
@@ -994,7 +1004,6 @@
     <Content Include="Areas\Admin\Views\Shop\Products.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\AddProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\EditProduct.cshtml" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="Areas\Admin\Views\Shop\Brands.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\AddBrand.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\EditBrand.cshtml" />
@@ -1019,8 +1028,6 @@
     <Content Include="Areas\Admin\Views\Shop\Features.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\AddFeature.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\EditFeature.cshtml" />
-    <Content Include="fonts\QAUlVt1jXOgQavlW5wEfxQLUuEpTyoUstqEm5AMlJo4.woff2" />
-    <Content Include="fonts\xkvoNo9fC8O2RDydKj12bwzyDMXhdD8sAj6OAJTFsBI.woff2" />
     <Content Include="Front-end\img\product\.DS_Store" />
     <Content Include="Areas\Admin\Views\Pages\AddPage.cshtml" />
     <Content Include="Areas\Admin\Views\Pages\EditPage.cshtml" />
@@ -1064,9 +1071,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\UserNavPartial.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
-    <Content Include="Views\Pages\_PagesMenuPartial.cshtml" />
-    <Content Include="Views\Pages\_SidebarPartial.cshtml" />
-    <Content Include="Views\Pages\Index.cshtml" />
     <Content Include="Views\Shop\Products.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
@@ -1077,6 +1081,10 @@
     <Content Include="Views\Shop\Features.cshtml" />
     <Content Include="Views\Account\Orders.cshtml" />
     <Content Include="Views\Cart\PaypalPartial.cshtml" />
+    <Content Include="Views\Shop\_BrandMenuPartial.cshtml" />
+    <Content Include="Views\Shop\_ProductMenuPartial.cshtml" />
+    <Content Include="Views\Shop\_SmallProductMenuPartial.cshtml" />
+    <Content Include="Views\Pages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

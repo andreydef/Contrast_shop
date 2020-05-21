@@ -41,6 +41,7 @@ namespace WebStore_Contrast.Controllers
         }
 
         // GET: MainCart/AddToCartPartial/id
+        [Authorize(Roles = "User")]
         public ActionResult AddToCartPartial(int id)
         {
             // Assign the List<>, with type CartVM
@@ -173,6 +174,7 @@ namespace WebStore_Contrast.Controllers
         }
 
         // Method to update PayPal form on cart
+        [Authorize(Roles = "User")]
         public ActionResult PaypalPartial()
         {
             // Get the list of products in cart
@@ -184,6 +186,7 @@ namespace WebStore_Contrast.Controllers
 
         // POST: /cart/PlaceOrder
         [HttpPost]
+        [Authorize(Roles = "User")]
         public void PlaceOrder()
         {
             // Get the list with products in cart

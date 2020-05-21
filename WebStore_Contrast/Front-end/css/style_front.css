@@ -1498,7 +1498,7 @@ a.name-group:hover {
     color: #e95668;
 }
 
-.price-box {
+.price-box  {
     font-family: 'Roboto', sans-serif;
     margin-bottom: 10px;
 }
@@ -1737,7 +1737,7 @@ a.posts-read-more:hover {
   /*----------------------------------------*/
 
 .product-area {
-    margin-top: 32px;
+    margin-top: 12px;
 }
 
 .product-menu {
@@ -2280,17 +2280,12 @@ ul.footer-content.box-information li a {
 }
 
 #scrollUp {
-    background: #e95668 url("Front-end/img/icon/back-top.png") no-repeat scroll 0 0;
     bottom: 35px;
     height: 54px;
     right: 20px;
     text-indent: -99999px;
     transition: all 0.3s ease-in-out 0s;
     width: 54px;
-}
-
-#scrollUp:hover {
-    background: #26acce url("Front-end/img/icon/back-top.png") no-repeat scroll 0 -56px;
 }
 
 
@@ -2975,22 +2970,6 @@ span.count {
     height: 40px;
     position: inherit;
     width: auto;
-}
-
-.product-filter ul li.grid a {
-    background: rgba(0, 0, 0, 0) url("img/icon/grid.png") no-repeat scroll 0 0;
-}
-
-.product-filter ul li.list a {
-    background: rgba(0, 0, 0, 0) url("img/icon/list.png") no-repeat scroll 0 0;
-}
-
-.product-filter ul li.grid.active a {
-    background: rgba(0, 0, 0, 0) url("img/icon/grid.png") no-repeat scroll 0 -17px;
-}
-
-.product-filter ul li.list.active a {
-    background: rgba(0, 0, 0, 0) url("img/icon/list.png") no-repeat scroll 0 -17px;
 }
 
 .product-filter ul li a {
