@@ -1,9 +1,9 @@
 # Web Store Contrast
 
 ## Version
-* .net framework --version `Version ASP .NET Framework: 4.7.2`
-* sql server --version `Version SQL Server: 15.0.2070.41`
-* entity framework --version `Version Entity Framework: 6.4.0`
+* .NET Framework --version `.NET Framework: 4.7.2`
+* SQL Server --version `SQL Server: 15.0.2070.41`
+* entity framework --version `Entity Framework: 6.4.0`
 
 ## Install and open
 * `git clone https://github.com/andreydef/WebStore_Contrast_MVC.git`
@@ -19,17 +19,17 @@ Uninstall-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform
 * The site opens in a browser at `https://localhost:44316/`
 
 ##### In this project I mastered:
-- ###### ASP .NET MVC, Entity Framework
-- ###### SQL, SQL Server
-- ###### HTML5, CSS3, JavaScript, Bootstrap4
-- ###### AJAX, JSON
-- ###### PayPal API
+* ##### ASP .NET MVC, Entity Framework
+* ##### SQL, SQL Server
+* ##### HTML5, CSS3, JavaScript, Bootstrap4
+* ##### AJAX, JSON
+* ##### PayPal API
 
 ## Screenshots
 
-![Image of main page on front-end part](https://i.ibb.co/bb3kpBD/1.jpg);
-![Image of admin-panel main page](https://i.ibb.co/bm7yVR9/2.jpg);
-![Image of product in admin-panel](https://i.ibb.co/wpwNB09/3.jpg);
-![Image of products page in front-end part](https://i.ibb.co/x2w8sQv/4.jpg);
-![Image of user cart in front-end part](https://i.ibb.co/JRByKkz/5.jpg);
-![Image of user orders in front-end part](https://i.ibb.co/RB2W6QT/6.jpg);
+![Image of main page on front-end part](https://i.ibb.co/bb3kpBD/1.jpg)
+![Image of admin-panel main page](https://i.ibb.co/bm7yVR9/2.jpg)
+![Image of product in admin-panel](https://i.ibb.co/wpwNB09/3.jpg)
+![Image of products page in front-end part](https://i.ibb.co/x2w8sQv/4.jpg)
+![Image of user cart in front-end part](https://i.ibb.co/JRByKkz/5.jpg)
+![Image of user orders in front-end part](https://i.ibb.co/RB2W6QT/6.jpg)
