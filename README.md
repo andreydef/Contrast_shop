@@ -18,7 +18,7 @@ Uninstall-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform
 * `Debug project`
 * The site opens in a browser at `https://localhost:44316/`
 
-##### In this project I mastered:
+### In this project I used:
 * ##### ASP .NET MVC, Entity Framework
 * ##### SQL, SQL Server
 * ##### HTML5, CSS3, JavaScript, Bootstrap4
