@@ -30,6 +30,5 @@ Uninstall-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform
 ![Image of main page on front-end part](https://i.ibb.co/bb3kpBD/1.jpg)
 ![Image of admin-panel main page](https://i.ibb.co/bm7yVR9/2.jpg)
 ![Image of product in admin-panel](https://i.ibb.co/wpwNB09/3.jpg)
-![Image of products page in front-end part](https://i.ibb.co/x2w8sQv/4.jpg)
 ![Image of user cart in front-end part](https://i.ibb.co/JRByKkz/5.jpg)
 ![Image of user orders in front-end part](https://i.ibb.co/RB2W6QT/6.jpg)
